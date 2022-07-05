@@ -92,6 +92,15 @@
   padding: 6px 0;
   border-right: 1px solid #ddd;
 }
+.leftSectionTop{
+  display: flex;
+  justify-content: space-between;
+  flex: 3;
+  padding-right: 0;
+  padding-left: 0;
+  padding: 6px 0;
+  border-right: 0px solid #ddd;
+}
 .midSection{
   flex: 1;
   margin-left: 10px;
@@ -99,6 +108,16 @@
   padding: 6px 0;
   border-right: 1px solid #ddd;
 }
+.midSectionTop{
+  flex: 2;
+  margin-left: 10px;
+  padding-top: 50;
+display: flex;
+  padding-right: 0;
+  padding: 6px 0;
+  border-right: 1px solid #ddd;
+}
+
 .rightSection{
   flex: 6;
   padding-left: 0;
