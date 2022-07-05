@@ -3,6 +3,65 @@
   padding: 20px 40px;
 }
 
+.buttonGroup {
+  margin: 20px 0;
+  font-size: 13px;
+}
+.button {
+  border: none;
+  padding: 3px 15px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+.button:hover {
+  background-color: #E2E2E2;
+}
+.buttons{
+  flex: 9;
+  display: flex;
+}
+.buttons > .inputItem{
+  border: 1px solid #ddd;
+  display: flex;
+  margin: 0 10px;
+  padding: 0;
+  border-radius: 6px;
+}
+.buttons > .inputItem > span {
+  background-color: #E2E2E2;
+  padding: 5px 10px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.buttons > .inputItem > input {
+  border: none;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  padding-left: 10px;
+}
+.buttons > span {
+  display: flex;
+  align-items: center;
+  color: #2494d1;
+}
+.buttons > .button {
+  margin-right: 10px;
+}
+.rightlinkText{
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.rightlinkText > .linkText{
+  color: #2494d1;
+  font-size: 14px;
+}
+.inputItem {
+  padding: 0 10px;
+}
+
 .item{
   margin-bottom: 15px;
   border: 1px solid #ddd;
