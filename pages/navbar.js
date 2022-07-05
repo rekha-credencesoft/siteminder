@@ -23,14 +23,14 @@ function NavBar() {
                         <HiOutlineMail style={{ fontSize: "20px", marginTop: "-5px", marginRight: "-10px" }} />
                     </Nav.Link>
                     <NavDropdown style={{ color: "white", fontSize: "15px" }} title="Book One Test Hotel" id="collasible-nav-dropdown">
-                        <NavDropdown.Item href="#">Action</NavDropdown.Item>
+                        <NavDropdown.Item href="#">Property Setting</NavDropdown.Item>
                         <NavDropdown.Item href="#">
-                            Another action
+                            My Account
                         </NavDropdown.Item>
-                        <NavDropdown.Item href="#">Something</NavDropdown.Item>
+                        <NavDropdown.Item href="#">Online Help</NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="#">
-                            Separated link
+                            Support
                         </NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
