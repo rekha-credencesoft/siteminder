@@ -176,28 +176,23 @@
   margin-bottom: 15px;
   border: 1px solid #ddd;
 }
-
 .heading{
   margin: 0 0;
   background-color: #E2E2E2;
 }
-
 .content{
   margin: 0 0;
 }
-
 .col{
   text-align: center;
   padding: 0;
   padding: 6px 0;
   border-right: 1px solid #ddd;
 }
-
 .Icon{
   flex: 0.2;
   padding-right: 0;
 }
-
 .leftSection{
   display: flex;
   justify-content: space-between;
@@ -207,10 +202,27 @@
   padding: 6px 0;
   border-right: 1px solid #ddd;
 }
-
+.leftSectionTop{
+  display: flex;
+  justify-content: space-between;
+  flex: 3;
+  padding-right: 0;
+  padding-left: 0;
+  padding: 6px 0;
+  border-right: 0px solid #ddd;
+}
 .midSection{
   flex: 1;
   margin-left: 10px;
+  padding-right: 0;
+  padding: 6px 0;
+  border-right: 1px solid #ddd;
+}
+.midSectionTop{
+  flex: 2;
+  margin-left: 10px;
+  padding-top: 50;
+display: flex;
   padding-right: 0;
   padding: 6px 0;
   border-right: 1px solid #ddd;
@@ -221,7 +233,6 @@
   padding-left: 0;
   padding-right: 0;
 }
-
 .rightSection > .data{
   justify-content: space-between;
   margin: 0;
