@@ -31,7 +31,7 @@ export default function Home() {
             <VscDebugRestart style={{color:"skyblue",marginRight:"10px",marginTop:"20px"}} />
             <AiOutlineDoubleLeft  style={{color:"skyblue",marginRight:"10px",marginTop:"20px"}} />
             <AiOutlineLeft  style={{color:"skyblue",marginRight:"10px",marginTop:"20px"}} />
-            <h6 style={{color:"skyblue",marginTop:"20px"}}>Jul 5, 2022</h6>
+            <h5 style={{color:"skyblue",marginTop:"17px"}}>Jul 5, 2022</h5>
             <AiOutlineRight  style={{color:"skyblue",marginRight:"10px",marginLeft:"10px",marginTop:"20px"}} />
             <AiOutlineDoubleRight  style={{color:"skyblue",marginRight:"10px",marginTop:"20px"}} />
             </Col>
