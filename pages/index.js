@@ -20,7 +20,7 @@ export default function Home() {
         <div className={styles.topBarButtons}>
          <div className={styles.buttonsWrapper}>
           <button className={styles.bulkUpdateBtn}>Bulk Update</button>
-          <span><GrRotateLeft/>Reset</span>
+          <span><GrRotateLeft size={13} style={{marginRight: '5px'}}/><span>Reset</span></span>
           <button className={styles.saveBtn}>Save</button>
          </div>
         </div>
