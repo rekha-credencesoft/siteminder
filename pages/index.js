@@ -10,30 +10,41 @@ import {GoTriangleRight} from 'react-icons/go';
 import {MdKeyboardArrowLeft,MdKeyboardArrowRight} from 'react-icons/md';
 import {AiOutlineDoubleRight,AiOutlineDoubleLeft} from 'react-icons/ai';
 import {GrRotateLeft} from 'react-icons/gr';
-import {useEffect} from "react";
 
 
-export default function Home() {
-  useEffect(() => {
-    var date = '1475235770601';
-    var d = new Date(+1475235770601);
-    // var d = new Date(parseInt(date, 10));
-    // var ds = d.toString('MM/dd/yy HH:mm:ss');
-    console.log(d);
-    fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=495', {
-      headers: {
-        Accept: 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWhhYmlyLmdhbGF4eUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX1BST1BfQURNSU4iLCJpYXQiOjE2NTY5OTI5MjksImV4cCI6MTY1NzQyNDkyOX0.kmoXtkq3kmuHaiFFzgpB23FVGMu1qZDEgIwc3-VCAc4',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'APP_ID': 'BOOKONE_WEB_APP'
-      }
-    })
-      .then(resp => resp.json())
-      .then(json => console.log(json))
-  });
-  console.log(styles);
+export default function Home({properties,roomsArray,property}) {
+  console.log(property);
+  const roomTypes = [];
+  let room = [];
+  let roomDetail = [];
+  for (let index = 0; index < properties.length; index++) {
+    if (!roomTypes[properties[index].name]) {
+      roomTypes[properties[index].name]=JSON.parse(JSON.stringify(properties[index]));
+    }
+  }
+  delete roomTypes['Official  Use'];
+
+
+  for (let i = 0; i < roomsArray.length; i++) {
+    room = roomsArray[i];
+    let keys = Object.values(roomTypes);
+    for (let k = 0; k < keys.length; k++) {
+      // console.log(keys[k].id)
+      for (let j = 0; j < room.length; j++) {
+          // console.log(room[j].roomId)
+            if(room[j].roomId == keys[k].id && room[j].roomName == keys[k].name){
+              // console.log(keys[k]);
+              roomDetail.push(keys[k])
+              keys[k]['roomDetail'] = roomDetail;
+            }
+          }
+          roomDetail = []
+    }
+  }
+  // console.log(roomTypes);
+
   return (
-    <div className={styles.container}>
+      <div className={styles.container}>
       <div className={styles.table}>
       <div className={styles.topBar}>
         <div className={styles.topBarButtons}>
@@ -223,13 +234,15 @@ export default function Home() {
             </Col>
           </Row>
       </div>
+      {Object.values(roomTypes).map((val,index)=>(
+    <div key={index}>
       <div className={styles.item}>
         <Row className={styles.heading}>
           <Col className={styles.Icon}>
             <FaBed size={18} style={{marginTop: '5px'}}/>
           </Col>
           <Col className={styles.leftSection}>
-            <span>Deluxe View</span>
+            <span>{val.name}</span>
             <AiFillThunderbolt size={15} style={{marginTop: '5px', color: '#2494d1'}}/>
           </Col>
           <Col className={styles.midSection}>
@@ -291,7 +304,7 @@ export default function Home() {
             <AiFillThunderbolt size={15} style={{marginTop: '5px', color: '#2494d1'}}/>
           </Col>
           <Col className={styles.midSection}>
-            Avail
+            Rates
           </Col>
           <Col className={styles.rightSection}>
             <Row className={styles.data}>
@@ -341,243 +354,53 @@ export default function Home() {
           </Col>
         </Row>
       </div>
-      <div className={styles.item}>
-        <Row className={styles.heading}>
-          <Col className={styles.Icon}>
-            <FaBed size={18} style={{marginTop: '5px'}}/>
-          </Col>
-          <Col className={styles.leftSection}>
-            <span>Deluxe View</span>
-            <AiFillThunderbolt size={15} style={{marginTop: '5px', color: '#2494d1'}}/>
-          </Col>
-          <Col className={styles.midSection}>
-            Avail
-          </Col>
-          <Col className={styles.rightSection}>
-            <Row className={styles.data}>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            </Row>
-          </Col>
-        </Row>
-        <Row className={styles.content}>
-          <Col className={styles.Icon}>
-          
-          </Col>
-          <Col className={styles.leftSection}>
-            Rath Yatra Plan (Rath Yatra Special)
-            <AiFillThunderbolt size={15} style={{marginTop: '5px', color: '#2494d1'}}/>
-          </Col>
-          <Col className={styles.midSection}>
-            Avail
-          </Col>
-          <Col className={styles.rightSection}>
-            <Row className={styles.data}>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            </Row>
-          </Col>
-        </Row>
-      </div>
-      <div className={styles.item}>
-        <Row className={styles.heading}>
-          <Col className={styles.Icon}>
-            <FaBed size={18} style={{marginTop: '5px'}}/>
-          </Col>
-          <Col className={styles.leftSection}>
-            <span>Deluxe View</span>
-            <AiFillThunderbolt size={15} style={{marginTop: '5px', color: '#2494d1'}}/>
-          </Col>
-          <Col className={styles.midSection}>
-            Avail
-          </Col>
-          <Col className={styles.rightSection}>
-            <Row className={styles.data}>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            </Row>
-          </Col>
-        </Row>
-        <Row className={styles.content}>
-          <Col className={styles.Icon}>
-          
-          </Col>
-          <Col className={styles.leftSection}>
-            Rath Yatra Plan (Rath Yatra Special)
-            <AiFillThunderbolt size={15} style={{marginTop: '5px', color: '#2494d1'}}/>
-          </Col>
-          <Col className={styles.midSection}>
-            Avail
-          </Col>
-          <Col className={styles.rightSection}>
-            <Row className={styles.data}>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            </Row>
-          </Col>
-        </Row>
-      </div>
+    </div>
+  ))}
       </div>
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/property/495/rooms', {
+  // const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=495', {
+  // const response = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForRoom?PropertyId=495&RoomId=1539', {
+    method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWhhYmlyLmdhbGF4eUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX1BST1BfQURNSU4iLCJpYXQiOjE2NTY5OTI5MjksImV4cCI6MTY1NzQyNDkyOX0.kmoXtkq3kmuHaiFFzgpB23FVGMu1qZDEgIwc3-VCAc4',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'APP_ID': 'BOOKONE_WEB_APP'
+      }
+    })
+    const properties = await propertiesResponse.json();
+
+  const propertyResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=495', {
+    method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWhhYmlyLmdhbGF4eUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX1BST1BfQURNSU4iLCJpYXQiOjE2NTY5OTI5MjksImV4cCI6MTY1NzQyNDkyOX0.kmoXtkq3kmuHaiFFzgpB23FVGMu1qZDEgIwc3-VCAc4',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'APP_ID': 'BOOKONE_WEB_APP'
+      }
+    })
+    const property = await propertyResponse.json();
+
+  const roomsArray = [];
+  for (let index = 0; index < properties.length; index++) {
+    const roomsResponse = await fetch(`https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForRoom?PropertyId=495&RoomId=${properties[index].id}`, {
+      method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWhhYmlyLmdhbGF4eUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX1BST1BfQURNSU4iLCJpYXQiOjE2NTY5OTI5MjksImV4cCI6MTY1NzQyNDkyOX0.kmoXtkq3kmuHaiFFzgpB23FVGMu1qZDEgIwc3-VCAc4',
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'APP_ID': 'BOOKONE_WEB_APP'
+        }
+      })
+      const rooms = await roomsResponse.json();
+      roomsArray.push(rooms);
+  }
+  return {
+    props: {properties,roomsArray,property}, // will be passed to the page component as props
+  }
 }
