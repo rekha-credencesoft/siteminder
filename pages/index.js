@@ -9,9 +9,28 @@ import {BiSearch} from 'react-icons/bi';
 import {GoTriangleRight} from 'react-icons/go';
 import {MdKeyboardArrowLeft,MdKeyboardArrowRight} from 'react-icons/md';
 import {AiOutlineDoubleRight,AiOutlineDoubleLeft} from 'react-icons/ai';
-import {GrRotateLeft} from 'react-icons/gr'
+import {GrRotateLeft} from 'react-icons/gr';
+import {useEffect} from "react";
+
 
 export default function Home() {
+  useEffect(() => {
+    var date = '1475235770601';
+    var d = new Date(+1475235770601);
+    // var d = new Date(parseInt(date, 10));
+    // var ds = d.toString('MM/dd/yy HH:mm:ss');
+    console.log(d);
+    fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=495', {
+      headers: {
+        Accept: 'application/json',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWhhYmlyLmdhbGF4eUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX1BST1BfQURNSU4iLCJpYXQiOjE2NTY5OTI5MjksImV4cCI6MTY1NzQyNDkyOX0.kmoXtkq3kmuHaiFFzgpB23FVGMu1qZDEgIwc3-VCAc4',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'APP_ID': 'BOOKONE_WEB_APP'
+      }
+    })
+      .then(resp => resp.json())
+      .then(json => console.log(json))
+  });
   console.log(styles);
   return (
     <div className={styles.container}>
