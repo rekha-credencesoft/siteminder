@@ -10,7 +10,7 @@ import {GoTriangleRight} from 'react-icons/go';
 import {MdKeyboardArrowLeft,MdKeyboardArrowRight} from 'react-icons/md';
 import {AiOutlineDoubleRight,AiOutlineDoubleLeft} from 'react-icons/ai';
 import {GrRotateLeft} from 'react-icons/gr';
-
+import { useState } from 'react';
 
 export default function Home({properties,roomsArray,property}) {
   // console.log(property);
@@ -31,7 +31,7 @@ export default function Home({properties,roomsArray,property}) {
     for (let k = 0; k < keys.length; k++) {
       // console.log(keys[k].id)
       for (let j = 0; j < room.length; j++) {
-          // console.log(room[j].roomId)
+        // console.log(room[j].roomId)
             if(room[j].roomId == keys[k].id && room[j].roomName == keys[k].name){
               // console.log(keys[k]);
               roomDetail.push(keys[k])
@@ -39,33 +39,208 @@ export default function Home({properties,roomsArray,property}) {
             }
           }
           roomDetail = []
-    }
-  }
-
-  const date = new Date();
-  let currentDate = '';
-  const dateArray = [];
-  let showDates = [];
+        }
+      }
 
   //Function to find out last date of the month
   const lastday = function(y,m){
-    return  new Date(y, m +1, 0).getDate();
-    }
-    // console.log(lastday(2022,6));
+    return  new Date(y, m +1, 0);
+  }
+  // console.log(lastday(2022,6));
     // console.log(currentDate)
-
-  //This will create an Array of Dates in a Month
-    for (let index = date.getDate(); index <= lastday(2022,6); index++) {
-      date.setDate(date.getDate() + 1);
-      // console.log(date)
-      currentDate = JSON.stringify(date);
-      console.log(currentDate)
-      dateArray.push(date);
+    
+    //This will create an Array of Dates in a Month
+    function dateRange(startDate, endDate, steps = 1) {
+      const dateArray = [];
+      let currentDate = new Date(startDate);
+      
+      while (currentDate <= new Date(endDate)) {
+        dateArray.push(new Date(currentDate).toDateString());
+        // Use UTC date to prevent problems with time zones and DST
+        currentDate.setUTCDate(currentDate.getUTCDate() + steps);
     }
-    // showDates = dateArray.slice()
-    console.log(dateArray)
-    const day = new Date();
-  // console.log(roomTypes);
+
+    return dateArray;
+  }
+
+
+  const date = new Date();
+  let monthToShow = [];
+  let datesToShow = [];
+  let daysToShow = [];
+  
+  
+  const dates = dateRange(date, lastday(2022, 6));
+  for (let index = 0; index < dates.length; index++) {
+    let day = new Date(dates[index]).getDay();
+    let month = new Date(dates[index]).getMonth();
+    let date = new Date(dates[index]).getDate();
+    switch (day) {
+      case 0:
+        daysToShow.push('Sun');
+        break;
+      case 1:
+        daysToShow.push('Mon');
+        break;
+      case 2:
+        daysToShow.push('Tue');
+        break;
+      case 3:
+        daysToShow.push('Wed');
+        break;
+      case 4:
+        daysToShow.push('Thu');
+        break;
+      case 5:
+        daysToShow.push('Fri');
+        break;
+      case 6:
+        daysToShow.push('Sat');
+      }
+      
+      switch (month) {
+        case 0:
+        monthToShow.push('January');
+        break;
+      case 1:
+        monthToShow.push('February');
+        break;
+      case 2:
+        monthToShow.push('March');
+        break;
+      case 3:
+        monthToShow.push('April');
+        break;
+      case 4:
+        monthToShow.push('May');
+        break;
+        case 5:
+          monthToShow.push('June');
+          break;
+        case 6:
+          monthToShow.push('July');
+          break;
+        case 7:
+          monthToShow.push('August');
+          break;
+        case 8:
+          monthToShow.push('September');
+          break;
+        case 9:
+          monthToShow.push('October');
+          break;
+        case 10:
+          monthToShow.push('November');
+          break;
+        case 11:
+          monthToShow.push('December');
+      }
+
+      switch (date) {
+        case 0:
+        datesToShow.push(0);
+        break;
+      case 1:
+        datesToShow.push(1);
+        break;
+      case 2:
+        datesToShow.push(2);
+        break;
+      case 3:
+        datesToShow.push(3);
+        break;
+      case 4:
+        datesToShow.push(4);
+        break;
+        case 5:
+          datesToShow.push(5);
+          break;
+        case 6:
+          datesToShow.push(6);
+          break;
+        case 7:
+          datesToShow.push(7);
+          break;
+        case 8:
+          datesToShow.push(8);
+          break;
+        case 9:
+          datesToShow.push(9);
+          break;
+        case 10:
+          datesToShow.push(10);
+          break;
+        case 11:
+          datesToShow.push(11);
+          break;
+        case 12:
+          datesToShow.push(12);
+          break;
+        case 13:
+          datesToShow.push(13);
+          break;
+        case 14:
+          datesToShow.push(14);
+          break;
+        case 15:
+          datesToShow.push(15);
+          break;
+        case 16:
+          datesToShow.push(16);
+          break;
+        case 17:
+          datesToShow.push(17);
+          break;
+        case 18:
+          datesToShow.push(18);
+          break;
+        case 19:
+          datesToShow.push(19);
+          break;
+        case 20:
+          datesToShow.push(20);
+          break;
+        case 21:
+          datesToShow.push(21);
+          break;
+        case 22:
+          datesToShow.push(22);
+          break;
+        case 23:
+          datesToShow.push(23);
+          break;
+        case 24:
+          datesToShow.push(24);
+          break;
+        case 25:
+          datesToShow.push(25);
+          break;
+        case 26:
+          datesToShow.push(26);
+          break;
+        case 27:
+          datesToShow.push(27);
+          break;
+        case 28:
+          datesToShow.push(28);
+          break;
+        case 29:
+          datesToShow.push(29);
+          break;
+        case 30:
+          datesToShow.push(30);
+          break;
+        case 31:
+          datesToShow.push(31);
+          break;
+      }
+
+}
+
+  datesToShow.splice(14,datesToShow.length);
+  // const da = datesToShow.slice(0,7);
+  daysToShow.splice(14,daysToShow.length);
+  // console.log(datesToShow);
 
   return (
       <div className={styles.container}>
@@ -80,164 +255,24 @@ export default function Home({properties,roomsArray,property}) {
         </div>
         <Row className={styles.dateSection}>
           <Col className={styles.dateSelector}>
-            <span><GrRotateLeft size={15} style={{marginRight: '10px'}}/><AiOutlineDoubleLeft size={15} style={{marginRight: '10px'}}/><MdKeyboardArrowLeft/>Jul 5, 2022<MdKeyboardArrowRight /><AiOutlineDoubleRight size={15} style={{marginLeft: '10px'}} /></span>
+            <span><GrRotateLeft size={15} style={{marginRight: '10px'}}/><AiOutlineDoubleLeft size={15} style={{marginRight: '10px'}}/><MdKeyboardArrowLeft/>{date.toDateString()}<MdKeyboardArrowRight /><AiOutlineDoubleRight size={15} style={{marginLeft: '10px'}} /></span>
           </Col>
           <Col className={styles.dates}>
             <Row className={styles.dateCards}>
-              <Col className={styles.dateCard}>
-              <span>
-                Mon
-              </span>
-              <span className={styles.boldDateText}>
-                03
-              </span>
-              <span>
-                JUL
-              </span>
-              </Col>
-              <Col className={styles.dateCard}>
-              <span>
-                Mon
-              </span>
-              <span className={styles.boldDateText}>
-                03
-              </span>
-              <span>
-                JUL
-              </span>
-              </Col>
-              <Col className={styles.dateCard}>
-              <span>
-                Mon
-              </span>
-              <span className={styles.boldDateText}>
-                03
-              </span>
-              <span>
-                JUL
-              </span>
-              </Col>
-              <Col className={styles.dateCard}>
-              <span>
-                Mon
-              </span>
-              <span className={styles.boldDateText}>
-                03
-              </span>
-              <span>
-                JUL
-              </span>
-              </Col>
-              <Col className={styles.dateCard}>
-              <span>
-                Mon
-              </span>
-              <span className={styles.boldDateText}>
-                03
-              </span>
-              <span>
-                JUL
-              </span>
-              </Col>
-              <Col className={styles.dateCard}>
-              <span>
-                Mon
-              </span>
-              <span className={styles.boldDateText}>
-                03
-              </span>
-              <span>
-                JUL
-              </span>
-              </Col>
-              <Col className={styles.dateCard}>
-              <span>
-                Mon
-              </span>
-              <span className={styles.boldDateText}>
-                03
-              </span>
-              <span>
-                JUL
-              </span>
-              </Col>
-              <Col className={styles.dateCard}>
-              <span>
-                Mon
-              </span>
-              <span className={styles.boldDateText}>
-                03
-              </span>
-              <span>
-                JUL
-              </span>
-              </Col>
-              <Col className={styles.dateCard}>
-              <span>
-                Mon
-              </span>
-              <span className={styles.boldDateText}>
-                03
-              </span>
-              <span>
-                JUL
-              </span>
-              </Col>
-              <Col className={styles.dateCard}>
-              <span>
-                Mon
-              </span>
-              <span className={styles.boldDateText}>
-                03
-              </span>
-              <span>
-                JUL
-              </span>
-              </Col>
-              <Col className={styles.dateCard}>
-              <span>
-                Mon
-              </span>
-              <span className={styles.boldDateText}>
-                03
-              </span>
-              <span>
-                JUL
-              </span>
-              </Col>
-              <Col className={styles.dateCard}>
-              <span>
-                Mon
-              </span>
-              <span className={styles.boldDateText}>
-                03
-              </span>
-              <span>
-                JUL
-              </span>
-              </Col>
-              <Col className={styles.dateCard}>
-              <span>
-                Mon
-              </span>
-              <span className={styles.boldDateText}>
-                03
-              </span>
-              <span>
-                JUL
-              </span>
-              </Col>
-              <Col className={styles.dateCard}>
-              <span>
-                Mon
-              </span>
-              <span className={styles.boldDateText}>
-                03
-              </span>
-              <span>
-                JUL
-              </span>
-              </Col>
+              {datesToShow.map((val,i)=>{
+                return (<Col key={i} className={styles.dateCard}>
+                  <span>
+                    {daysToShow[i]}
+                  </span>
+                  <span className={styles.boldDateText}>
+                    {val}
+                  </span>
+                  <span>
+                    JUL
+                  </span>
+                  </Col>)
+              })
+              }
             </Row>
           </Col>
         </Row>
