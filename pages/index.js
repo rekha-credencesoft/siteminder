@@ -13,7 +13,7 @@ import {GrRotateLeft} from 'react-icons/gr';
 
 
 export default function Home({properties,roomsArray,property}) {
-  console.log(property);
+  // console.log(property);
   const roomTypes = [];
   let room = [];
   let roomDetail = [];
@@ -41,6 +41,30 @@ export default function Home({properties,roomsArray,property}) {
           roomDetail = []
     }
   }
+
+  const date = new Date();
+  let currentDate = '';
+  const dateArray = [];
+  let showDates = [];
+
+  //Function to find out last date of the month
+  const lastday = function(y,m){
+    return  new Date(y, m +1, 0).getDate();
+    }
+    // console.log(lastday(2022,6));
+    // console.log(currentDate)
+
+  //This will create an Array of Dates in a Month
+    for (let index = date.getDate(); index <= lastday(2022,6); index++) {
+      date.setDate(date.getDate() + 1);
+      // console.log(date)
+      currentDate = JSON.stringify(date);
+      console.log(currentDate)
+      dateArray.push(date);
+    }
+    // showDates = dateArray.slice()
+    console.log(dateArray)
+    const day = new Date();
   // console.log(roomTypes);
 
   return (
