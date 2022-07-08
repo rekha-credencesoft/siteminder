@@ -13,10 +13,13 @@ import {GrRotateLeft} from 'react-icons/gr';
 import { useState } from 'react';
 
 export default function Home({properties,roomsArray,property}) {
+  const [increment, setIncrement] = useState(0);
   // console.log(property);
   const roomTypes = [];
   let room = [];
   let roomDetail = [];
+
+  //This loop will extract the name of property and will make it as a key of its data
   for (let index = 0; index < properties.length; index++) {
     if (!roomTypes[properties[index].name]) {
       roomTypes[properties[index].name]=JSON.parse(JSON.stringify(properties[index]));
@@ -25,6 +28,7 @@ export default function Home({properties,roomsArray,property}) {
   delete roomTypes['Official  Use'];
 
 
+  //This loop will add the data of rooms according to the roomId
   for (let i = 0; i < roomsArray.length; i++) {
     room = roomsArray[i];
     let keys = Object.values(roomTypes);
@@ -41,6 +45,7 @@ export default function Home({properties,roomsArray,property}) {
           roomDetail = []
         }
       }
+
 
   //Function to find out last date of the month
   const lastday = function(y,m){
@@ -70,7 +75,8 @@ export default function Home({properties,roomsArray,property}) {
   let daysToShow = [];
   
   
-  const dates = dateRange(date, lastday(2022, 6));
+  const dates = dateRange(date, lastday(2023, 6));
+  // console.log(dates)
   for (let index = 0; index < dates.length; index++) {
     let day = new Date(dates[index]).getDay();
     let month = new Date(dates[index]).getMonth();
@@ -100,40 +106,40 @@ export default function Home({properties,roomsArray,property}) {
       
       switch (month) {
         case 0:
-        monthToShow.push('January');
+        monthToShow.push('Jan');
         break;
       case 1:
-        monthToShow.push('February');
+        monthToShow.push('Feb');
         break;
       case 2:
-        monthToShow.push('March');
+        monthToShow.push('Mar');
         break;
       case 3:
-        monthToShow.push('April');
+        monthToShow.push('Apr');
         break;
       case 4:
         monthToShow.push('May');
         break;
         case 5:
-          monthToShow.push('June');
+          monthToShow.push('Jun');
           break;
         case 6:
-          monthToShow.push('July');
+          monthToShow.push('Jul');
           break;
         case 7:
-          monthToShow.push('August');
+          monthToShow.push('Aug');
           break;
         case 8:
-          monthToShow.push('September');
+          monthToShow.push('Sep');
           break;
         case 9:
-          monthToShow.push('October');
+          monthToShow.push('Oct');
           break;
         case 10:
-          monthToShow.push('November');
+          monthToShow.push('Nov');
           break;
         case 11:
-          monthToShow.push('December');
+          monthToShow.push('Dec');
       }
 
       switch (date) {
@@ -237,10 +243,47 @@ export default function Home({properties,roomsArray,property}) {
 
 }
 
-  datesToShow.splice(14,datesToShow.length);
-  // const da = datesToShow.slice(0,7);
-  daysToShow.splice(14,daysToShow.length);
+//This function will Increement Seven Days
+const sevenDaysIncrement = () => {
+  setIncrement(increment + 7)
+}
+
+//This function will Decrement Seven Days
+const sevenDaysDecrement = () => {
+  if (increment !== 0) {
+    setIncrement(increment - 7)
+  }
+
+}
+
+//This will Decrement Days by Fourteen
+const fourteenDaysDecrement = () => {
+  if(increment == 7) {
+    setIncrement(0)
+  }
+  else if (increment !== 0) {
+    setIncrement(increment - 14)
+  }
+}
+
+//This will Increment Days by Fourteen
+const fourteenDaysIncrement = () => {
+  setIncrement(increment + 14)
+}
+
+//This will refresh dates
+const refreshDates = ()=>{
+  setIncrement(0)
+}
+
+
+  datesToShow = datesToShow.slice(increment,increment + 14)
+  daysToShow = daysToShow.slice(increment,increment + 14);
+  monthToShow = monthToShow.slice(increment,increment + 14)
+  // console.log(monthToShow)
+  // console.log(monthToShow)
   // console.log(datesToShow);
+  console.log(roomTypes)
 
   return (
       <div className={styles.container}>
@@ -255,7 +298,7 @@ export default function Home({properties,roomsArray,property}) {
         </div>
         <Row className={styles.dateSection}>
           <Col className={styles.dateSelector}>
-            <span><GrRotateLeft size={15} style={{marginRight: '10px'}}/><AiOutlineDoubleLeft size={15} style={{marginRight: '10px'}}/><MdKeyboardArrowLeft/>{date.toDateString()}<MdKeyboardArrowRight /><AiOutlineDoubleRight size={15} style={{marginLeft: '10px'}} /></span>
+            <span><GrRotateLeft onClick={refreshDates} size={15} style={{marginRight: '10px'}}/><AiOutlineDoubleLeft onClick={fourteenDaysDecrement} size={15} style={{marginRight: '10px'}}/><MdKeyboardArrowLeft onClick={sevenDaysDecrement} />{date.toDateString()}<MdKeyboardArrowRight onClick={sevenDaysIncrement} /><AiOutlineDoubleRight onClick={fourteenDaysIncrement}  size={15} style={{marginLeft: '10px'}} /></span>
           </Col>
           <Col className={styles.dates}>
             <Row className={styles.dateCards}>
@@ -268,7 +311,7 @@ export default function Home({properties,roomsArray,property}) {
                     {val}
                   </span>
                   <span>
-                    JUL
+                    {monthToShow[i]}
                   </span>
                   </Col>)
               })
