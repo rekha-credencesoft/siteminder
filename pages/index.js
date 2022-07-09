@@ -26,6 +26,7 @@ export default function Home({properties,roomsArray,property}) {
     }
   }
   delete roomTypes['Official  Use'];
+  console.log(roomTypes)
 
 
   //This loop will add the data of rooms according to the roomId
@@ -86,6 +87,8 @@ export default function Home({properties,roomsArray,property}) {
   // console.log(ClassicRoom);
   // console.log(properties)
 
+
+  //Deluxe Room Plans
   let deluxeRoomPlans = [];
   for (let index = 0; index < DeluxeRoom.length; index++) {
     // console.log(DeluxeRoom[index].roomRatePlans)
@@ -93,6 +96,8 @@ export default function Home({properties,roomsArray,property}) {
   }
   // console.log(deluxeRoomPlans)
 
+
+  //Deluxe room Plans to Show
   let deluxPlansToShow = [];
   for (let index = 0; index < deluxeRoomPlans.length; index++) {
     // console.log(deluxeRoomPlans[index][0])
@@ -106,7 +111,59 @@ export default function Home({properties,roomsArray,property}) {
       }
     }
   }
-  console.log(deluxPlansToShow)
+  // console.log(deluxPlansToShow)
+
+
+  //Supreme Room Plans
+  let supremeRoomPlans = [];
+  for (let index = 0; index < SupremeRoom.length; index++) {
+    // console.log(DeluxeRoom[index].roomRatePlans)
+    supremeRoomPlans.push(SupremeRoom[index].roomRatePlans);
+  }
+  // console.log(supremeRoomPlans)
+
+
+  //Supreme Room Plans To Show
+  let supremePlansToShow = [];
+  for (let index = 0; index < supremeRoomPlans.length; index++) {
+    // console.log(supremeRoomPlans[index][0])
+    for (let jindex = 0; jindex < supremeRoomPlans[index].length; jindex++) {
+      if(!supremePlansToShow[supremeRoomPlans[index][jindex].name]){
+        supremePlansToShow[supremeRoomPlans[index][jindex].name] = [];
+        supremePlansToShow[supremeRoomPlans[index][jindex].name].push(supremeRoomPlans[index][jindex])
+      }
+      else {
+        supremePlansToShow[supremeRoomPlans[index][jindex].name].push(supremeRoomPlans[index][jindex])
+      }
+    }
+  }
+  // console.log(supremePlansToShow)
+
+
+  //Classic Room Plans
+  let classicRoomPlans = [];
+  for (let index = 0; index < ClassicRoom.length; index++) {
+    // console.log(DeluxeRoom[index].roomRatePlans)
+    classicRoomPlans.push(ClassicRoom[index].roomRatePlans);
+  }
+  // console.log(classicRoomPlans)
+
+
+  //Classic Room Plans To Show
+  let classicPlansToShow = [];
+  for (let index = 0; index < classicRoomPlans.length; index++) {
+    // console.log(classicRoomPlans[index][0])
+    for (let jindex = 0; jindex < classicRoomPlans[index].length; jindex++) {
+      if(!classicPlansToShow[classicRoomPlans[index][jindex].name]){
+        classicPlansToShow[classicRoomPlans[index][jindex].name] = [];
+        classicPlansToShow[classicRoomPlans[index][jindex].name].push(classicRoomPlans[index][jindex])
+      }
+      else {
+        classicPlansToShow[classicRoomPlans[index][jindex].name].push(classicRoomPlans[index][jindex])
+      }
+    }
+  }
+  // console.log(classicPlansToShow)
   
 
 
@@ -457,7 +514,7 @@ const refreshDates = ()=>{
         </Row>
         <Row className={styles.content}>
           {/* Room Rate Plans */}
-                {Object.keys(deluxPlansToShow).map((val1,i)=>{
+                {val.name == 'Deluxe Room'? Object.keys(deluxPlansToShow).map((val1,i)=>{
                   return (
                     <>
                     <Col className={styles.Icon}>
@@ -477,13 +534,13 @@ const refreshDates = ()=>{
                     return (<Col key={j} className={styles.col} >
                       {val2.amount}
                     </Col>)
-                  }): val.name == 'Supreme Room'? SupremeRoom.map((val,i)=>{
-                    return (<Col key={i} className={styles.col} >
-                      {val.amount}
+                  }): val.name == 'Supreme Room'? Object.values(supremePlansToShow)[i].map((val2,j)=>{
+                    return (<Col key={j} className={styles.col} >
+                      {val2.amount}
                     </Col>)
-                  }) : val.name == 'Classic Room'? ClassicRoom.map((val,i)=>{
-                    return (<Col key={i} className={styles.col} >
-                      {val.amount}
+                  }) : val.name == 'Classic Room'? Object.values(classicPlansToShow)[i].map((val2,j)=>{
+                    return (<Col key={j} className={styles.col} >
+                      {val2.amount}
                     </Col>)
                   }): ''}
                   <Col className={styles.col} >
@@ -511,7 +568,115 @@ const refreshDates = ()=>{
                 </Col>
                     </>
                   )
-                })}
+                }):val.name == 'Supreme Room'? Object.keys(supremePlansToShow).map((val1,i)=>{
+                  return (
+                    <>
+                    <Col className={styles.Icon}>
+          
+                </Col>
+                <Col className={styles.leftSection}>
+                  {val1}
+                  <AiFillThunderbolt size={15} style={{marginTop: '5px', color: '#2494d1'}}/>
+                </Col>
+                <Col className={styles.midSection}>
+                  Rates
+                </Col>
+                <Col className={styles.rightSection}>
+                  <Row className={styles.data}>
+                  {val.name == 'Deluxe Room'?
+                  Object.values(deluxPlansToShow)[i].map((val2,j)=>{
+                    return (<Col key={j} className={styles.col} >
+                      {val2.amount}
+                    </Col>)
+                  }): val.name == 'Supreme Room'? Object.values(supremePlansToShow)[i].map((val2,j)=>{
+                    return (<Col key={j} className={styles.col} >
+                      {val2.amount}
+                    </Col>)
+                  }) : val.name == 'Classic Room'? Object.values(classicPlansToShow)[i].map((val2,j)=>{
+                    return (<Col key={j} className={styles.col} >
+                      {val2.amount}
+                    </Col>)
+                  }): ''}
+                  <Col className={styles.col} >
+                    10
+                  </Col>
+                  <Col className={styles.col} >
+                    10
+                  </Col>
+                  <Col className={styles.col} >
+                    10
+                  </Col>
+                  <Col className={styles.col} >
+                    10
+                  </Col>
+                  <Col className={styles.col} >
+                    10
+                  </Col>
+                  <Col className={styles.col} >
+                    10
+                  </Col>
+                  <Col className={styles.col} >
+                    10
+                  </Col>
+                  </Row>
+                </Col>
+                    </>
+                  )
+                }):val.name == 'Classic Room'? Object.keys(classicPlansToShow).map((val1,i)=>{
+                  return (
+                    <>
+                    <Col className={styles.Icon}>
+          
+                </Col>
+                <Col className={styles.leftSection}>
+                  {val1}
+                  <AiFillThunderbolt size={15} style={{marginTop: '5px', color: '#2494d1'}}/>
+                </Col>
+                <Col className={styles.midSection}>
+                  Rates
+                </Col>
+                <Col className={styles.rightSection}>
+                  <Row className={styles.data}>
+                  {val.name == 'Deluxe Room'?
+                  Object.values(deluxPlansToShow)[i].map((val2,j)=>{
+                    return (<Col key={j} className={styles.col} >
+                      {val2.amount}
+                    </Col>)
+                  }): val.name == 'Supreme Room'? Object.values(supremePlansToShow)[i].map((val2,j)=>{
+                    return (<Col key={j} className={styles.col} >
+                      {val2.amount}
+                    </Col>)
+                  }) : val.name == 'Classic Room'? Object.values(classicPlansToShow)[i].map((val2,j)=>{
+                    return (<Col key={j} className={styles.col} >
+                      {val2.amount}
+                    </Col>)
+                  }): ''}
+                  <Col className={styles.col} >
+                    10
+                  </Col>
+                  <Col className={styles.col} >
+                    10
+                  </Col>
+                  <Col className={styles.col} >
+                    10
+                  </Col>
+                  <Col className={styles.col} >
+                    10
+                  </Col>
+                  <Col className={styles.col} >
+                    10
+                  </Col>
+                  <Col className={styles.col} >
+                    10
+                  </Col>
+                  <Col className={styles.col} >
+                    10
+                  </Col>
+                  </Row>
+                </Col>
+                    </>
+                  )
+                }): ''}
         </Row>
       </div>
     </div>
