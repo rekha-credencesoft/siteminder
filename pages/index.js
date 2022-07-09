@@ -26,7 +26,7 @@ export default function Home({properties,roomsArray,property}) {
     }
   }
   delete roomTypes['Official  Use'];
-  console.log(roomTypes)
+  // console.log(roomTypes)
 
 
   //This loop will add the data of rooms according to the roomId
@@ -82,10 +82,104 @@ export default function Home({properties,roomsArray,property}) {
     // room = [];
   }
 
-  // console.log(DeluxeRoom);
-  // console.log(SupremeRoom);
-  // console.log(ClassicRoom);
+  //237
+  let roomsData = [];
+  let roomsNamesWithData = {};
+  for (let index = 0; index < Object.keys(roomTypes).length; index++) {
+    if(!roomsData[Object.keys(roomTypes)[index]]){
+      Object.keys(roomTypes)[index] = [];
+      // obj[Object.keys(roomTypes)[index]] = [];
+      roomsData.push(Object.keys(roomTypes)[index])
+    }
+  }
+  // console.log(roomsData)
+
+  let DoubleRoom = [];
+  let TwinRoom = [];
+  let BanquetHall = [];
+  let OneDayTrip = [];
+  for (let i = 0 ; i < roomsArray.length ; i++) {
+    let room = roomsArray[i];
+    for (let j = 0; j < room.length; j++) {
+    //  room[j]['hie'] = 'hie'
+      for (let k = 0; k < properties.length; k++) {
+        if (properties[k].name == room[j].roomName) {
+            room[j]['roomDetail'] = properties[k];
+        }
+        // console.log(properties[k])
+        
+      }
+    }
+    // console.log(roomsArray[index])
+    // console.log(room)
+    for (let l = 0; l < room.length; l++) {
+      // console.log(room[l].roomName)
+      if (room[l].roomName == roomsData[l]) {
+        // console.log(roomsData[l])
+        roomsNamesWithData[roomsData[l]] = room
+        // roomsData[l] = rooms
+      }
+      
+    }
+    // room = [];
+  }
+  // console.log(roomsNamesWithData)
+  // console.log(Object.keys(roomsNamesWithData))
+  // console.log(Object.values(roomsNamesWithData)[0])
+
+
+  //This will fetch The room Rate Plans of each room in their particular room keys
+
+  // console.log(roomsData[0][0].roomRatePlans)
+  let roomsPlansToShow = [];
+  let roomsPlansNames = {};
+  for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
+    // console.log(Object.values(roomsNamesWithData)[index]);
+    // console.log(Object.keys(roomsNamesWithData)[index]);
+    // let roomData = roomsData[index];
+    for (let jindex = 0; jindex < Object.values(roomsNamesWithData)[index].length; jindex++) {
+      // console.log(Object.values(roomsNamesWithData)[index][jindex].roomRatePlans[0]);
+      if (!roomsPlansNames[Object.keys(roomsNamesWithData)[index]]) {
+        roomsPlansNames[Object.keys(roomsNamesWithData)[index]] = [];
+        roomsPlansNames[Object.keys(roomsNamesWithData)[index]].push(Object.values(roomsNamesWithData)[index][jindex].roomRatePlans);
+      }
+      else{
+        roomsPlansNames[Object.keys(roomsNamesWithData)[index]].push(Object.values(roomsNamesWithData)[index][jindex].roomRatePlans);
+      }
+    }
+    
+  }
+  // console.log(roomsData)
+  console.log(roomsPlansNames);
+
+  //Fetching room rate plans
+  for (let index = 0; index < Object.values(roomsPlansNames).length; index++) {
+    // console.log(Object.values(roomsPlansNames)[index]);
+    for (let jindex = 0; jindex < Object.values(roomsPlansNames)[index].length; jindex++) {
+      // console.log(Object.values(roomsPlansNames)[index][jindex]);
+    }
+    
+  }
+
+  // console.log(DoubleRoom);
+  // console.log(TwinRoom);
+  // console.log(BanquetHall);
+  // console.log(OneDayTrip);
   // console.log(properties)
+
+  //Trial
+  // let roomsPlansData = [];
+  // let roomsPlanName = {};
+  // for (let index = 0; index < roomsData.length; index++) {
+  //   // console.log(roomsData[index])
+  //   if(!roomsPlansData[Object.keys(roomsData)[index]]){
+  //     Object.keys(roomsData)[index] = [];
+  //     // obj[Object.keys(roomTypes)[index]] = [];
+  //     roomsPlansData.push(Object.keys(roomTypes)[index])
+  //   }
+    
+  // }
+  // console.log(roomsPlansData)
 
 
   //Deluxe Room Plans
@@ -474,7 +568,7 @@ const refreshDates = ()=>{
           </Col>
           <Col className={styles.rightSection}>
             <Row className={styles.data}>
-            {val.name == 'Deluxe Room'?
+            {/* {val.name == 'Deluxe Room'?
             DeluxeRoom.map((val,i)=>{
               return (<Col key={i} className={styles.col} >
                 {val.roomDetails.length}
@@ -487,7 +581,17 @@ const refreshDates = ()=>{
               return (<Col key={i} className={styles.col} >
                 {val.roomDetails.length}
               </Col>)
-            }): ''}
+            }): ''} */}
+            {val.name == Object.keys(roomsNamesWithData)[index]?
+            Object.values(roomsNamesWithData)[index].map((val,i)=>{
+              return (<Col key={i} className={styles.col} >
+                {val.roomDetails.length}
+              </Col>)
+            }): Object.keys(roomsNamesWithData)[index]?Object.values(roomsNamesWithData)[index].map((val,i)=>{
+              return (<Col key={i} className={styles.col} >
+                {val.roomDetails.length}
+              </Col>)
+            }) :''}
             <Col className={styles.col} >
               10
             </Col>
