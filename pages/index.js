@@ -218,11 +218,25 @@ export default function Home({properties,roomsArray,property}) {
     
   }
 
+  let fullRoomDeatils = [];
+  for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
+    // console.log(Object.values(roomsNamesWithData)[index])
+    for (let jindex = 0; jindex < Object.values(roomPlansToShowTrial).length; jindex++) {
+      // console.log(Object.values(roomPlansToShowTrial)[jindex])
+      if(Object.keys(roomsNamesWithData)[index] == Object.keys(roomPlansToShowTrial)[jindex]){
+          fullRoomDeatils[Object.keys(roomsNamesWithData)[index]] = {'Details': Object.values(roomsNamesWithData)[index],'Plans':Object.values(roomPlansToShowTrial)[jindex]}
+      }
+      
+    }
+  }
+
+  // console.log(fullRoomDeatils);
+
   // for (let index = 0; index < Object.values(roomsPlansToShow).length; index++) {
   //   console.log(Object.values(roomsPlansToShow)[index])
     
   // }
-  console.log(roomPlansToShowTrial)
+  // console.log(roomPlansToShowTrial)
 
   // console.log(roomsPlansToShow)
   // console.log(Object.values(roomsPlansToShow))
@@ -566,6 +580,9 @@ const refreshDates = ()=>{
   // console.log(roomTypes)
   // console.log(Object.values(deluxPlansToShow)[0])
 
+  // console.log(Object.keys(fullRoomDeatils))
+  console.log(Object.values(fullRoomDeatils)[0].Details[0].roomName)
+
   return (
       <div className={styles.container}>
       <div className={styles.table}>
@@ -617,7 +634,7 @@ const refreshDates = ()=>{
             </Col>
           </Row>
       </div>
-      {Object.values(roomTypes).map((val,index)=>(
+      {Object.keys(fullRoomDeatils).map((val,index)=>(
     <div key={index}>
       <div className={styles.item}>
         <Row className={styles.heading}>
@@ -625,7 +642,7 @@ const refreshDates = ()=>{
             <FaBed size={18} style={{marginTop: '5px'}}/>
           </Col>
           <Col className={styles.leftSection}>
-            <span>{val.name}</span>
+            <span>{val}</span>
             <AiFillThunderbolt size={15} style={{marginTop: '5px', color: '#2494d1'}}/>
           </Col>
           <Col className={styles.midSection}>
@@ -647,7 +664,7 @@ const refreshDates = ()=>{
                 {val.roomDetails.length}
               </Col>)
             }): ''} */}
-            {val.name == Object.keys(roomsNamesWithData)[index]?
+            {/* {val.name == Object.keys(roomsNamesWithData)[index]?
             Object.values(roomsNamesWithData)[index].map((val,i)=>{
               return (<Col key={i} className={styles.col} >
                 {val.roomDetails.length}
@@ -656,7 +673,18 @@ const refreshDates = ()=>{
               return (<Col key={i} className={styles.col} >
                 {val.roomDetails.length}
               </Col>)
-            }) :''}
+            }) :''} */}
+            {/* {val == Object.keys(fullRoomDeatils)?
+            Object.values(fullRoomDeatils)[index].map((val,i)=>{
+              return (<Col key={i} className={styles.col} >
+                {val.roomDetails.length}
+              </Col>)
+            }): Object.keys(fullRoomDeatils)?Object.values(fullRoomDeatils)[index].map((val,i)=>{
+              return (<Col key={i} className={styles.col} >
+                {val.roomDetails.length}
+              </Col>)
+            }) :''} */}
+            {}
             <Col className={styles.col} >
               10
             </Col>
