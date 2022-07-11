@@ -664,7 +664,7 @@ const refreshDates = ()=>{
                 {val.roomDetails.length}
               </Col>)
             }): ''} */}
-            {/* {val.name == Object.keys(roomsNamesWithData)[index]?
+            {val.name == Object.keys(roomsNamesWithData)[index]?
             Object.values(roomsNamesWithData)[index].map((val,i)=>{
               return (<Col key={i} className={styles.col} >
                 {val.roomDetails.length}
@@ -673,7 +673,7 @@ const refreshDates = ()=>{
               return (<Col key={i} className={styles.col} >
                 {val.roomDetails.length}
               </Col>)
-            }) :''} */}
+            }) :''}
             {/* {val == Object.keys(fullRoomDeatils)?
             Object.values(fullRoomDeatils)[index].map((val,i)=>{
               return (<Col key={i} className={styles.col} >
