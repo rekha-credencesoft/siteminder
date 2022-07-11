@@ -110,7 +110,7 @@ export default function Home({properties,roomsArray,property}) {
         
       }
     }
-    // console.log(roomsArray[index])
+    // console.log(roomsArray[0])
     // console.log(room)
     for (let l = 0; l < room.length; l++) {
       // console.log(room[l].roomName)
@@ -138,7 +138,7 @@ export default function Home({properties,roomsArray,property}) {
     // console.log(Object.keys(roomsNamesWithData)[index]);
     // let roomData = roomsData[index];
     for (let jindex = 0; jindex < Object.values(roomsNamesWithData)[index].length; jindex++) {
-      // console.log(Object.values(roomsNamesWithData)[index][jindex].roomRatePlans[0]);
+      // console.log(Object.values(roomsNamesWithData)[index][jindex]);
       if (!roomsPlansNames[Object.keys(roomsNamesWithData)[index]]) {
         roomsPlansNames[Object.keys(roomsNamesWithData)[index]] = [];
         roomsPlansNames[Object.keys(roomsNamesWithData)[index]].push(Object.values(roomsNamesWithData)[index][jindex].roomRatePlans);
@@ -150,17 +150,82 @@ export default function Home({properties,roomsArray,property}) {
     
   }
   // console.log(roomsData)
-  console.log(roomsPlansNames);
+  // console.log(roomsPlansNames);
 
   //Fetching room rate plans
   for (let index = 0; index < Object.values(roomsPlansNames).length; index++) {
     // console.log(Object.values(roomsPlansNames)[index]);
     for (let jindex = 0; jindex < Object.values(roomsPlansNames)[index].length; jindex++) {
       // console.log(Object.values(roomsPlansNames)[index][jindex]);
+      for (let zindex = 0; zindex < Object.values(roomsPlansNames)[index][jindex].length; zindex++) {
+        // console.log(Object.values(roomsPlansNames)[index][jindex][zindex]);
+        if (!roomsPlansToShow[Object.values(roomsPlansNames)[index][jindex][zindex].name]) {
+          roomsPlansToShow[Object.values(roomsPlansNames)[index][jindex][zindex].name] = [];
+          roomsPlansToShow[Object.values(roomsPlansNames)[index][jindex][zindex].name].push(Object.values(roomsPlansNames)[index][jindex][zindex]);
+        }
+        else{
+          roomsPlansToShow[Object.values(roomsPlansNames)[index][jindex][zindex].name].push(Object.values(roomsPlansNames)[index][jindex][zindex]);
+        }
+      }
     }
     
   }
 
+  let roomPlansToShowTrial = [];
+  for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
+    // console.log(Object.values(roomsNamesWithData)[index])
+    for (let jindex = 0; jindex < Object.values(roomsNamesWithData)[index].length; jindex++) {
+      // console.log(Object.values(roomsNamesWithData)[index][jindex].roomId)
+      // console.log(Object.values(roomsNamesWithData)[index][jindex])
+      for (let zindex = 0; zindex < Object.values(roomsPlansToShow).length; zindex++) {
+        // console.log(Object.values(roomsPlansToShow)[zindex])
+        for (let ndex = 0; ndex < Object.values(roomsPlansToShow)[zindex].length; ndex++) {
+          // console.log(Object.values(roomsPlansToShow)[zindex][ndex].roomId)
+          // console.log(Object.values(roomsPlansToShow)[zindex][ndex].name)
+          if (!roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName]) {
+            roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName] = [];
+
+            if (!roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name] && Object.values(roomsNamesWithData)[index][jindex].roomId == Object.values(roomsPlansToShow)[zindex][ndex].roomId) {
+              roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name] = [];
+              if (!roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name].includes(Object.values(roomsPlansToShow)[zindex][ndex])) {
+                roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name].push(Object.values(roomsPlansToShow)[zindex][ndex]);
+              }
+            }
+            else if (Object.values(roomsNamesWithData)[index][jindex].roomId == Object.values(roomsPlansToShow)[zindex][ndex].roomId){
+              if (!roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name].includes(Object.values(roomsPlansToShow)[zindex][ndex])) {
+                roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name].push(Object.values(roomsPlansToShow)[zindex][ndex]);
+              }
+            }
+          }
+          else {
+              if (!roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name] && Object.values(roomsNamesWithData)[index][jindex].roomId == Object.values(roomsPlansToShow)[zindex][ndex].roomId) {
+                roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name] = [];
+                if (!roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name].includes(Object.values(roomsPlansToShow)[zindex][ndex])) {
+                  roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name].push(Object.values(roomsPlansToShow)[zindex][ndex]);
+                }
+              }
+              else if (Object.values(roomsNamesWithData)[index][jindex].roomId == Object.values(roomsPlansToShow)[zindex][ndex].roomId){
+                if (!roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name].includes(Object.values(roomsPlansToShow)[zindex][ndex])) {
+                  roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name].push(Object.values(roomsPlansToShow)[zindex][ndex]);
+                }
+              }
+            }
+        }
+        
+      }
+      
+    }
+    
+  }
+
+  // for (let index = 0; index < Object.values(roomsPlansToShow).length; index++) {
+  //   console.log(Object.values(roomsPlansToShow)[index])
+    
+  // }
+  console.log(roomPlansToShowTrial)
+
+  // console.log(roomsPlansToShow)
+  // console.log(Object.values(roomsPlansToShow))
   // console.log(DoubleRoom);
   // console.log(TwinRoom);
   // console.log(BanquetHall);
@@ -677,7 +742,7 @@ const refreshDates = ()=>{
                     <>
                     <Col className={styles.Icon}>
           
-                </Col>
+                    </Col>
                 <Col className={styles.leftSection}>
                   {val1}
                   <AiFillThunderbolt size={15} style={{marginTop: '5px', color: '#2494d1'}}/>
@@ -791,24 +856,24 @@ const refreshDates = ()=>{
 }
 
 export async function getServerSideProps(context) {
-  const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/property/495/rooms', {
+  const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/property/237/rooms', {
   // const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=495', {
   // const response = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForRoom?PropertyId=495&RoomId=1539', {
     method: 'GET',
       headers: {
         Accept: 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWhhYmlyLmdhbGF4eUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX1BST1BfQURNSU4iLCJpYXQiOjE2NTY5OTI5MjksImV4cCI6MTY1NzQyNDkyOX0.kmoXtkq3kmuHaiFFzgpB23FVGMu1qZDEgIwc3-VCAc4',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWhhYmlyLmdhbGF4eUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX1BST1BfQURNSU4iLCJpYXQiOjE2NTc0NDE5MjcsImV4cCI6MTY1Nzg3MzkyN30.BdApPr1hs6DR_NYdR3VWRaan8GQehajWRIPWohSfIT8',
         'Content-Type': 'application/x-www-form-urlencoded',
         'APP_ID': 'BOOKONE_WEB_APP'
       }
     })
     const properties = await propertiesResponse.json();
 
-  const propertyResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=495', {
+  const propertyResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=237', {
     method: 'GET',
       headers: {
         Accept: 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWhhYmlyLmdhbGF4eUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX1BST1BfQURNSU4iLCJpYXQiOjE2NTY5OTI5MjksImV4cCI6MTY1NzQyNDkyOX0.kmoXtkq3kmuHaiFFzgpB23FVGMu1qZDEgIwc3-VCAc4',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWhhYmlyLmdhbGF4eUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX1BST1BfQURNSU4iLCJpYXQiOjE2NTc0NDE5MjcsImV4cCI6MTY1Nzg3MzkyN30.BdApPr1hs6DR_NYdR3VWRaan8GQehajWRIPWohSfIT8',
         'Content-Type': 'application/x-www-form-urlencoded',
         'APP_ID': 'BOOKONE_WEB_APP'
       }
@@ -817,11 +882,11 @@ export async function getServerSideProps(context) {
 
   const roomsArray = [];
   for (let index = 0; index < properties.length; index++) {
-    const roomsResponse = await fetch(`https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForRoom?PropertyId=495&RoomId=${properties[index].id}`, {
+    const roomsResponse = await fetch(`https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForRoom?PropertyId=237&RoomId=${properties[index].id}`, {
       method: 'GET',
         headers: {
           Accept: 'application/json',
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWhhYmlyLmdhbGF4eUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX1BST1BfQURNSU4iLCJpYXQiOjE2NTY5OTI5MjksImV4cCI6MTY1NzQyNDkyOX0.kmoXtkq3kmuHaiFFzgpB23FVGMu1qZDEgIwc3-VCAc4',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWhhYmlyLmdhbGF4eUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX1BST1BfQURNSU4iLCJpYXQiOjE2NTc0NDE5MjcsImV4cCI6MTY1Nzg3MzkyN30.BdApPr1hs6DR_NYdR3VWRaan8GQehajWRIPWohSfIT8',
           'Content-Type': 'application/x-www-form-urlencoded',
           'APP_ID': 'BOOKONE_WEB_APP'
         }
