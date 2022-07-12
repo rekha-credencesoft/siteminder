@@ -1,5 +1,56 @@
 .container {
   padding: 30px;
+  /* background-color: aqua; */
+}
+.col {
+  display: flex;
+  flex: 0.8;
+  text-align: center;
+  padding: 6px 0;
+  /* border-right: 1px solid #000; */
+  flex-direction: column;
+}
+.column {
+  display: flex;
+  flex: 0.8;
+  text-align: center;
+  /* padding: 6px 0; */
+  /* border-right: 1px solid #000; */
+  flex-direction: column;
+}
+.col1 {
+  display: flex;
+  flex: 1;
+  text-align: center;
+  /* padding: 10px 0px 0px 0px; */
+  /* border-right: 1px solid #000; */
+  flex-direction: column;
+}
+.col2 {
+  display: flex;
+  flex: 2.3;
+  text-align: left;
+  /* padding: 5px 0px 0px 10px; */
+  /* border-right: 1px solid #000; */
+  flex-direction: column;
+}
+.col3 {
+  display: flex;
+  flex: 0.7;
+  padding-top: 10px;
+  /* justify-content: flex-end; */
+  /* align-items: center; */
+  /* padding-left: 30px; */
+  /* border: 1px solid black; */
+  /* margin-left: -10px; */
+  /* padding: 10px 0px 0px 0px; */
+}
+
+.leftArrow2 {
+  display: flex;
+  justify-content: flex-end;
+  flex: 3;
+  /* padding: 0; */
 }
 
 .columnDate {
@@ -23,4 +74,22 @@
   flex: 1;
   justify-content: flex-start;
   font-size: 50px;
+}
+.rightArrow2 {
+}
+.image {
+  height: 50px;
+  width: 100px;
+}
+.text {
+  font-size: 12px;
+}
+.btn {
+  display: flex;
+  background-color: rgb(5, 41, 67);
+  color: white;
+  padding: 1px solid rgb(5, 41, 67);
+  border-radius: 5px;
+  font-size: 10px;
+  flex: 2;
 }
