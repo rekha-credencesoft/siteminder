@@ -176,6 +176,7 @@ export default function Home({ properties, roomsArray, property }) {
   }
 
   // console.log(fullRoomDeatils);
+  //Walla
 
 
   // console.log(roomsPlansData)
@@ -492,20 +493,6 @@ export default function Home({ properties, roomsArray, property }) {
                 </Col>
                 <Col className={styles.rightSection}>
                   <Row className={styles.data}>
-                    {/* {val.name == 'Deluxe Room'?
-            DeluxeRoom.map((val,i)=>{
-              return (<Col key={i} className={styles.col} >
-                {val.roomDetails.length}
-              </Col>)
-            }): val.name == 'Supreme Room'? SupremeRoom.map((val,i)=>{
-              return (<Col key={i} className={styles.col} >
-                {val.roomDetails.length}
-              </Col>)
-            }) : val.name == 'Classic Room'? ClassicRoom.map((val,i)=>{
-              return (<Col key={i} className={styles.col} >
-                {val.roomDetails.length}
-              </Col>)
-            }): ''} */}
                     {val.name == Object.keys(roomsNamesWithData)[index] ?
                       Object.values(roomsNamesWithData)[index].map((val, i) => {
                         return (<Col key={i} className={styles.col} >
@@ -516,17 +503,6 @@ export default function Home({ properties, roomsArray, property }) {
                           {val.roomDetails.length}
                         </Col>)
                       }) : ''}
-                    {/* {val == Object.keys(fullRoomDeatils)?
-            Object.values(fullRoomDeatils)[index].map((val,i)=>{
-              return (<Col key={i} className={styles.col} >
-                {val.roomDetails.length}
-              </Col>)
-            }): Object.keys(fullRoomDeatils)?Object.values(fullRoomDeatils)[index].map((val,i)=>{
-              return (<Col key={i} className={styles.col} >
-                {val.roomDetails.length}
-              </Col>)
-            }) :''} */}
-                    { }
                     <Col className={styles.col} >
                       10
                     </Col>
