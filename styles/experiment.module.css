@@ -1,0 +1,26 @@
+.container {
+  padding: 30px;
+}
+
+.columnDate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid black;
+  flex: 0.8;
+}
+
+.leftArrow {
+  flex: 3;
+  font-size: 50px;
+  display: flex;
+  justify-content: flex-end;
+  border-right: 1px solid black;
+}
+
+.rightArrow {
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+  font-size: 50px;
+}
