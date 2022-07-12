@@ -1,18 +1,13 @@
-import styles from '../styles/Home.module.css'
+import React from "react";
+import styles from "../styles/experiment.module.css";
+import Link from "next/link";
+import { BsInfoCircle } from "react-icons/bs";
+import { Row, Col } from "react-bootstrap";
+import { MdArrowLeft, MdArrowRight } from "react-icons/md";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Row,Col } from 'react-bootstrap';
-import {FaBed} from 'react-icons/fa';
-import {AiFillThunderbolt} from 'react-icons/ai';
-import {MdOutlineArrowDropDown} from 'react-icons/md';
-import {BsFillTagFill} from 'react-icons/bs';
-import {BiSearch} from 'react-icons/bi';
-import {GoTriangleRight} from 'react-icons/go';
-import {MdKeyboardArrowLeft,MdKeyboardArrowRight} from 'react-icons/md';
-import {AiOutlineDoubleRight,AiOutlineDoubleLeft} from 'react-icons/ai';
-import {GrRotateLeft} from 'react-icons/gr';
 import { useState } from 'react';
 
-export default function Home({properties,roomsArray,property}) {
+const Experiment = ({properties,roomsArray,property}) => {
   const [increment, setIncrement] = useState(0);
   // console.log(property);
   const roomTypes = [];
@@ -538,14 +533,14 @@ export default function Home({properties,roomsArray,property}) {
 }
 
 //This function will Increement Seven Days
-const sevenDaysIncrement = () => {
-  setIncrement(increment + 7)
+const oneDayIncrement = () => {
+  setIncrement(increment + 1)
 }
 
 //This function will Decrement Seven Days
-const sevenDaysDecrement = () => {
+const oneDayDecrement = () => {
   if (increment !== 0) {
-    setIncrement(increment - 7)
+    setIncrement(increment - 1)
   }
 
 }
@@ -571,9 +566,26 @@ const refreshDates = ()=>{
 }
 
 
-  datesToShow = datesToShow.slice(increment,increment + 14)
-  daysToShow = daysToShow.slice(increment,increment + 14);
-  monthToShow = monthToShow.slice(increment,increment + 14)
+//To Show Single Image of room Types
+let imageObj = {};
+for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
+  // console.log(Object.values(roomsNamesWithData)[index])
+  for (let jindex = 0; jindex < Object.values(roomsNamesWithData)[index].length; jindex++) {
+    // console.log(Object.values(roomsNamesWithData)[index][jindex])
+    for (let ndex = 0; ndex < Object.values(roomsNamesWithData)[index][jindex].roomDetail.imageList.length; ndex++) {
+      // console.log(Object.values(roomsNamesWithData)[index][jindex].roomDetail.imageList[0])
+      if(!imageObj[Object.keys(roomsNamesWithData)[index]]){
+        imageObj[Object.keys(roomsNamesWithData)[index]] = Object.values(roomsNamesWithData)[index][jindex].roomDetail.imageList[0]
+      }
+    }
+  }
+}
+// console.log(imageObj)
+
+
+  datesToShow = datesToShow.slice(increment,increment + 10)
+  daysToShow = daysToShow.slice(increment,increment + 10);
+  monthToShow = monthToShow.slice(increment,increment + 10)
   // console.log(monthToShow)
   // console.log(monthToShow)
   // console.log(datesToShow);
@@ -581,310 +593,89 @@ const refreshDates = ()=>{
   // console.log(Object.values(deluxPlansToShow)[0])
 
   // console.log(Object.keys(fullRoomDeatils))
-  console.log(Object.values(fullRoomDeatils)[0].Details[0].roomName)
+  // console.log(Object.values(fullRoomDeatils)[0].Details[0].roomName)
+  // console.log(Object.values(roomsNamesWithData)[0])
+  // console.log(Object.keys(roomsNamesWithData))
 
   return (
-      <div className={styles.container}>
-      <div className={styles.table}>
-      <div className={styles.topBar}>
-        <div className={styles.topBarButtons}>
-         <div className={styles.buttonsWrapper}>
-          <button className={styles.bulkUpdateBtn}>Bulk Update</button>
-          <span><GrRotateLeft size={13} style={{marginRight: '5px'}}/><span>Reset</span></span>
-          <button className={styles.saveBtn}>Save</button>
-         </div>
-        </div>
-        <Row className={styles.dateSection}>
-          <Col className={styles.dateSelector}>
-            <span><GrRotateLeft onClick={refreshDates} size={15} style={{marginRight: '10px'}}/><AiOutlineDoubleLeft onClick={fourteenDaysDecrement} size={15} style={{marginRight: '10px'}}/><MdKeyboardArrowLeft onClick={sevenDaysDecrement} />{date.toDateString()}<MdKeyboardArrowRight onClick={sevenDaysIncrement} /><AiOutlineDoubleRight onClick={fourteenDaysIncrement}  size={15} style={{marginLeft: '10px'}} /></span>
+    <div className={styles.bigContainer}>
+      <div className={styles.topContainer}>
+        <Row className={styles.upperRow}>
+          <Col className={styles.leftArrow}>
+            <MdArrowLeft onClick={oneDayDecrement} />
           </Col>
-          <Col className={styles.dates}>
-            <Row className={styles.dateCards}>
-              {datesToShow.map((val,i)=>{
-                return (<Col key={i} className={styles.dateCard}>
-                  <span>
-                    {daysToShow[i]}
-                  </span>
-                  <span className={styles.boldDateText}>
-                    {val}
-                  </span>
-                  <span>
-                    {monthToShow[i]}
-                  </span>
-                  </Col>)
-              })
-              }
+          {datesToShow.map((val,i)=>{
+            return (
+              <Col className={styles.columnDate} key={i}>
+                <div className={styles.spanContainer}>
+                  <span>{daysToShow[i]}</span>
+                  <span>{val}</span>
+                  <span>{monthToShow[i]}</span>
+                </div>
+              </Col>
+            )
+          })}
+          <Col className={styles.rightArrow}>
+            <MdArrowRight onClick={oneDayIncrement} />
+          </Col>
+        </Row>
+        {Object.keys(roomsNamesWithData).map((val,i)=>{
+          return (
+            <Row className={styles.row} key={i}>
+          <Col className={styles.leftArrow2}>
+            <Row>
+              <Col className={styles.col1}>
+                {val == Object.keys(imageObj)[i]?<img key={i+1}
+                    src={Object.values(imageObj)[i].url}
+                    alt=''
+                    className={styles.image}/>: ''}
+              </Col>
+              <Col className={styles.col2}>
+                <span className={styles.text}>
+                  {val}
+                </span>
+                <span className={styles.text}>
+                  <Link href="/">More Info</Link>
+                </span>
+              </Col>
+              <Col className={styles.col3}>
+                <BsInfoCircle />
+              </Col>
             </Row>
           </Col>
-        </Row>
-      </div>
-      <div className={styles.buttonGroup}>
-          <Row>
-            <Col className={styles.buttons}>
-              <button className={`${styles.buttonHover} ${styles.button} `}>All Rates & Availablity<span><MdOutlineArrowDropDown size={22} style={{marginBottom: '2px'}}/></span></button>
-              <button className={styles.button}><FaBed style={{marginRight: '8px',marginBottom: '2px'}} size={15} />All Room Types<MdOutlineArrowDropDown size={22} style={{marginLeft: '2px',marginBottom: '2px'}}  /></button>
-              <button className={styles.button}><BsFillTagFill style={{marginRight: '8px',marginBottom: '2px'}}/>All Rates Plans<MdOutlineArrowDropDown size={22}  style={{marginLeft: '2px',marginBottom: '4px'}} /></button>
-              <div className={styles.inputItem}><span><BiSearch size={15} style={{marginBottom: '1px'}}/></span><input placeholder='Search room Rates'/></div>
-              <span>Clear all filters</span>
-            </Col>
-            <Col className={styles.rightlinkText}>
-              <div className={styles.linkText}>
-                <GoTriangleRight size={20} style={{marginBottom : '3px'}} /><span>Quick Tour - Inventory Grid</span>
-              </div>
-            </Col>
-          </Row>
-      </div>
-      {Object.keys(fullRoomDeatils).map((val,index)=>(
-    <div key={index}>
-      <div className={styles.item}>
-        <Row className={styles.heading}>
-          <Col className={styles.Icon}>
-            <FaBed size={18} style={{marginTop: '5px'}}/>
+          {Object.values(Object.values(roomsNamesWithData)[i]).map((val2,j)=>{
+            return (
+              <Col className={styles.column} key={j}>
+            <span>
+              <input type="checkbox" disabled />{" "}
+            </span>
+            <span>{val2.price}</span>
           </Col>
-          <Col className={styles.leftSection}>
-            <span>{val}</span>
-            <AiFillThunderbolt size={15} style={{marginTop: '5px', color: '#2494d1'}}/>
+            )
+          })}
+          <Col className={styles.column}>
+            <span>
+              <input type="checkbox" />{" "}
+            </span>
+            <span>11</span>
           </Col>
-          <Col className={styles.midSection}>
-            Avail
-          </Col>
-          <Col className={styles.rightSection}>
-            <Row className={styles.data}>
-            {/* {val.name == 'Deluxe Room'?
-            DeluxeRoom.map((val,i)=>{
-              return (<Col key={i} className={styles.col} >
-                {val.roomDetails.length}
-              </Col>)
-            }): val.name == 'Supreme Room'? SupremeRoom.map((val,i)=>{
-              return (<Col key={i} className={styles.col} >
-                {val.roomDetails.length}
-              </Col>)
-            }) : val.name == 'Classic Room'? ClassicRoom.map((val,i)=>{
-              return (<Col key={i} className={styles.col} >
-                {val.roomDetails.length}
-              </Col>)
-            }): ''} */}
-            {val.name == Object.keys(roomsNamesWithData)[index]?
-            Object.values(roomsNamesWithData)[index].map((val,i)=>{
-              return (<Col key={i} className={styles.col} >
-                {val.roomDetails.length}
-              </Col>)
-            }): Object.keys(roomsNamesWithData)[index]?Object.values(roomsNamesWithData)[index].map((val,i)=>{
-              return (<Col key={i} className={styles.col} >
-                {val.roomDetails.length}
-              </Col>)
-            }) :''}
-            {/* {val == Object.keys(fullRoomDeatils)?
-            Object.values(fullRoomDeatils)[index].map((val,i)=>{
-              return (<Col key={i} className={styles.col} >
-                {val.roomDetails.length}
-              </Col>)
-            }): Object.keys(fullRoomDeatils)?Object.values(fullRoomDeatils)[index].map((val,i)=>{
-              return (<Col key={i} className={styles.col} >
-                {val.roomDetails.length}
-              </Col>)
-            }) :''} */}
-            {}
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            <Col className={styles.col} >
-              10
-            </Col>
-            </Row>
+          <Col className={styles.rightArrow2}>
+            <button className={styles.btn}>
+              <span className={styles.span}>Book Now</span>
+            </button>
           </Col>
         </Row>
-        <Row className={styles.content}>
-          {/* Room Rate Plans */}
-                {val.name == 'Deluxe Room'? Object.keys(deluxPlansToShow).map((val1,i)=>{
-                  return (
-                    <>
-                    <Col className={styles.Icon}>
-          
-                </Col>
-                <Col className={styles.leftSection}>
-                  {val1}
-                  <AiFillThunderbolt size={15} style={{marginTop: '5px', color: '#2494d1'}}/>
-                </Col>
-                <Col className={styles.midSection}>
-                  Rates
-                </Col>
-                <Col className={styles.rightSection}>
-                  <Row className={styles.data}>
-                  {val.name == 'Deluxe Room'?
-                  Object.values(deluxPlansToShow)[i].map((val2,j)=>{
-                    return (<Col key={j} className={styles.col} >
-                      {val2.amount}
-                    </Col>)
-                  }): val.name == 'Supreme Room'? Object.values(supremePlansToShow)[i].map((val2,j)=>{
-                    return (<Col key={j} className={styles.col} >
-                      {val2.amount}
-                    </Col>)
-                  }) : val.name == 'Classic Room'? Object.values(classicPlansToShow)[i].map((val2,j)=>{
-                    return (<Col key={j} className={styles.col} >
-                      {val2.amount}
-                    </Col>)
-                  }): ''}
-                  <Col className={styles.col} >
-                    10
-                  </Col>
-                  <Col className={styles.col} >
-                    10
-                  </Col>
-                  <Col className={styles.col} >
-                    10
-                  </Col>
-                  <Col className={styles.col} >
-                    10
-                  </Col>
-                  <Col className={styles.col} >
-                    10
-                  </Col>
-                  <Col className={styles.col} >
-                    10
-                  </Col>
-                  <Col className={styles.col} >
-                    10
-                  </Col>
-                  </Row>
-                </Col>
-                    </>
-                  )
-                }):val.name == 'Supreme Room'? Object.keys(supremePlansToShow).map((val1,i)=>{
-                  return (
-                    <>
-                    <Col className={styles.Icon}>
-          
-                    </Col>
-                <Col className={styles.leftSection}>
-                  {val1}
-                  <AiFillThunderbolt size={15} style={{marginTop: '5px', color: '#2494d1'}}/>
-                </Col>
-                <Col className={styles.midSection}>
-                  Rates
-                </Col>
-                <Col className={styles.rightSection}>
-                  <Row className={styles.data}>
-                  {val.name == 'Deluxe Room'?
-                  Object.values(deluxPlansToShow)[i].map((val2,j)=>{
-                    return (<Col key={j} className={styles.col} >
-                      {val2.amount}
-                    </Col>)
-                  }): val.name == 'Supreme Room'? Object.values(supremePlansToShow)[i].map((val2,j)=>{
-                    return (<Col key={j} className={styles.col} >
-                      {val2.amount}
-                    </Col>)
-                  }) : val.name == 'Classic Room'? Object.values(classicPlansToShow)[i].map((val2,j)=>{
-                    return (<Col key={j} className={styles.col} >
-                      {val2.amount}
-                    </Col>)
-                  }): ''}
-                  <Col className={styles.col} >
-                    10
-                  </Col>
-                  <Col className={styles.col} >
-                    10
-                  </Col>
-                  <Col className={styles.col} >
-                    10
-                  </Col>
-                  <Col className={styles.col} >
-                    10
-                  </Col>
-                  <Col className={styles.col} >
-                    10
-                  </Col>
-                  <Col className={styles.col} >
-                    10
-                  </Col>
-                  <Col className={styles.col} >
-                    10
-                  </Col>
-                  </Row>
-                </Col>
-                    </>
-                  )
-                }):val.name == 'Classic Room'? Object.keys(classicPlansToShow).map((val1,i)=>{
-                  return (
-                    <>
-                    <Col className={styles.Icon}>
-          
-                </Col>
-                <Col className={styles.leftSection}>
-                  {val1}
-                  <AiFillThunderbolt size={15} style={{marginTop: '5px', color: '#2494d1'}}/>
-                </Col>
-                <Col className={styles.midSection}>
-                  Rates
-                </Col>
-                <Col className={styles.rightSection}>
-                  <Row className={styles.data}>
-                  {val.name == 'Deluxe Room'?
-                  Object.values(deluxPlansToShow)[i].map((val2,j)=>{
-                    return (<Col key={j} className={styles.col} >
-                      {val2.amount}
-                    </Col>)
-                  }): val.name == 'Supreme Room'? Object.values(supremePlansToShow)[i].map((val2,j)=>{
-                    return (<Col key={j} className={styles.col} >
-                      {val2.amount}
-                    </Col>)
-                  }) : val.name == 'Classic Room'? Object.values(classicPlansToShow)[i].map((val2,j)=>{
-                    return (<Col key={j} className={styles.col} >
-                      {val2.amount}
-                    </Col>)
-                  }): ''}
-                  <Col className={styles.col} >
-                    10
-                  </Col>
-                  <Col className={styles.col} >
-                    10
-                  </Col>
-                  <Col className={styles.col} >
-                    10
-                  </Col>
-                  <Col className={styles.col} >
-                    10
-                  </Col>
-                  <Col className={styles.col} >
-                    10
-                  </Col>
-                  <Col className={styles.col} >
-                    10
-                  </Col>
-                  <Col className={styles.col} >
-                    10
-                  </Col>
-                  </Row>
-                </Col>
-                    </>
-                  )
-                }): ''}
-        </Row>
+          )
+        })}
       </div>
     </div>
-  ))}
-      </div>
-    </div>
-  )
-}
+  );
+};
+
+export default Experiment;
 
 export async function getServerSideProps(context) {
-  const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/property/237/rooms', {
+  const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/property/578/rooms', {
   // const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=495', {
   // const response = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForRoom?PropertyId=495&RoomId=1539', {
     method: 'GET',
@@ -897,7 +688,7 @@ export async function getServerSideProps(context) {
     })
     const properties = await propertiesResponse.json();
 
-  const propertyResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=237', {
+  const propertyResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=578', {
     method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -910,7 +701,7 @@ export async function getServerSideProps(context) {
 
   const roomsArray = [];
   for (let index = 0; index < properties.length; index++) {
-    const roomsResponse = await fetch(`https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForRoom?PropertyId=237&RoomId=${properties[index].id}`, {
+    const roomsResponse = await fetch(`https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForRoom?PropertyId=578&RoomId=${properties[index].id}`, {
       method: 'GET',
         headers: {
           Accept: 'application/json',
