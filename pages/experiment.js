@@ -596,6 +596,42 @@ for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
   // console.log(Object.values(fullRoomDeatils)[0].Details[0].roomName)
   // console.log(Object.values(roomsNamesWithData)[0])
   // console.log(Object.keys(roomsNamesWithData))
+  // console.log(Object.values(roomsNamesWithData))
+  // console.log(dates);
+  let priceArray = [];
+  for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
+    // console.log(Object.values(roomsNamesWithData)[index])
+    for (let jindex = 0; jindex < dates.length; jindex++) {
+      // console.log(Object.values(roomsNamesWithData)[index][jindex])
+      if (!priceArray[Object.keys(roomsNamesWithData)[index]]) {
+        priceArray[Object.keys(roomsNamesWithData)[index]] = [];
+        priceArray[Object.keys(roomsNamesWithData)[index]].push(Object.values(roomsNamesWithData)[index][jindex].price)
+        if (Object.values(roomsNamesWithData)[index][jindex] == undefined) {
+          priceArray[Object.keys(roomsNamesWithData)[index]].push(0)
+        }
+      }
+      else{
+        if (Object.values(roomsNamesWithData)[index][jindex] == undefined) {
+          priceArray[Object.keys(roomsNamesWithData)[index]].push(0)
+        }
+        else{
+          priceArray[Object.keys(roomsNamesWithData)[index]].push(Object.values(roomsNamesWithData)[index][jindex].price)
+        }
+      }
+      
+    }
+    
+  }
+  // console.log(priceArray)
+
+  let pricesToShow = [];
+  for (let index = 0; index < Object.values(priceArray).length; index++) {
+    // console.log(Object.values(priceArray)[index])
+    if (!pricesToShow[Object.keys(priceArray)[index]]) {
+      pricesToShow[Object.keys(priceArray)[index]] = Object.values(priceArray)[index].slice(increment,increment + 10)
+    }
+  }
+  // console.log(pricesToShow)
 
   return (
     <div className={styles.bigContainer}>
@@ -646,34 +682,26 @@ for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
               </Col>
             {/* </Row> */}
           </Col>
-          {Object.values(Object.values(roomsNamesWithData)[i]).map((val2,j)=>{
+          {val == Object.keys(pricesToShow)[i] ? Object.values(pricesToShow)[i].map((val2,j)=>{
             return (
               <Col className={styles.column} key={j}>
             <span>
-              <input type="checkbox" disabled />{" "}
+              <input type="checkbox" />
+            </span>
+            <span>{val2}</span>
+          </Col>
+            )
+          }): ''}
+          {/* {Object.values(Object.values(roomsNamesWithData)[i]).map((val2,j)=>{
+            return (
+              <Col className={styles.column} key={j}>
+            <span>
+              <input type="checkbox" />
             </span>
             <span>{val2.price}</span>
           </Col>
             )
-          })}
-          <Col className={styles.column}>
-            <span>
-              <input type="checkbox" />{" "}
-            </span>
-            <span>11</span>
-          </Col>
-          <Col className={styles.column}>
-            <span>
-              <input type="checkbox" />{" "}
-            </span>
-            <span>11</span>
-          </Col>
-          <Col className={styles.column}>
-            <span>
-              <input type="checkbox" />{" "}
-            </span>
-            <span>11</span>
-          </Col>
+          })} */}
           <Col className={styles.rightArrow2}>
             <button className={styles.btn}>
               <span className={styles.span}>Book Now</span>
