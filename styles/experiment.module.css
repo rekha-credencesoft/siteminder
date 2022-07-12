@@ -88,7 +88,7 @@
 }
 .btn{
   display: flex;
-  background-color: blue;
+  background-color: rgb(5, 41, 67);
   color: white;
   padding: 1px solid blue;
   border-radius: 5px;
