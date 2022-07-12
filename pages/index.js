@@ -27,62 +27,14 @@ export default function Home({properties,roomsArray,property}) {
   }
   delete roomTypes['Official  Use'];
   // console.log(roomTypes)
-
-
-  //This loop will add the data of rooms according to the roomId
-  // for (let i = 0; i < roomsArray.length; i++) {
-  //   room = roomsArray[i];
-  //   let keys = Object.values(roomTypes);
-  //   for (let k = 0; k < keys.length; k++) {
-  //     // console.log(keys[k].id)
-  //     for (let j = 0; j < room.length; j++) {
-  //       // console.log(room[j].roomId)
-  //           if(room[j].roomId == keys[k].id && room[j].roomName == keys[k].name){
-  //             // console.log(keys[k]);
-  //             roomDetail.push(keys[k])
-  //             keys[k]['roomDetail'] = roomDetail;
-  //           }
-  //         }
-  //         roomDetail = []
-  //       }
-  //     }
   
   // console.log(roomsArray)
-  let DeluxeRoom = [];
-  let ClassicRoom = [];
-  let SupremeRoom = [];
-  for (let i = 0 ; i < roomsArray.length ; i++) {
-    let room = roomsArray[i];
-    for (let j = 0; j < room.length; j++) {
-    //  room[j]['hie'] = 'hie'
-      for (let k = 0; k < properties.length; k++) {
-        if (properties[k].name == room[j].roomName) {
-            room[j]['roomDetail'] = properties[k];
-        }
-        // console.log(properties[k])
-        
-      }
-    }
-    // console.log(roomsArray[index])
-    // console.log(room)
-    for (let l = 0; l < room.length; l++) {
-      // console.log(room[l].roomName)
-      switch (room[l].roomName) {
-        case "Deluxe Room":
-          DeluxeRoom = room;
-          break;
-        case  "Classic Room":
-          ClassicRoom = room;
-          break;
-        case "Supreme Room":
-          SupremeRoom = room;
-      }
-      
-    }
-    // room = [];
-  }
+
+
 
   //237
+
+  //This will Create an array of rooms names
   let roomsData = [];
   let roomsNamesWithData = {};
   for (let index = 0; index < Object.keys(roomTypes).length; index++) {
@@ -94,10 +46,8 @@ export default function Home({properties,roomsArray,property}) {
   }
   // console.log(roomsData)
 
-  let DoubleRoom = [];
-  let TwinRoom = [];
-  let BanquetHall = [];
-  let OneDayTrip = [];
+  //It will add room Detail to every day room data.
+  //Also it will create an array of rooms with their particular 7 days data.
   for (let i = 0 ; i < roomsArray.length ; i++) {
     let room = roomsArray[i];
     for (let j = 0; j < room.length; j++) {
@@ -129,7 +79,6 @@ export default function Home({properties,roomsArray,property}) {
 
 
   //This will fetch The room Rate Plans of each room in their particular room keys
-
   // console.log(roomsData[0][0].roomRatePlans)
   let roomsPlansToShow = [];
   let roomsPlansNames = {};
@@ -152,7 +101,8 @@ export default function Home({properties,roomsArray,property}) {
   // console.log(roomsData)
   // console.log(roomsPlansNames);
 
-  //Fetching room rate plans
+  
+  //Fetching room rate plans as per their particular keys
   for (let index = 0; index < Object.values(roomsPlansNames).length; index++) {
     // console.log(Object.values(roomsPlansNames)[index]);
     for (let jindex = 0; jindex < Object.values(roomsPlansNames)[index].length; jindex++) {
@@ -171,6 +121,11 @@ export default function Home({properties,roomsArray,property}) {
     
   }
 
+  // console.log(roomsPlansToShow)
+
+
+
+  //This will put the room rate plans to its particular key then that particular key to their particular rooms
   let roomPlansToShowTrial = [];
   for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
     // console.log(Object.values(roomsNamesWithData)[index])
@@ -217,7 +172,10 @@ export default function Home({properties,roomsArray,property}) {
     }
     
   }
+  // console.log(roomPlansToShowTrial)
 
+
+  //This will create a overall data of a room with a roomName as it's secific key
   let fullRoomDeatils = [];
   for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
     // console.log(Object.values(roomsNamesWithData)[index])
@@ -230,114 +188,7 @@ export default function Home({properties,roomsArray,property}) {
     }
   }
 
-  // console.log(fullRoomDeatils);
-
-  // for (let index = 0; index < Object.values(roomsPlansToShow).length; index++) {
-  //   console.log(Object.values(roomsPlansToShow)[index])
-    
-  // }
-  // console.log(roomPlansToShowTrial)
-
-  // console.log(roomsPlansToShow)
-  // console.log(Object.values(roomsPlansToShow))
-  // console.log(DoubleRoom);
-  // console.log(TwinRoom);
-  // console.log(BanquetHall);
-  // console.log(OneDayTrip);
-  // console.log(properties)
-
-  //Trial
-  // let roomsPlansData = [];
-  // let roomsPlanName = {};
-  // for (let index = 0; index < roomsData.length; index++) {
-  //   // console.log(roomsData[index])
-  //   if(!roomsPlansData[Object.keys(roomsData)[index]]){
-  //     Object.keys(roomsData)[index] = [];
-  //     // obj[Object.keys(roomTypes)[index]] = [];
-  //     roomsPlansData.push(Object.keys(roomTypes)[index])
-  //   }
-    
-  // }
-  // console.log(roomsPlansData)
-
-
-  //Deluxe Room Plans
-  let deluxeRoomPlans = [];
-  for (let index = 0; index < DeluxeRoom.length; index++) {
-    // console.log(DeluxeRoom[index].roomRatePlans)
-    deluxeRoomPlans.push(DeluxeRoom[index].roomRatePlans);
-  }
-  // console.log(deluxeRoomPlans)
-
-
-  //Deluxe room Plans to Show
-  let deluxPlansToShow = [];
-  for (let index = 0; index < deluxeRoomPlans.length; index++) {
-    // console.log(deluxeRoomPlans[index][0])
-    for (let jindex = 0; jindex < deluxeRoomPlans[index].length; jindex++) {
-      if(!deluxPlansToShow[deluxeRoomPlans[index][jindex].name]){
-        deluxPlansToShow[deluxeRoomPlans[index][jindex].name] = [];
-        deluxPlansToShow[deluxeRoomPlans[index][jindex].name].push(deluxeRoomPlans[index][jindex])
-      }
-      else {
-        deluxPlansToShow[deluxeRoomPlans[index][jindex].name].push(deluxeRoomPlans[index][jindex])
-      }
-    }
-  }
-  // console.log(deluxPlansToShow)
-
-
-  //Supreme Room Plans
-  let supremeRoomPlans = [];
-  for (let index = 0; index < SupremeRoom.length; index++) {
-    // console.log(DeluxeRoom[index].roomRatePlans)
-    supremeRoomPlans.push(SupremeRoom[index].roomRatePlans);
-  }
-  // console.log(supremeRoomPlans)
-
-
-  //Supreme Room Plans To Show
-  let supremePlansToShow = [];
-  for (let index = 0; index < supremeRoomPlans.length; index++) {
-    // console.log(supremeRoomPlans[index][0])
-    for (let jindex = 0; jindex < supremeRoomPlans[index].length; jindex++) {
-      if(!supremePlansToShow[supremeRoomPlans[index][jindex].name]){
-        supremePlansToShow[supremeRoomPlans[index][jindex].name] = [];
-        supremePlansToShow[supremeRoomPlans[index][jindex].name].push(supremeRoomPlans[index][jindex])
-      }
-      else {
-        supremePlansToShow[supremeRoomPlans[index][jindex].name].push(supremeRoomPlans[index][jindex])
-      }
-    }
-  }
-  // console.log(supremePlansToShow)
-
-
-  //Classic Room Plans
-  let classicRoomPlans = [];
-  for (let index = 0; index < ClassicRoom.length; index++) {
-    // console.log(DeluxeRoom[index].roomRatePlans)
-    classicRoomPlans.push(ClassicRoom[index].roomRatePlans);
-  }
-  // console.log(classicRoomPlans)
-
-
-  //Classic Room Plans To Show
-  let classicPlansToShow = [];
-  for (let index = 0; index < classicRoomPlans.length; index++) {
-    // console.log(classicRoomPlans[index][0])
-    for (let jindex = 0; jindex < classicRoomPlans[index].length; jindex++) {
-      if(!classicPlansToShow[classicRoomPlans[index][jindex].name]){
-        classicPlansToShow[classicRoomPlans[index][jindex].name] = [];
-        classicPlansToShow[classicRoomPlans[index][jindex].name].push(classicRoomPlans[index][jindex])
-      }
-      else {
-        classicPlansToShow[classicRoomPlans[index][jindex].name].push(classicRoomPlans[index][jindex])
-      }
-    }
-  }
-  // console.log(classicPlansToShow)
-  
+  console.log(fullRoomDeatils);  
 
 
 
