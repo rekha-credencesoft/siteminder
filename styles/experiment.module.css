@@ -1,13 +1,22 @@
 .container {
   padding: 30px;
 }
+.row {
+  background-color: #9acc54;
+  border-radius: 5px;
+  /* box-shadow: 10px 10px 10px 10px rgb(236, 236, 236); */
+}
 
 .columnDate {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-right: 1px solid black;
+  border-right: 1px solid white;
   flex: 0.8;
+  color: white;
+  padding: 5px;
+  font-weight: bold;
+  /* padding: 5px; */
 }
 
 .leftArrow {
@@ -15,12 +24,19 @@
   font-size: 50px;
   display: flex;
   justify-content: flex-end;
-  border-right: 1px solid black;
+  align-items: center;
+  border-right: 1px solid white;
+  color: white;
+  cursor: pointer;
+  /* text-align: center; */
 }
 
 .rightArrow {
   display: flex;
   flex: 1;
   justify-content: flex-start;
+  align-items: center;
   font-size: 50px;
+  color: white;
+  cursor: pointer;
 }
