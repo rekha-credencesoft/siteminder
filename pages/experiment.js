@@ -10,27 +10,14 @@ import { MdArrowLeft, MdArrowRight } from "react-icons/md";
 const Experiment = () => {
   return (
     <div className={styles.container}>
-      <Row className={styles.row}>
+      <Row>
         <Col className={styles.leftArrow}>
           <MdArrowLeft />
         </Col>
         <Col className={styles.columnDate}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              textAlign: "center",
-              backgroundColor: "white",
-              color: "#9acc54",
-              padding: "5px 20px",
-              borderRadius: "5px",
-              margin: "8px 0px",
-            }}
-          >
-            <span>Mon</span>
-            <span>11</span>
-            <span>Jul</span>
-          </div>
+          <span>Mon</span>
+          <span>11</span>
+          <span>Jul</span>
         </Col>
         <Col className={styles.columnDate}>
           <span>Mon</span>
