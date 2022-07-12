@@ -623,12 +623,15 @@ for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
           return (
             <Row className={styles.row} key={i}>
           <Col className={styles.leftArrow2}>
-            <Row>
+            {/* <Row> */}
               <Col className={styles.col1}>
                 {val == Object.keys(imageObj)[i]?<img key={i+1}
                     src={Object.values(imageObj)[i].url}
                     alt=''
-                    className={styles.image}/>: ''}
+                    className={styles.image}/>: <img key={i+1}
+                    src="https://tse2.explicit.bing.net/th?id=OIP.38eE6cQfShw5U-lGbkcMCgHaEo&pid=Api&P=0&w=250&h=156"
+                    alt=''
+                    className={styles.image}/>}
               </Col>
               <Col className={styles.col2}>
                 <span className={styles.text}>
@@ -641,7 +644,7 @@ for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
               <Col className={styles.col3}>
                 <BsInfoCircle />
               </Col>
-            </Row>
+            {/* </Row> */}
           </Col>
           {Object.values(Object.values(roomsNamesWithData)[i]).map((val2,j)=>{
             return (
@@ -653,6 +656,18 @@ for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
           </Col>
             )
           })}
+          <Col className={styles.column}>
+            <span>
+              <input type="checkbox" />{" "}
+            </span>
+            <span>11</span>
+          </Col>
+          <Col className={styles.column}>
+            <span>
+              <input type="checkbox" />{" "}
+            </span>
+            <span>11</span>
+          </Col>
           <Col className={styles.column}>
             <span>
               <input type="checkbox" />{" "}
@@ -675,7 +690,7 @@ for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
 export default Experiment;
 
 export async function getServerSideProps(context) {
-  const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/property/578/rooms', {
+  const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/property/237/rooms', {
   // const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=495', {
   // const response = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForRoom?PropertyId=495&RoomId=1539', {
     method: 'GET',
@@ -688,7 +703,7 @@ export async function getServerSideProps(context) {
     })
     const properties = await propertiesResponse.json();
 
-  const propertyResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=578', {
+  const propertyResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=237', {
     method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -701,7 +716,7 @@ export async function getServerSideProps(context) {
 
   const roomsArray = [];
   for (let index = 0; index < properties.length; index++) {
-    const roomsResponse = await fetch(`https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForRoom?PropertyId=578&RoomId=${properties[index].id}`, {
+    const roomsResponse = await fetch(`https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForRoom?PropertyId=237&RoomId=${properties[index].id}`, {
       method: 'GET',
         headers: {
           Accept: 'application/json',
