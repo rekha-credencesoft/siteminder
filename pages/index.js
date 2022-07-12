@@ -31,9 +31,6 @@ export default function Home({properties,roomsArray,property}) {
   // console.log(roomsArray)
 
 
-
-  //237
-
   //This will Create an array of rooms names
   let roomsData = [];
   let roomsNamesWithData = {};
@@ -45,6 +42,7 @@ export default function Home({properties,roomsArray,property}) {
     }
   }
   // console.log(roomsData)
+
 
   //It will add room Detail to every day room data.
   //Also it will create an array of rooms with their particular 7 days data.
@@ -173,6 +171,16 @@ export default function Home({properties,roomsArray,property}) {
     
   }
   // console.log(roomPlansToShowTrial)
+  // console.log(roomsNamesWithData)
+  // console.log(Object.values(Object.values(roomPlansToShowTrial)[0])[0])
+  //It will match the keys and will show the data
+  for (let index = 0; index < Object.keys(roomsNamesWithData).length; index++) {
+    if (Object.keys(roomsNamesWithData)[index] == Object.keys(roomPlansToShowTrial)[index]) {
+      console.log(Object.keys(roomPlansToShowTrial)[index])
+      console.log(Object.values(roomPlansToShowTrial)[index])
+    }
+    
+  }
 
 
   //This will create a overall data of a room with a roomName as it's secific key
@@ -188,7 +196,7 @@ export default function Home({properties,roomsArray,property}) {
     }
   }
 
-  console.log(fullRoomDeatils);  
+  // console.log(fullRoomDeatils);  
 
 
 
@@ -431,8 +439,8 @@ const refreshDates = ()=>{
   // console.log(roomTypes)
   // console.log(Object.values(deluxPlansToShow)[0])
 
-  // console.log(Object.keys(fullRoomDeatils))
-  console.log(Object.values(fullRoomDeatils)[0].Details[0].roomName)
+  // console.log(Object.values(fullRoomDeatils)[0].Plans)
+  // console.log(Object.values(fullRoomDeatils)[0].Details[0].roomName)
 
   return (
       <div className={styles.container}>
