@@ -2,6 +2,33 @@
   padding: 30px;
   /* background-color: aqua; */
 }
+
+.upperRow {
+  background-color: #9acc54;
+}
+
+.spanContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 5px 18px;
+  margin: 8px 0px;
+  font-weight: bold;
+  color: white;
+}
+
+.spanContainer:hover {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  color: #9acc54;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px 18px;
+  margin: 8px 0px;
+  font-weight: bold;
+}
+
 .col {
   display: flex;
   flex: 0.8;
@@ -57,7 +84,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-right: 1px solid black;
+  border-right: 1px solid white;
   flex: 0.8;
 }
 
@@ -65,15 +92,19 @@
   flex: 3;
   font-size: 50px;
   display: flex;
+  color: white;
   justify-content: flex-end;
-  border-right: 1px solid black;
+  border-right: 1px solid white;
+  align-items: center;
 }
 
 .rightArrow {
   display: flex;
+  color: white;
   flex: 1;
   justify-content: flex-start;
   font-size: 50px;
+  align-items: center;
 }
 .rightArrow2 {
 }

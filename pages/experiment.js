@@ -10,59 +10,79 @@ import { MdArrowLeft, MdArrowRight } from "react-icons/md";
 const Experiment = () => {
   return (
     <div className={styles.container}>
-      <Row>
+      <Row className={styles.upperRow}>
         <Col className={styles.leftArrow}>
           <MdArrowLeft />
         </Col>
         <Col className={styles.columnDate}>
-          <span>Mon</span>
-          <span>11</span>
-          <span>Jul</span>
+          <div className={styles.spanContainer}>
+            <span>Mon</span>
+            <span>11</span>
+            <span>Jul</span>
+          </div>
         </Col>
         <Col className={styles.columnDate}>
-          <span>Mon</span>
-          <span>11</span>
-          <span>Jul</span>
+          <div className={styles.spanContainer}>
+            <span>Mon</span>
+            <span>11</span>
+            <span>Jul</span>
+          </div>
         </Col>
         <Col className={styles.columnDate}>
-          <span>Mon</span>
-          <span>11</span>
-          <span>Jul</span>
+          <div className={styles.spanContainer}>
+            <span>Mon</span>
+            <span>11</span>
+            <span>Jul</span>
+          </div>
         </Col>
         <Col className={styles.columnDate}>
-          <span>Mon</span>
-          <span>11</span>
-          <span>Jul</span>
+          <div className={styles.spanContainer}>
+            <span>Mon</span>
+            <span>11</span>
+            <span>Jul</span>
+          </div>
         </Col>
         <Col className={styles.columnDate}>
-          <span>Mon</span>
-          <span>11</span>
-          <span>Jul</span>
+          <div className={styles.spanContainer}>
+            <span>Mon</span>
+            <span>11</span>
+            <span>Jul</span>
+          </div>
         </Col>
         <Col className={styles.columnDate}>
-          <span>Mon</span>
-          <span>11</span>
-          <span>Jul</span>
+          <div className={styles.spanContainer}>
+            <span>Mon</span>
+            <span>11</span>
+            <span>Jul</span>
+          </div>
         </Col>
         <Col className={styles.columnDate}>
-          <span>Mon</span>
-          <span>11</span>
-          <span>Jul</span>
+          <div className={styles.spanContainer}>
+            <span>Mon</span>
+            <span>11</span>
+            <span>Jul</span>
+          </div>
         </Col>
         <Col className={styles.columnDate}>
-          <span>Mon</span>
-          <span>11</span>
-          <span>Jul</span>
+          <div className={styles.spanContainer}>
+            <span>Mon</span>
+            <span>11</span>
+            <span>Jul</span>
+          </div>
         </Col>
         <Col className={styles.columnDate}>
-          <span>Mon</span>
-          <span>11</span>
-          <span>Jul</span>
+          <div className={styles.spanContainer}>
+            <span>Mon</span>
+            <span>11</span>
+            <span>Jul</span>
+          </div>
         </Col>
         <Col className={styles.columnDate}>
-          <span>Mon</span>
-          <span>11</span>
-          <span>Jul</span>
+          <div className={styles.spanContainer}>
+            <span>Mon</span>
+            <span>11</span>
+            <span>Jul</span>
+          </div>
         </Col>
         <Col className={styles.rightArrow}>
           <MdArrowRight />
