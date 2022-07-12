@@ -1,10 +1,18 @@
-.container {
-  padding: 30px;
+.topContainer {
+  margin: 20px;
+  /* border: 1px solid black; */
+  box-shadow: 2px 2px 10px 10px rgb(238, 238, 238);
+  /* border-radius: 50px; */
   /* background-color: aqua; */
 }
 
 .upperRow {
   background-color: #9acc54;
+  /* padding: 50px 10px; */
+  margin: 0px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  /* border-radius: 5px; */
 }
 
 .spanContainer {
@@ -44,7 +52,7 @@
   /* padding: 6px 0; */
   /* border-right: 1px solid #000; */
   flex-direction: column;
-  margin-top: 15px;
+  /* margin-top: 15px; */
 }
 .col1 {
   display: flex;
@@ -123,15 +131,46 @@
   color: white;
   border: 1px solid rgb(5, 41, 67);
   border-radius: 5px;
-  margin-top: 25px;
+  margin-top: 10px;
   width: 90px;
   height: 30px;
+
   /* align-items: center; */
 }
-.row{
+.row {
   margin-top: 10px;
+  padding: 10px 0px;
 }
-.span{
+.span {
   text-align: center;
   font-size: 13.5px;
+  /* margin-bottom: 10px; */
+}
+
+.bottomContainer {
+  margin: 30px;
+}
+
+.topRow {
+  border: 1px solid black;
+}
+
+.roomHeading {
+  display: flex;
+  flex: 2;
+}
+
+.roomAvail {
+  display: flex;
+  flex: 1.2;
+}
+
+.rates {
+  display: flex;
+  flex: 0.8;
+}
+
+.rates2 {
+  display: flex;
+  flex: 1.7;
 }
