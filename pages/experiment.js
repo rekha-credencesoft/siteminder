@@ -88,7 +88,7 @@ const Experiment = () => {
           <MdArrowRight />
         </Col>
       </Row>
-      <Row>
+      <Row className={styles.row}>
         <Col className={styles.leftArrow2}>
           <Row>
             <Col className={styles.col1}>
@@ -172,7 +172,9 @@ const Experiment = () => {
           <span>11</span>
         </Col>
         <Col className={styles.rightArrow2}>
-          <button className={styles.btn}>Book Now</button>
+          <button className={styles.btn}>
+            <span className={styles.span}>Book Now</span>
+          </button>
         </Col>
       </Row>
       {/* <Row>
