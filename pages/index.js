@@ -659,7 +659,7 @@ function MyVerticallyCenteredModal(props) {
           <div>
             <Carousel
               style={{ height: "300px", width: "300px" }}>
-              {props.images.map((val,i)=>{
+              {props.images && props.images.map((val,i)=>{
                 return (
                   <Carousel.Item key={i}>
                 <img
