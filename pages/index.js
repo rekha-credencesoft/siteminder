@@ -641,7 +641,7 @@ const Home = ({ properties, roomsArray, property }) => {
 export default Home;
 
 function MyVerticallyCenteredModal(props) {
-  console.log(props.images)
+  console.log(props.facilities)
   return (
     <Modal
       {...props}
