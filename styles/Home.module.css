@@ -203,3 +203,44 @@
   justify-content: space-between;
   padding: 2.5px 20px ;
 }
+.moreInfo{
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+}
+.modalHeader{
+  display: flex;
+  justify-content: space-between;
+}
+.modalBody{
+  display: flex;
+  gap: 20px;
+  padding: 2.5px 20px ;
+}
+.modalBodyText{
+  color:gray;
+}
+.modalContainer{
+  margin: 10px 10px;
+}
+.modalCol{
+    display: flex;
+    flex: 3;
+    text-align: center;
+    padding: 6px 0;
+    /* border-right: 1px solid #000; */
+    flex-direction: column;
+}
+.modalCol2{
+  display: flex;
+  flex: 1.5;
+  text-align: center;
+  /* padding: 10px 0px 0px 0px; */
+  /* border-right: 1px solid #000; */
+  flex-direction: column;
+}
+.modalColBody{
+  display: flex;
+  gap: 10px;
+  padding: 2.5px 20px ;
+}

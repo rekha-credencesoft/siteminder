@@ -9,6 +9,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Carousel from 'react-bootstrap/Carousel';
+import { AiFillCopyrightCircle } from "react-icons/ai";
 
 const Home = ({ properties, roomsArray, property }) => {
   const [increment, setIncrement] = useState(0);
@@ -654,35 +656,35 @@ const Home = ({ properties, roomsArray, property }) => {
   // for (let index = 0; index < array.length; index++) {
   //   const element = array[index];
 
-//For Getting the Available, Hold, Booked and Total value of Rooms
-let roomsInfo = {};
-for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
-  // console.log(Object.values(roomsNamesWithData)[index])
-  for (let jindex = 0; jindex < Object.values(roomsNamesWithData)[index].length; jindex++) {
-    // console.log(Object.values(roomsNamesWithData)[index][jindex]
-    if (!roomsInfo[Object.keys(roomsNamesWithData)[index]]) {
-      roomsInfo[Object.keys(roomsNamesWithData)[index]] = {
-        noOfAvailable: '',
-        totalNoRooms: '',
-        noOfBooked: '',
-        noOfOnHold: ''
+  //For Getting the Available, Hold, Booked and Total value of Rooms
+  let roomsInfo = {};
+  for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
+    // console.log(Object.values(roomsNamesWithData)[index])
+    for (let jindex = 0; jindex < Object.values(roomsNamesWithData)[index].length; jindex++) {
+      // console.log(Object.values(roomsNamesWithData)[index][jindex]
+      if (!roomsInfo[Object.keys(roomsNamesWithData)[index]]) {
+        roomsInfo[Object.keys(roomsNamesWithData)[index]] = {
+          noOfAvailable: '',
+          totalNoRooms: '',
+          noOfBooked: '',
+          noOfOnHold: ''
+        }
+        roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfAvailable = Object.values(roomsNamesWithData)[index][jindex].noOfAvailable;
+        roomsInfo[Object.keys(roomsNamesWithData)[index]].totalNoRooms = Object.values(roomsNamesWithData)[index][jindex].totalNoRooms;
+        roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfBooked = Object.values(roomsNamesWithData)[index][jindex].noOfBooked;
+        roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfOnHold = Object.values(roomsNamesWithData)[index][jindex].noOfOnHold;
       }
-      roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfAvailable = Object.values(roomsNamesWithData)[index][jindex].noOfAvailable;
-      roomsInfo[Object.keys(roomsNamesWithData)[index]].totalNoRooms = Object.values(roomsNamesWithData)[index][jindex].totalNoRooms;
-      roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfBooked = Object.values(roomsNamesWithData)[index][jindex].noOfBooked;
-      roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfOnHold = Object.values(roomsNamesWithData)[index][jindex].noOfOnHold;
+      else {
+        roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfAvailable = roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfAvailable + Object.values(roomsNamesWithData)[index][jindex].noOfAvailable;
+        roomsInfo[Object.keys(roomsNamesWithData)[index]].totalNoRooms = roomsInfo[Object.keys(roomsNamesWithData)[index]].totalNoRooms + Object.values(roomsNamesWithData)[index][jindex].totalNoRooms;
+        roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfBooked = roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfBooked + Object.values(roomsNamesWithData)[index][jindex].noOfBooked;
+        roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfOnHold = roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfOnHold + Object.values(roomsNamesWithData)[index][jindex].noOfOnHold;
+      }
+
     }
-    else{
-      roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfAvailable = roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfAvailable + Object.values(roomsNamesWithData)[index][jindex].noOfAvailable;
-      roomsInfo[Object.keys(roomsNamesWithData)[index]].totalNoRooms = roomsInfo[Object.keys(roomsNamesWithData)[index]].totalNoRooms + Object.values(roomsNamesWithData)[index][jindex].totalNoRooms;
-      roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfBooked = roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfBooked + Object.values(roomsNamesWithData)[index][jindex].noOfBooked;
-      roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfOnHold = roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfOnHold + Object.values(roomsNamesWithData)[index][jindex].noOfOnHold;
-    }
-    
+
   }
-  
-}
-console.log(roomsInfo)
+  console.log(roomsInfo)
 
   return (
     <div className={styles.bigContainer}>
@@ -725,7 +727,7 @@ console.log(roomsInfo)
                     {val}
                   </span>
                   <span className={styles.text}>
-                    <span style={{ text: Link }} onClick={() => setModalShow(true)} >More Info</span>
+                    <span className={styles.moreInfo} onClick={() => setModalShow(true)} >More Info</span>
                     <MyVerticallyCenteredModal
                       show={modalShow}
                       onHide={() => setModalShow(false)}
@@ -733,29 +735,29 @@ console.log(roomsInfo)
                   </span>
                 </Col>
                 <Col className={styles.col3}>
-                  <BsInfoCircle onMouseEnter={()=>showModal(true,i)} onMouseLeave={()=>showModal(false,-1)} />
-                  {modal.state ==true && modal.id == i ? 
+                  <BsInfoCircle onMouseEnter={() => showModal(true, i)} onMouseLeave={() => showModal(false, -1)} />
+                  {modal.state == true && modal.id == i ?
                     <>
-                    {val == Object.keys(roomsInfo)[i]?
-                      <div  className={styles.popupModal}>
-                      <div>
-                        <span><b>Total</b></span>
-                        <span>{Object.values(roomsInfo)[i].totalNoRooms}</span>
-                      </div>
-                      <div>
-                        <span><b>Booked</b></span>
-                        <span>{Object.values(roomsInfo)[i].noOfBooked}</span>
-                      </div>
-                      <div>
-                        <span><b>Hold</b></span>
-                        <span>{Object.values(roomsInfo)[i].noOfOnHold}</span>
-                      </div>
-                      <div>
-                        <span><b>Available</b></span>
-                        <span>{Object.values(roomsInfo)[i].noOfAvailable}</span>
-                      </div>
-                    </div>: ''}
-                    </> :""
+                      {val == Object.keys(roomsInfo)[i] ?
+                        <div className={styles.popupModal}>
+                          <div>
+                            <span><b>Total</b></span>
+                            <span>{Object.values(roomsInfo)[i].totalNoRooms}</span>
+                          </div>
+                          <div>
+                            <span><b>Booked</b></span>
+                            <span>{Object.values(roomsInfo)[i].noOfBooked}</span>
+                          </div>
+                          <div>
+                            <span><b>Hold</b></span>
+                            <span>{Object.values(roomsInfo)[i].noOfOnHold}</span>
+                          </div>
+                          <div>
+                            <span><b>Available</b></span>
+                            <span>{Object.values(roomsInfo)[i].noOfAvailable}</span>
+                          </div>
+                        </div> : ''}
+                    </> : ""
                   }
                 </Col>
                 {/* </Row> */}
@@ -805,20 +807,73 @@ function MyVerticallyCenteredModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
+          Double Room
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Centered Modal</h4>
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
-        </p>
+        <div className={styles.modalBody}>
+          <div>
+            <Carousel
+              style={{ height: "300px", width: "300px" }}>
+              <Carousel.Item>
+                <img
+                  style={{ height: "300px", width: "300px" }}
+                  src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_181f654e99f%20text%20%7B%20fill%3A%23ffffff%3Bfont-weight%3Anormal%3Bfont-family%3Avar(--bs-font-sans-serif)%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_181f654e99f%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23373940%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22289.71875%22%20y%3D%22221.36000137329103%22%3EFirst%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                  alt="First slide"
+                />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img
+                  style={{ height: "300px", width: "300px" }}
+                  src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_181f654e9a1%20text%20%7B%20fill%3A%23ffffff%3Bfont-weight%3Anormal%3Bfont-family%3Avar(--bs-font-sans-serif)%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_181f654e9a1%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23282c34%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22251.97499084472656%22%20y%3D%22221.36000137329103%22%3ESecond%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                  alt="Second slide"
+                />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img
+                  style={{ height: "300px", width: "300px" }}
+                  src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_181f654e9a3%20text%20%7B%20fill%3A%23ffffff%3Bfont-weight%3Anormal%3Bfont-family%3Avar(--bs-font-sans-serif)%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_181f654e9a3%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%2320232a%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22278.3312454223633%22%20y%3D%22221.36000137329103%22%3EThird%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                  alt="Third slide"
+                />
+              </Carousel.Item>
+            </Carousel>
+          </div>
+          <div className={styles.modalBodyText}>
+            <span>1 King or 2 Twin beds, Jungle or Lawn facing, Balcony</span>
+            <hr />
+          </div>
+        </div>
+        <div className={styles.modalContainer}>
+          <Row>
+            <Col className={styles.modalCol}>
+              <div className={styles.modalColBody}>
+                <div>
+                  <AiFillCopyrightCircle />
+                </div>
+                <div>Maximum 3 Guests</div>
+              </div>
+            </Col>
+            <Col className={styles.modalCol}>
+              <div className={styles.modalColBody}>
+                <div><AiFillCopyrightCircle /></div>
+                <div>1 King or 2 singles</div>
+              </div>
+            </Col>
+            <Col className={styles.modalCol}>
+              <div className={styles.modalColBody}>
+                <div><AiFillCopyrightCircle /></div>
+                <div>Balcony</div>
+              </div>
+            </Col>
+            <Col className={styles.modalCol}>
+              <div className={styles.modalColBody}>
+                <div><AiFillCopyrightCircle /></div>
+                <div>Electronic Door Lock</div>
+              </div>
+            </Col>
+          </Row>
+        </div>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
     </Modal>
   );
 }
