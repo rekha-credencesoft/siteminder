@@ -647,6 +647,34 @@ const Home = ({ properties, roomsArray, property }) => {
 // console.log(roomsNamesWithData)
 
 //For Getting the Available, Hold, Booked and Total value of Rooms
+let roomsInfo = {};
+for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
+  // console.log(Object.values(roomsNamesWithData)[index])
+  for (let jindex = 0; jindex < Object.values(roomsNamesWithData)[index].length; jindex++) {
+    // console.log(Object.values(roomsNamesWithData)[index][jindex]
+    if (!roomsInfo[Object.keys(roomsNamesWithData)[index]]) {
+      roomsInfo[Object.keys(roomsNamesWithData)[index]] = {
+        noOfAvailable: '',
+        totalNoRooms: '',
+        noOfBooked: '',
+        noOfOnHold: ''
+      }
+      roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfAvailable = Object.values(roomsNamesWithData)[index][jindex].noOfAvailable;
+      roomsInfo[Object.keys(roomsNamesWithData)[index]].totalNoRooms = Object.values(roomsNamesWithData)[index][jindex].totalNoRooms;
+      roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfBooked = Object.values(roomsNamesWithData)[index][jindex].noOfBooked;
+      roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfOnHold = Object.values(roomsNamesWithData)[index][jindex].noOfOnHold;
+    }
+    else{
+      roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfAvailable = roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfAvailable + Object.values(roomsNamesWithData)[index][jindex].noOfAvailable;
+      roomsInfo[Object.keys(roomsNamesWithData)[index]].totalNoRooms = roomsInfo[Object.keys(roomsNamesWithData)[index]].totalNoRooms + Object.values(roomsNamesWithData)[index][jindex].totalNoRooms;
+      roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfBooked = roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfBooked + Object.values(roomsNamesWithData)[index][jindex].noOfBooked;
+      roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfOnHold = roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfOnHold + Object.values(roomsNamesWithData)[index][jindex].noOfOnHold;
+    }
+    
+  }
+  
+}
+console.log(roomsInfo)
 
   return (
     <div className={styles.bigContainer}>
@@ -695,24 +723,27 @@ const Home = ({ properties, roomsArray, property }) => {
                 <Col className={styles.col3}>
                   <BsInfoCircle onMouseEnter={()=>showModal(true,i)} onMouseLeave={()=>showModal(false,-1)} />
                   {modal.state ==true && modal.id == i ? 
-                    <div  className={styles.popupModal}>
-                    <div>
-                      <span><b>Total</b></span>
-                      <span>10</span>
-                    </div>
-                    <div>
-                      <span><b>Booked</b></span>
-                      <span>5</span>
-                    </div>
-                    <div>
-                      <span><b>Hold</b></span>
-                      <span>1</span>
-                    </div>
-                    <div>
-                      <span><b>Available</b></span>
-                      <span>4</span>
-                    </div>
-                  </div> :""
+                    <>
+                    {val == Object.keys(roomsInfo)[i]?
+                      <div  className={styles.popupModal}>
+                      <div>
+                        <span><b>Total</b></span>
+                        <span>{Object.values(roomsInfo)[i].totalNoRooms}</span>
+                      </div>
+                      <div>
+                        <span><b>Booked</b></span>
+                        <span>{Object.values(roomsInfo)[i].noOfBooked}</span>
+                      </div>
+                      <div>
+                        <span><b>Hold</b></span>
+                        <span>{Object.values(roomsInfo)[i].noOfOnHold}</span>
+                      </div>
+                      <div>
+                        <span><b>Available</b></span>
+                        <span>{Object.values(roomsInfo)[i].noOfAvailable}</span>
+                      </div>
+                    </div>: ''}
+                    </> :""
                   }
                 </Col>
                 {/* </Row> */}
