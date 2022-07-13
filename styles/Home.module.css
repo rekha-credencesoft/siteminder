@@ -30,6 +30,7 @@
   margin: 8px 0px;
   font-weight: bold;
   color: white;
+  cursor: pointer;
 }
 
 .spanContainer:hover {

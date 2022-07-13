@@ -391,15 +391,19 @@ const Home = ({ properties, roomsArray, property }) => {
 
   }
 
+  // console.log(dates.length)
+  // console.log(increment)
   //This function will Increement Seven Days
   const oneDayIncrement = () => {
-    setIncrement(increment + 1)
+    if (increment < dates.length -7 ) {
+      setIncrement(increment + 7)
+    }
   }
 
   //This function will Decrement Seven Days
   const oneDayDecrement = () => {
     if (increment !== 0) {
-      setIncrement(increment - 1)
+      setIncrement(increment - 7)
     }
 
   }
