@@ -581,7 +581,7 @@ const Home = ({ properties, roomsArray, property }) => {
                   </span>
                 </Col>
                 <Col className={styles.col3}>
-                  <BsInfoCircle onMouseEnter={() => showModal(true, i)} onMouseLeave={() => showModal(false, -1)} />
+                  <BsInfoCircle style={{cursor:"pointer"}} onMouseEnter={() => showModal(true, i)} onMouseLeave={() => showModal(false, -1)} />
                   {modal.state == true && modal.id == i ?
                     <>
                       {val == Object.keys(roomsInfo)[i] ?
