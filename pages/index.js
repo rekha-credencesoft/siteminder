@@ -701,6 +701,7 @@ function MyVerticallyCenteredModal(props) {
 }
 
 export async function getServerSideProps(context) {
+  console.log(context)
   const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/property/237/rooms', {
     // const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=495', {
     // const response = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForRoom?PropertyId=495&RoomId=1539', {
