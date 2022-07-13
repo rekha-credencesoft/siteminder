@@ -225,11 +225,12 @@
 }
 .modalCol{
     display: flex;
-    flex: 3;
     text-align: center;
     padding: 6px 5px;
     /* border-right: 1px solid #000; */
     flex-direction: column;
+    border: 1px solid black;
+    flex-wrap: wrap;
 }
 .modalCol2{
   display: flex;
@@ -242,4 +243,12 @@
 .modalColBody{
   display: flex;
   gap: 2px;
+}
+.box {
+  display: flex;
+  flex-wrap: wrap;
+}
+.box>* {
+  flex: 1 1 160px;
+  padding: 5px;
 }
