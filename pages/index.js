@@ -109,6 +109,7 @@ const Home = ({ properties, roomsArray, property }) => {
     }
 
   }
+
   // console.log(roomsData)
   // console.log(roomsPlansNames);
 
@@ -177,6 +178,7 @@ const Home = ({ properties, roomsArray, property }) => {
     }
 
   }
+  console.log(roomPlansToShowTrial)
 
   let fullRoomDeatils = [];
   for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
@@ -648,6 +650,7 @@ function MyVerticallyCenteredModal(props) {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
@@ -681,7 +684,7 @@ function MyVerticallyCenteredModal(props) {
           <div className={styles.box}>
             {props.facilities && props.facilities.map((val, i) => {
               return (
-                <div key={i}> <AiFillCopyrightCircle /> {val.name}</div>
+                <div key={i}> <img src={val.logoUrl} alt="" className={styles.logo} /> {val.name}</div>
               )
             })}
           </div>
