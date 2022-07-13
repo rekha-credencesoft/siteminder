@@ -7,19 +7,22 @@ import { MdArrowLeft, MdArrowRight } from "react-icons/md";
 import { FaCaretSquareRight } from "react-icons/fa"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 const Home = ({ properties, roomsArray, property }) => {
   const [increment, setIncrement] = useState(0);
-  const [modal, setModal] = useState({state:false,id:-1});
+  const [modal, setModal] = useState({ state: false, id: -1 });
+  const [modalShow, setModalShow] = React.useState(false);
   // console.log(property);
   const roomTypes = [];
   let room = [];
   let roomDetail = [];
 
-  const showModal = (state,id) => {
+  const showModal = (state, id) => {
     setModal({
-      state:state,
-      id:id
+      state: state,
+      id: id
     })
   }
   //This loop will extract the name of property and will make it as a key of its data
@@ -32,7 +35,7 @@ const Home = ({ properties, roomsArray, property }) => {
   // console.log(roomTypes)
 
 
-//
+  //
 
 
 
@@ -644,9 +647,14 @@ const Home = ({ properties, roomsArray, property }) => {
     }
   }
   // console.log(pricesToShow)
-// console.log(roomsNamesWithData)
+  // console.log(roomsNamesWithData)
 
-//For Getting the Available, Hold, Booked and Total value of Rooms
+  //For Getting the Available, Hold, Booked and Total value of Rooms
+  // let roomsInfo = []
+  // for (let index = 0; index < array.length; index++) {
+  //   const element = array[index];
+
+  // }
 
   return (
     <div className={styles.bigContainer}>
@@ -689,30 +697,34 @@ const Home = ({ properties, roomsArray, property }) => {
                     {val}
                   </span>
                   <span className={styles.text}>
-                    <Link href="/">More Info</Link>
+                    <span style={{ text: Link }} onClick={() => setModalShow(true)} >More Info</span>
+                    <MyVerticallyCenteredModal
+                      show={modalShow}
+                      onHide={() => setModalShow(false)}
+                    />
                   </span>
                 </Col>
                 <Col className={styles.col3}>
-                  <BsInfoCircle onMouseEnter={()=>showModal(true,i)} onMouseLeave={()=>showModal(false,-1)} />
-                  {modal.state ==true && modal.id == i ? 
-                    <div  className={styles.popupModal}>
-                    <div>
-                      <span><b>Total</b></span>
-                      <span>10</span>
-                    </div>
-                    <div>
-                      <span><b>Booked</b></span>
-                      <span>5</span>
-                    </div>
-                    <div>
-                      <span><b>Hold</b></span>
-                      <span>1</span>
-                    </div>
-                    <div>
-                      <span><b>Available</b></span>
-                      <span>4</span>
-                    </div>
-                  </div> :""
+                  <BsInfoCircle onMouseEnter={() => showModal(true, i)} onMouseLeave={() => showModal(false, -1)} />
+                  {modal.state == true && modal.id == i ?
+                    <div className={styles.popupModal}>
+                      <div>
+                        <span><b>Total</b></span>
+                        <span>10</span>
+                      </div>
+                      <div>
+                        <span><b>Booked</b></span>
+                        <span>5</span>
+                      </div>
+                      <div>
+                        <span><b>Hold</b></span>
+                        <span>1</span>
+                      </div>
+                      <div>
+                        <span><b>Available</b></span>
+                        <span>4</span>
+                      </div>
+                    </div> : ""
                   }
                 </Col>
                 {/* </Row> */}
@@ -751,6 +763,34 @@ const Home = ({ properties, roomsArray, property }) => {
 };
 
 export default Home;
+
+function MyVerticallyCenteredModal(props) {
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Modal heading
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <h4>Centered Modal</h4>
+        <p>
+          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
+          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
+          consectetur ac, vestibulum at eros.
+        </p>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
 
 export async function getServerSideProps(context) {
   const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/property/237/rooms', {
