@@ -582,7 +582,7 @@ const Home = ({ properties, roomsArray, property }) => {
                   {modal.state == true && modal.id == i ?
                     <>
                       {val == Object.keys(roomsInfo)[i] ?
-                        <div className={styles.popupModal}>
+                        <div className={styles.popupModal} onMouseEnter={() => showModal(true, i)} onMouseLeave={() => showModal(false, -1)}>
                           <div>
                             <span><b>Total</b></span>
                             <span>{Object.values(roomsInfo)[i].totalNoRooms}</span>
