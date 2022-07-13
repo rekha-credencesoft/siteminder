@@ -16,6 +16,7 @@ const Home = ({ properties, roomsArray, property }) => {
   const [increment, setIncrement] = useState(0);
   const [modal, setModal] = useState({ state: false, id: -1 });
   const [modalShow, setModalShow] = React.useState(false);
+  const [details, setDetails] = useState({});
   // console.log(property);
   const roomTypes = [];
   let room = [];
@@ -35,64 +36,11 @@ const Home = ({ properties, roomsArray, property }) => {
   }
   delete roomTypes['Official  Use'];
   // console.log(roomTypes)
+  // console.log(Object.values(roomTypes)[0].roomFacilities)
 
-
-  //
-
-
-
-  //This loop will add the data of rooms according to the roomId
-  // for (let i = 0; i < roomsArray.length; i++) {
-  //   room = roomsArray[i];
-  //   let keys = Object.values(roomTypes);
-  //   for (let k = 0; k < keys.length; k++) {
-  //     // console.log(keys[k].id)
-  //     for (let j = 0; j < room.length; j++) {
-  //       // console.log(room[j].roomId)
-  //           if(room[j].roomId == keys[k].id && room[j].roomName == keys[k].name){
-  //             // console.log(keys[k]);
-  //             roomDetail.push(keys[k])
-  //             keys[k]['roomDetail'] = roomDetail;
-  //           }
-  //         }
-  //         roomDetail = []
-  //       }
-  //     }
 
   // console.log(roomsArray)
-  let DeluxeRoom = [];
-  let ClassicRoom = [];
-  let SupremeRoom = [];
-  for (let i = 0; i < roomsArray.length; i++) {
-    let room = roomsArray[i];
-    for (let j = 0; j < room.length; j++) {
-      //  room[j]['hie'] = 'hie'
-      for (let k = 0; k < properties.length; k++) {
-        if (properties[k].name == room[j].roomName) {
-          room[j]['roomDetail'] = properties[k];
-        }
-        // console.log(properties[k])
 
-      }
-    }
-    // console.log(roomsArray[index])
-    // console.log(room)
-    for (let l = 0; l < room.length; l++) {
-      // console.log(room[l].roomName)
-      switch (room[l].roomName) {
-        case "Deluxe Room":
-          DeluxeRoom = room;
-          break;
-        case "Classic Room":
-          ClassicRoom = room;
-          break;
-        case "Supreme Room":
-          SupremeRoom = room;
-      }
-
-    }
-    // room = [];
-  }
 
   //237
   let roomsData = [];
@@ -243,114 +191,6 @@ const Home = ({ properties, roomsArray, property }) => {
   }
 
   // console.log(fullRoomDeatils);
-
-  // for (let index = 0; index < Object.values(roomsPlansToShow).length; index++) {
-  //   console.log(Object.values(roomsPlansToShow)[index])
-
-  // }
-  // console.log(roomPlansToShowTrial)
-
-  // console.log(roomsPlansToShow)
-  // console.log(Object.values(roomsPlansToShow))
-  // console.log(DoubleRoom);
-  // console.log(TwinRoom);
-  // console.log(BanquetHall);
-  // console.log(OneDayTrip);
-  // console.log(properties)
-
-  //Trial
-  // let roomsPlansData = [];
-  // let roomsPlanName = {};
-  // for (let index = 0; index < roomsData.length; index++) {
-  //   // console.log(roomsData[index])
-  //   if(!roomsPlansData[Object.keys(roomsData)[index]]){
-  //     Object.keys(roomsData)[index] = [];
-  //     // obj[Object.keys(roomTypes)[index]] = [];
-  //     roomsPlansData.push(Object.keys(roomTypes)[index])
-  //   }
-
-  // }
-  // console.log(roomsPlansData)
-
-
-  //Deluxe Room Plans
-  let deluxeRoomPlans = [];
-  for (let index = 0; index < DeluxeRoom.length; index++) {
-    // console.log(DeluxeRoom[index].roomRatePlans)
-    deluxeRoomPlans.push(DeluxeRoom[index].roomRatePlans);
-  }
-  // console.log(deluxeRoomPlans)
-
-
-  //Deluxe room Plans to Show
-  let deluxPlansToShow = [];
-  for (let index = 0; index < deluxeRoomPlans.length; index++) {
-    // console.log(deluxeRoomPlans[index][0])
-    for (let jindex = 0; jindex < deluxeRoomPlans[index].length; jindex++) {
-      if (!deluxPlansToShow[deluxeRoomPlans[index][jindex].name]) {
-        deluxPlansToShow[deluxeRoomPlans[index][jindex].name] = [];
-        deluxPlansToShow[deluxeRoomPlans[index][jindex].name].push(deluxeRoomPlans[index][jindex])
-      }
-      else {
-        deluxPlansToShow[deluxeRoomPlans[index][jindex].name].push(deluxeRoomPlans[index][jindex])
-      }
-    }
-  }
-  // console.log(deluxPlansToShow)
-
-
-  //Supreme Room Plans
-  let supremeRoomPlans = [];
-  for (let index = 0; index < SupremeRoom.length; index++) {
-    // console.log(DeluxeRoom[index].roomRatePlans)
-    supremeRoomPlans.push(SupremeRoom[index].roomRatePlans);
-  }
-  // console.log(supremeRoomPlans)
-
-
-  //Supreme Room Plans To Show
-  let supremePlansToShow = [];
-  for (let index = 0; index < supremeRoomPlans.length; index++) {
-    // console.log(supremeRoomPlans[index][0])
-    for (let jindex = 0; jindex < supremeRoomPlans[index].length; jindex++) {
-      if (!supremePlansToShow[supremeRoomPlans[index][jindex].name]) {
-        supremePlansToShow[supremeRoomPlans[index][jindex].name] = [];
-        supremePlansToShow[supremeRoomPlans[index][jindex].name].push(supremeRoomPlans[index][jindex])
-      }
-      else {
-        supremePlansToShow[supremeRoomPlans[index][jindex].name].push(supremeRoomPlans[index][jindex])
-      }
-    }
-  }
-  // console.log(supremePlansToShow)
-
-
-  //Classic Room Plans
-  let classicRoomPlans = [];
-  for (let index = 0; index < ClassicRoom.length; index++) {
-    // console.log(DeluxeRoom[index].roomRatePlans)
-    classicRoomPlans.push(ClassicRoom[index].roomRatePlans);
-  }
-  // console.log(classicRoomPlans)
-
-
-  //Classic Room Plans To Show
-  let classicPlansToShow = [];
-  for (let index = 0; index < classicRoomPlans.length; index++) {
-    // console.log(classicRoomPlans[index][0])
-    for (let jindex = 0; jindex < classicRoomPlans[index].length; jindex++) {
-      if (!classicPlansToShow[classicRoomPlans[index][jindex].name]) {
-        classicPlansToShow[classicRoomPlans[index][jindex].name] = [];
-        classicPlansToShow[classicRoomPlans[index][jindex].name].push(classicRoomPlans[index][jindex])
-      }
-      else {
-        classicPlansToShow[classicRoomPlans[index][jindex].name].push(classicRoomPlans[index][jindex])
-      }
-    }
-  }
-  // console.log(classicPlansToShow)
-
-
 
 
   //Function to find out last date of the month
@@ -592,11 +432,12 @@ const Home = ({ properties, roomsArray, property }) => {
       for (let ndex = 0; ndex < Object.values(roomsNamesWithData)[index][jindex].roomDetail.imageList.length; ndex++) {
         // console.log(Object.values(roomsNamesWithData)[index][jindex].roomDetail.imageList[0])
         if (!imageObj[Object.keys(roomsNamesWithData)[index]]) {
-          imageObj[Object.keys(roomsNamesWithData)[index]] = Object.values(roomsNamesWithData)[index][jindex].roomDetail.imageList[0]
+          imageObj[Object.keys(roomsNamesWithData)[index]] = Object.values(roomsNamesWithData)[index][jindex].roomDetail.imageList
         }
       }
     }
   }
+  // console.log(Object.values(imageObj))
   // console.log(imageObj)
 
 
@@ -652,11 +493,6 @@ const Home = ({ properties, roomsArray, property }) => {
   // console.log(roomsNamesWithData)
 
   //For Getting the Available, Hold, Booked and Total value of Rooms
-  // let roomsInfo = []
-  // for (let index = 0; index < array.length; index++) {
-  //   const element = array[index];
-
-  //For Getting the Available, Hold, Booked and Total value of Rooms
   let roomsInfo = {};
   for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
     // console.log(Object.values(roomsNamesWithData)[index])
@@ -684,7 +520,7 @@ const Home = ({ properties, roomsArray, property }) => {
     }
 
   }
-  console.log(roomsInfo)
+  // console.log(roomsInfo)
 
   return (
     <div className={styles.bigContainer}>
@@ -715,7 +551,7 @@ const Home = ({ properties, roomsArray, property }) => {
                 {/* <Row> */}
                 <Col className={styles.col1}>
                   {val == Object.keys(imageObj)[i] ? <img key={i + 1}
-                    src={Object.values(imageObj)[i].url}
+                    src={Object.values(imageObj)[i][0].url}
                     alt=''
                     className={styles.image} /> : <img key={i + 1}
                       src="https://tse2.explicit.bing.net/th?id=OIP.38eE6cQfShw5U-lGbkcMCgHaEo&pid=Api&P=0&w=250&h=156"
@@ -727,11 +563,18 @@ const Home = ({ properties, roomsArray, property }) => {
                     {val}
                   </span>
                   <span className={styles.text}>
-                    <span className={styles.moreInfo} onClick={() => setModalShow(true)} >More Info</span>
-                    <MyVerticallyCenteredModal
+                    <span className={styles.moreInfo} onClick={() => {setModalShow(true),setDetails({name:Object.keys(roomTypes)[i], facilities:Object.values(roomTypes)[i].roomFacilities, images: Object.values(imageObj)[i] })}} >More Info</span>
+                    {val == Object.keys(roomTypes)[i]?<MyVerticallyCenteredModal
                       show={modalShow}
                       onHide={() => setModalShow(false)}
-                    />
+                      name={details.name}
+                      facilities={details.facilities}
+                      images={details.images}
+                    />: ''}
+                    {/* <MyVerticallyCenteredModal
+                      show={modalShow}
+                      onHide={() => setModalShow(false)}
+                    /> */}
                   </span>
                 </Col>
                 <Col className={styles.col3}>
@@ -798,6 +641,7 @@ const Home = ({ properties, roomsArray, property }) => {
 export default Home;
 
 function MyVerticallyCenteredModal(props) {
+  console.log(props.images)
   return (
     <Modal
       {...props}
@@ -807,7 +651,7 @@ function MyVerticallyCenteredModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Double Room
+          {props.name}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -815,27 +659,17 @@ function MyVerticallyCenteredModal(props) {
           <div>
             <Carousel
               style={{ height: "300px", width: "300px" }}>
-              <Carousel.Item>
+              {props.images.map((val,i)=>{
+                return (
+                  <Carousel.Item key={i}>
                 <img
                   style={{ height: "300px", width: "300px" }}
-                  src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_181f654e99f%20text%20%7B%20fill%3A%23ffffff%3Bfont-weight%3Anormal%3Bfont-family%3Avar(--bs-font-sans-serif)%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_181f654e99f%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23373940%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22289.71875%22%20y%3D%22221.36000137329103%22%3EFirst%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                  src={val.url}
                   alt="First slide"
                 />
               </Carousel.Item>
-              <Carousel.Item>
-                <img
-                  style={{ height: "300px", width: "300px" }}
-                  src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_181f654e9a1%20text%20%7B%20fill%3A%23ffffff%3Bfont-weight%3Anormal%3Bfont-family%3Avar(--bs-font-sans-serif)%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_181f654e9a1%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23282c34%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22251.97499084472656%22%20y%3D%22221.36000137329103%22%3ESecond%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
-                  alt="Second slide"
-                />
-              </Carousel.Item>
-              <Carousel.Item>
-                <img
-                  style={{ height: "300px", width: "300px" }}
-                  src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_181f654e9a3%20text%20%7B%20fill%3A%23ffffff%3Bfont-weight%3Anormal%3Bfont-family%3Avar(--bs-font-sans-serif)%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_181f654e9a3%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%2320232a%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22278.3312454223633%22%20y%3D%22221.36000137329103%22%3EThird%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
-                  alt="Third slide"
-                />
-              </Carousel.Item>
+                )
+              })}
             </Carousel>
           </div>
           <div className={styles.modalBodyText}>
@@ -845,32 +679,18 @@ function MyVerticallyCenteredModal(props) {
         </div>
         <div className={styles.modalContainer}>
           <Row>
-            <Col className={styles.modalCol}>
+            {props.facilities && props.facilities.map((val,i)=>{
+              return (
+                <Col key={i} className={styles.modalCol}>
               <div className={styles.modalColBody}>
                 <div>
                   <AiFillCopyrightCircle />
                 </div>
-                <div>Maximum 3 Guests</div>
+                <div>{val.name}</div>
               </div>
             </Col>
-            <Col className={styles.modalCol}>
-              <div className={styles.modalColBody}>
-                <div><AiFillCopyrightCircle /></div>
-                <div>1 King or 2 singles</div>
-              </div>
-            </Col>
-            <Col className={styles.modalCol}>
-              <div className={styles.modalColBody}>
-                <div><AiFillCopyrightCircle /></div>
-                <div>Balcony</div>
-              </div>
-            </Col>
-            <Col className={styles.modalCol}>
-              <div className={styles.modalColBody}>
-                <div><AiFillCopyrightCircle /></div>
-                <div>Electronic Door Lock</div>
-              </div>
-            </Col>
+              )
+            })}
           </Row>
         </div>
       </Modal.Body>
