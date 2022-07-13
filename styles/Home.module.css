@@ -249,6 +249,9 @@
   flex-wrap: wrap;
 }
 .box>* {
-  flex: 1 1 160px;
-  padding: 5px;
+  flex: 1 1 220px;
+  padding: 7px 20px;
+}
+.logo{
+  width: 1.2vw;
 }
