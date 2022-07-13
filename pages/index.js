@@ -563,14 +563,14 @@ const Home = ({ properties, roomsArray, property }) => {
                     {val}
                   </span>
                   <span className={styles.text}>
-                    <span className={styles.moreInfo} onClick={() => {setModalShow(true),setDetails({name:Object.keys(roomTypes)[i], facilities:Object.values(roomTypes)[i].roomFacilities, images: Object.values(imageObj)[i] })}} >More Info</span>
-                    {val == Object.keys(roomTypes)[i]?<MyVerticallyCenteredModal
+                    <span className={styles.moreInfo} onClick={() => { setModalShow(true), setDetails({ name: Object.keys(roomTypes)[i], facilities: Object.values(roomTypes)[i].roomFacilities, images: Object.values(imageObj)[i] }) }} >More Info</span>
+                    {val == Object.keys(roomTypes)[i] ? <MyVerticallyCenteredModal
                       show={modalShow}
                       onHide={() => setModalShow(false)}
                       name={details.name}
                       facilities={details.facilities}
                       images={details.images}
-                    />: ''}
+                    /> : ''}
                     {/* <MyVerticallyCenteredModal
                       show={modalShow}
                       onHide={() => setModalShow(false)}
@@ -659,15 +659,15 @@ function MyVerticallyCenteredModal(props) {
           <div>
             <Carousel
               style={{ height: "300px", width: "300px" }}>
-              {props.images && props.images.map((val,i)=>{
+              {props.images && props.images.map((val, i) => {
                 return (
                   <Carousel.Item key={i}>
-                <img
-                  style={{ height: "300px", width: "300px" }}
-                  src={val.url}
-                  alt="First slide"
-                />
-              </Carousel.Item>
+                    <img
+                      style={{ height: "300px", width: "300px" }}
+                      src={val.url}
+                      alt="First slide"
+                    />
+                  </Carousel.Item>
                 )
               })}
             </Carousel>
@@ -678,21 +678,15 @@ function MyVerticallyCenteredModal(props) {
           </div>
         </div>
         <div className={styles.modalContainer}>
-          <Row>
-            {props.facilities && props.facilities.map((val,i)=>{
+          <div className={styles.box}>
+            {props.facilities && props.facilities.map((val, i) => {
               return (
-                <Col key={i} className={styles.modalCol}>
-              <div className={styles.modalColBody}>
-                <div>
-                  <AiFillCopyrightCircle />
-                </div>
-                <div>{val.name}</div>
-              </div>
-            </Col>
+                <div key={i}> <AiFillCopyrightCircle /> {val.name}</div>
               )
             })}
-          </Row>
+          </div>
         </div>
+
       </Modal.Body>
     </Modal>
   );
