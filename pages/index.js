@@ -178,7 +178,7 @@ const Home = ({ properties, roomsArray, property }) => {
     }
 
   }
-  console.log(roomPlansToShowTrial)
+  // console.log(roomPlansToShowTrial)
 
   let fullRoomDeatils = [];
   for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
@@ -677,7 +677,7 @@ function MyVerticallyCenteredModal(props) {
             </Carousel>
           </div>
           <div className={styles.modalBodyText}>
-            <span>{props.plans.join(", ")}</span>
+            <span>{props.plans && props.plans.join(", ")}</span>
             <hr />
           </div>
         </div>
