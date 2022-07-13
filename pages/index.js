@@ -4,24 +4,36 @@ import Link from "next/link";
 import { BsInfoCircle } from "react-icons/bs";
 import { Row, Col } from "react-bootstrap";
 import { MdArrowLeft, MdArrowRight } from "react-icons/md";
+import { FaCaretSquareRight } from "react-icons/fa"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 
-const Home = ({properties,roomsArray,property}) => {
+const Home = ({ properties, roomsArray, property }) => {
   const [increment, setIncrement] = useState(0);
+  const [modal, setModal] = useState({state:false,id:-1});
   // console.log(property);
   const roomTypes = [];
   let room = [];
   let roomDetail = [];
 
+  const showModal = (state,id) => {
+    setModal({
+      state:state,
+      id:id
+    })
+  }
   //This loop will extract the name of property and will make it as a key of its data
   for (let index = 0; index < properties.length; index++) {
     if (!roomTypes[properties[index].name]) {
-      roomTypes[properties[index].name]=JSON.parse(JSON.stringify(properties[index]));
+      roomTypes[properties[index].name] = JSON.parse(JSON.stringify(properties[index]));
     }
   }
   delete roomTypes['Official  Use'];
   // console.log(roomTypes)
+
+
+//
+
 
 
   //This loop will add the data of rooms according to the roomId
@@ -41,21 +53,21 @@ const Home = ({properties,roomsArray,property}) => {
   //         roomDetail = []
   //       }
   //     }
-  
+
   // console.log(roomsArray)
   let DeluxeRoom = [];
   let ClassicRoom = [];
   let SupremeRoom = [];
-  for (let i = 0 ; i < roomsArray.length ; i++) {
+  for (let i = 0; i < roomsArray.length; i++) {
     let room = roomsArray[i];
     for (let j = 0; j < room.length; j++) {
-    //  room[j]['hie'] = 'hie'
+      //  room[j]['hie'] = 'hie'
       for (let k = 0; k < properties.length; k++) {
         if (properties[k].name == room[j].roomName) {
-            room[j]['roomDetail'] = properties[k];
+          room[j]['roomDetail'] = properties[k];
         }
         // console.log(properties[k])
-        
+
       }
     }
     // console.log(roomsArray[index])
@@ -66,13 +78,13 @@ const Home = ({properties,roomsArray,property}) => {
         case "Deluxe Room":
           DeluxeRoom = room;
           break;
-        case  "Classic Room":
+        case "Classic Room":
           ClassicRoom = room;
           break;
         case "Supreme Room":
           SupremeRoom = room;
       }
-      
+
     }
     // room = [];
   }
@@ -81,7 +93,7 @@ const Home = ({properties,roomsArray,property}) => {
   let roomsData = [];
   let roomsNamesWithData = {};
   for (let index = 0; index < Object.keys(roomTypes).length; index++) {
-    if(!roomsData[Object.keys(roomTypes)[index]]){
+    if (!roomsData[Object.keys(roomTypes)[index]]) {
       Object.keys(roomTypes)[index] = [];
       // obj[Object.keys(roomTypes)[index]] = [];
       roomsData.push(Object.keys(roomTypes)[index])
@@ -93,16 +105,16 @@ const Home = ({properties,roomsArray,property}) => {
   let TwinRoom = [];
   let BanquetHall = [];
   let OneDayTrip = [];
-  for (let i = 0 ; i < roomsArray.length ; i++) {
+  for (let i = 0; i < roomsArray.length; i++) {
     let room = roomsArray[i];
     for (let j = 0; j < room.length; j++) {
-    //  room[j]['hie'] = 'hie'
+      //  room[j]['hie'] = 'hie'
       for (let k = 0; k < properties.length; k++) {
         if (properties[k].name == room[j].roomName) {
-            room[j]['roomDetail'] = properties[k];
+          room[j]['roomDetail'] = properties[k];
         }
         // console.log(properties[k])
-        
+
       }
     }
     // console.log(roomsArray[0])
@@ -114,7 +126,7 @@ const Home = ({properties,roomsArray,property}) => {
         roomsNamesWithData[roomsData[l]] = room
         // roomsData[l] = rooms
       }
-      
+
     }
     // room = [];
   }
@@ -138,11 +150,11 @@ const Home = ({properties,roomsArray,property}) => {
         roomsPlansNames[Object.keys(roomsNamesWithData)[index]] = [];
         roomsPlansNames[Object.keys(roomsNamesWithData)[index]].push(Object.values(roomsNamesWithData)[index][jindex].roomRatePlans);
       }
-      else{
+      else {
         roomsPlansNames[Object.keys(roomsNamesWithData)[index]].push(Object.values(roomsNamesWithData)[index][jindex].roomRatePlans);
       }
     }
-    
+
   }
   // console.log(roomsData)
   // console.log(roomsPlansNames);
@@ -158,12 +170,12 @@ const Home = ({properties,roomsArray,property}) => {
           roomsPlansToShow[Object.values(roomsPlansNames)[index][jindex][zindex].name] = [];
           roomsPlansToShow[Object.values(roomsPlansNames)[index][jindex][zindex].name].push(Object.values(roomsPlansNames)[index][jindex][zindex]);
         }
-        else{
+        else {
           roomsPlansToShow[Object.values(roomsPlansNames)[index][jindex][zindex].name].push(Object.values(roomsPlansNames)[index][jindex][zindex]);
         }
       }
     }
-    
+
   }
 
   let roomPlansToShowTrial = [];
@@ -186,31 +198,31 @@ const Home = ({properties,roomsArray,property}) => {
                 roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name].push(Object.values(roomsPlansToShow)[zindex][ndex]);
               }
             }
-            else if (Object.values(roomsNamesWithData)[index][jindex].roomId == Object.values(roomsPlansToShow)[zindex][ndex].roomId){
+            else if (Object.values(roomsNamesWithData)[index][jindex].roomId == Object.values(roomsPlansToShow)[zindex][ndex].roomId) {
               if (!roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name].includes(Object.values(roomsPlansToShow)[zindex][ndex])) {
                 roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name].push(Object.values(roomsPlansToShow)[zindex][ndex]);
               }
             }
           }
           else {
-              if (!roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name] && Object.values(roomsNamesWithData)[index][jindex].roomId == Object.values(roomsPlansToShow)[zindex][ndex].roomId) {
-                roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name] = [];
-                if (!roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name].includes(Object.values(roomsPlansToShow)[zindex][ndex])) {
-                  roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name].push(Object.values(roomsPlansToShow)[zindex][ndex]);
-                }
-              }
-              else if (Object.values(roomsNamesWithData)[index][jindex].roomId == Object.values(roomsPlansToShow)[zindex][ndex].roomId){
-                if (!roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name].includes(Object.values(roomsPlansToShow)[zindex][ndex])) {
-                  roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name].push(Object.values(roomsPlansToShow)[zindex][ndex]);
-                }
+            if (!roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name] && Object.values(roomsNamesWithData)[index][jindex].roomId == Object.values(roomsPlansToShow)[zindex][ndex].roomId) {
+              roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name] = [];
+              if (!roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name].includes(Object.values(roomsPlansToShow)[zindex][ndex])) {
+                roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name].push(Object.values(roomsPlansToShow)[zindex][ndex]);
               }
             }
+            else if (Object.values(roomsNamesWithData)[index][jindex].roomId == Object.values(roomsPlansToShow)[zindex][ndex].roomId) {
+              if (!roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name].includes(Object.values(roomsPlansToShow)[zindex][ndex])) {
+                roomPlansToShowTrial[Object.values(roomsNamesWithData)[index][jindex].roomName][Object.values(roomsPlansToShow)[zindex][ndex].name].push(Object.values(roomsPlansToShow)[zindex][ndex]);
+              }
+            }
+          }
         }
-        
+
       }
-      
+
     }
-    
+
   }
 
   let fullRoomDeatils = [];
@@ -218,10 +230,10 @@ const Home = ({properties,roomsArray,property}) => {
     // console.log(Object.values(roomsNamesWithData)[index])
     for (let jindex = 0; jindex < Object.values(roomPlansToShowTrial).length; jindex++) {
       // console.log(Object.values(roomPlansToShowTrial)[jindex])
-      if(Object.keys(roomsNamesWithData)[index] == Object.keys(roomPlansToShowTrial)[jindex]){
-          fullRoomDeatils[Object.keys(roomsNamesWithData)[index]] = {'Details': Object.values(roomsNamesWithData)[index],'Plans':Object.values(roomPlansToShowTrial)[jindex]}
+      if (Object.keys(roomsNamesWithData)[index] == Object.keys(roomPlansToShowTrial)[jindex]) {
+        fullRoomDeatils[Object.keys(roomsNamesWithData)[index]] = { 'Details': Object.values(roomsNamesWithData)[index], 'Plans': Object.values(roomPlansToShowTrial)[jindex] }
       }
-      
+
     }
   }
 
@@ -229,7 +241,7 @@ const Home = ({properties,roomsArray,property}) => {
 
   // for (let index = 0; index < Object.values(roomsPlansToShow).length; index++) {
   //   console.log(Object.values(roomsPlansToShow)[index])
-    
+
   // }
   // console.log(roomPlansToShowTrial)
 
@@ -251,7 +263,7 @@ const Home = ({properties,roomsArray,property}) => {
   //     // obj[Object.keys(roomTypes)[index]] = [];
   //     roomsPlansData.push(Object.keys(roomTypes)[index])
   //   }
-    
+
   // }
   // console.log(roomsPlansData)
 
@@ -270,7 +282,7 @@ const Home = ({properties,roomsArray,property}) => {
   for (let index = 0; index < deluxeRoomPlans.length; index++) {
     // console.log(deluxeRoomPlans[index][0])
     for (let jindex = 0; jindex < deluxeRoomPlans[index].length; jindex++) {
-      if(!deluxPlansToShow[deluxeRoomPlans[index][jindex].name]){
+      if (!deluxPlansToShow[deluxeRoomPlans[index][jindex].name]) {
         deluxPlansToShow[deluxeRoomPlans[index][jindex].name] = [];
         deluxPlansToShow[deluxeRoomPlans[index][jindex].name].push(deluxeRoomPlans[index][jindex])
       }
@@ -296,7 +308,7 @@ const Home = ({properties,roomsArray,property}) => {
   for (let index = 0; index < supremeRoomPlans.length; index++) {
     // console.log(supremeRoomPlans[index][0])
     for (let jindex = 0; jindex < supremeRoomPlans[index].length; jindex++) {
-      if(!supremePlansToShow[supremeRoomPlans[index][jindex].name]){
+      if (!supremePlansToShow[supremeRoomPlans[index][jindex].name]) {
         supremePlansToShow[supremeRoomPlans[index][jindex].name] = [];
         supremePlansToShow[supremeRoomPlans[index][jindex].name].push(supremeRoomPlans[index][jindex])
       }
@@ -322,7 +334,7 @@ const Home = ({properties,roomsArray,property}) => {
   for (let index = 0; index < classicRoomPlans.length; index++) {
     // console.log(classicRoomPlans[index][0])
     for (let jindex = 0; jindex < classicRoomPlans[index].length; jindex++) {
-      if(!classicPlansToShow[classicRoomPlans[index][jindex].name]){
+      if (!classicPlansToShow[classicRoomPlans[index][jindex].name]) {
         classicPlansToShow[classicRoomPlans[index][jindex].name] = [];
         classicPlansToShow[classicRoomPlans[index][jindex].name].push(classicRoomPlans[index][jindex])
       }
@@ -332,26 +344,26 @@ const Home = ({properties,roomsArray,property}) => {
     }
   }
   // console.log(classicPlansToShow)
-  
+
 
 
 
   //Function to find out last date of the month
-  const lastday = function(y,m){
-    return  new Date(y, m +1, 0);
+  const lastday = function (y, m) {
+    return new Date(y, m + 1, 0);
   }
   // console.log(lastday(2022,6));
-    // console.log(currentDate)
-    
-    //This will create an Array of Dates in a Month
-    function dateRange(startDate, endDate, steps = 1) {
-      const dateArray = [];
-      let currentDate = new Date(startDate);
-      
-      while (currentDate <= new Date(endDate)) {
-        dateArray.push(new Date(currentDate).toDateString());
-        // Use UTC date to prevent problems with time zones and DST
-        currentDate.setUTCDate(currentDate.getUTCDate() + steps);
+  // console.log(currentDate)
+
+  //This will create an Array of Dates in a Month
+  function dateRange(startDate, endDate, steps = 1) {
+    const dateArray = [];
+    let currentDate = new Date(startDate);
+
+    while (currentDate <= new Date(endDate)) {
+      dateArray.push(new Date(currentDate).toDateString());
+      // Use UTC date to prevent problems with time zones and DST
+      currentDate.setUTCDate(currentDate.getUTCDate() + steps);
     }
 
     return dateArray;
@@ -362,8 +374,8 @@ const Home = ({properties,roomsArray,property}) => {
   let monthToShow = [];
   let datesToShow = [];
   let daysToShow = [];
-  
-  
+
+
   const dates = dateRange(date, lastday(2023, 6));
   // console.log(dates)
   for (let index = 0; index < dates.length; index++) {
@@ -391,10 +403,10 @@ const Home = ({properties,roomsArray,property}) => {
         break;
       case 6:
         daysToShow.push('Sat');
-      }
-      
-      switch (month) {
-        case 0:
+    }
+
+    switch (month) {
+      case 0:
         monthToShow.push('Jan');
         break;
       case 1:
@@ -409,30 +421,30 @@ const Home = ({properties,roomsArray,property}) => {
       case 4:
         monthToShow.push('May');
         break;
-        case 5:
-          monthToShow.push('Jun');
-          break;
-        case 6:
-          monthToShow.push('Jul');
-          break;
-        case 7:
-          monthToShow.push('Aug');
-          break;
-        case 8:
-          monthToShow.push('Sep');
-          break;
-        case 9:
-          monthToShow.push('Oct');
-          break;
-        case 10:
-          monthToShow.push('Nov');
-          break;
-        case 11:
-          monthToShow.push('Dec');
-      }
+      case 5:
+        monthToShow.push('Jun');
+        break;
+      case 6:
+        monthToShow.push('Jul');
+        break;
+      case 7:
+        monthToShow.push('Aug');
+        break;
+      case 8:
+        monthToShow.push('Sep');
+        break;
+      case 9:
+        monthToShow.push('Oct');
+        break;
+      case 10:
+        monthToShow.push('Nov');
+        break;
+      case 11:
+        monthToShow.push('Dec');
+    }
 
-      switch (date) {
-        case 0:
+    switch (date) {
+      case 0:
         datesToShow.push(0);
         break;
       case 1:
@@ -447,145 +459,145 @@ const Home = ({properties,roomsArray,property}) => {
       case 4:
         datesToShow.push(4);
         break;
-        case 5:
-          datesToShow.push(5);
-          break;
-        case 6:
-          datesToShow.push(6);
-          break;
-        case 7:
-          datesToShow.push(7);
-          break;
-        case 8:
-          datesToShow.push(8);
-          break;
-        case 9:
-          datesToShow.push(9);
-          break;
-        case 10:
-          datesToShow.push(10);
-          break;
-        case 11:
-          datesToShow.push(11);
-          break;
-        case 12:
-          datesToShow.push(12);
-          break;
-        case 13:
-          datesToShow.push(13);
-          break;
-        case 14:
-          datesToShow.push(14);
-          break;
-        case 15:
-          datesToShow.push(15);
-          break;
-        case 16:
-          datesToShow.push(16);
-          break;
-        case 17:
-          datesToShow.push(17);
-          break;
-        case 18:
-          datesToShow.push(18);
-          break;
-        case 19:
-          datesToShow.push(19);
-          break;
-        case 20:
-          datesToShow.push(20);
-          break;
-        case 21:
-          datesToShow.push(21);
-          break;
-        case 22:
-          datesToShow.push(22);
-          break;
-        case 23:
-          datesToShow.push(23);
-          break;
-        case 24:
-          datesToShow.push(24);
-          break;
-        case 25:
-          datesToShow.push(25);
-          break;
-        case 26:
-          datesToShow.push(26);
-          break;
-        case 27:
-          datesToShow.push(27);
-          break;
-        case 28:
-          datesToShow.push(28);
-          break;
-        case 29:
-          datesToShow.push(29);
-          break;
-        case 30:
-          datesToShow.push(30);
-          break;
-        case 31:
-          datesToShow.push(31);
-          break;
-      }
+      case 5:
+        datesToShow.push(5);
+        break;
+      case 6:
+        datesToShow.push(6);
+        break;
+      case 7:
+        datesToShow.push(7);
+        break;
+      case 8:
+        datesToShow.push(8);
+        break;
+      case 9:
+        datesToShow.push(9);
+        break;
+      case 10:
+        datesToShow.push(10);
+        break;
+      case 11:
+        datesToShow.push(11);
+        break;
+      case 12:
+        datesToShow.push(12);
+        break;
+      case 13:
+        datesToShow.push(13);
+        break;
+      case 14:
+        datesToShow.push(14);
+        break;
+      case 15:
+        datesToShow.push(15);
+        break;
+      case 16:
+        datesToShow.push(16);
+        break;
+      case 17:
+        datesToShow.push(17);
+        break;
+      case 18:
+        datesToShow.push(18);
+        break;
+      case 19:
+        datesToShow.push(19);
+        break;
+      case 20:
+        datesToShow.push(20);
+        break;
+      case 21:
+        datesToShow.push(21);
+        break;
+      case 22:
+        datesToShow.push(22);
+        break;
+      case 23:
+        datesToShow.push(23);
+        break;
+      case 24:
+        datesToShow.push(24);
+        break;
+      case 25:
+        datesToShow.push(25);
+        break;
+      case 26:
+        datesToShow.push(26);
+        break;
+      case 27:
+        datesToShow.push(27);
+        break;
+      case 28:
+        datesToShow.push(28);
+        break;
+      case 29:
+        datesToShow.push(29);
+        break;
+      case 30:
+        datesToShow.push(30);
+        break;
+      case 31:
+        datesToShow.push(31);
+        break;
+    }
 
-}
-
-//This function will Increement Seven Days
-const oneDayIncrement = () => {
-  setIncrement(increment + 1)
-}
-
-//This function will Decrement Seven Days
-const oneDayDecrement = () => {
-  if (increment !== 0) {
-    setIncrement(increment - 1)
   }
 
-}
+  //This function will Increement Seven Days
+  const oneDayIncrement = () => {
+    setIncrement(increment + 1)
+  }
 
-//This will Decrement Days by Fourteen
-const fourteenDaysDecrement = () => {
-  if(increment == 7) {
+  //This function will Decrement Seven Days
+  const oneDayDecrement = () => {
+    if (increment !== 0) {
+      setIncrement(increment - 1)
+    }
+
+  }
+
+  //This will Decrement Days by Fourteen
+  const fourteenDaysDecrement = () => {
+    if (increment == 7) {
+      setIncrement(0)
+    }
+    else if (increment !== 0) {
+      setIncrement(increment - 14)
+    }
+  }
+
+  //This will Increment Days by Fourteen
+  const fourteenDaysIncrement = () => {
+    setIncrement(increment + 14)
+  }
+
+  //This will refresh dates
+  const refreshDates = () => {
     setIncrement(0)
   }
-  else if (increment !== 0) {
-    setIncrement(increment - 14)
-  }
-}
-
-//This will Increment Days by Fourteen
-const fourteenDaysIncrement = () => {
-  setIncrement(increment + 14)
-}
-
-//This will refresh dates
-const refreshDates = ()=>{
-  setIncrement(0)
-}
 
 
-//To Show Single Image of room Types
-let imageObj = {};
-for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
-  // console.log(Object.values(roomsNamesWithData)[index])
-  for (let jindex = 0; jindex < Object.values(roomsNamesWithData)[index].length; jindex++) {
-    // console.log(Object.values(roomsNamesWithData)[index][jindex])
-    for (let ndex = 0; ndex < Object.values(roomsNamesWithData)[index][jindex].roomDetail.imageList.length; ndex++) {
-      // console.log(Object.values(roomsNamesWithData)[index][jindex].roomDetail.imageList[0])
-      if(!imageObj[Object.keys(roomsNamesWithData)[index]]){
-        imageObj[Object.keys(roomsNamesWithData)[index]] = Object.values(roomsNamesWithData)[index][jindex].roomDetail.imageList[0]
+  //To Show Single Image of room Types
+  let imageObj = {};
+  for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
+    // console.log(Object.values(roomsNamesWithData)[index])
+    for (let jindex = 0; jindex < Object.values(roomsNamesWithData)[index].length; jindex++) {
+      // console.log(Object.values(roomsNamesWithData)[index][jindex])
+      for (let ndex = 0; ndex < Object.values(roomsNamesWithData)[index][jindex].roomDetail.imageList.length; ndex++) {
+        // console.log(Object.values(roomsNamesWithData)[index][jindex].roomDetail.imageList[0])
+        if (!imageObj[Object.keys(roomsNamesWithData)[index]]) {
+          imageObj[Object.keys(roomsNamesWithData)[index]] = Object.values(roomsNamesWithData)[index][jindex].roomDetail.imageList[0]
+        }
       }
     }
   }
-}
-// console.log(imageObj)
+  // console.log(imageObj)
 
 
-  datesToShow = datesToShow.slice(increment,increment + 10)
-  daysToShow = daysToShow.slice(increment,increment + 10);
-  monthToShow = monthToShow.slice(increment,increment + 10)
+  datesToShow = datesToShow.slice(increment, increment + 10)
+  daysToShow = daysToShow.slice(increment, increment + 10);
+  monthToShow = monthToShow.slice(increment, increment + 10)
   // console.log(monthToShow)
   // console.log(monthToShow)
   // console.log(datesToShow);
@@ -610,17 +622,17 @@ for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
           priceArray[Object.keys(roomsNamesWithData)[index]].push(0)
         }
       }
-      else{
+      else {
         if (Object.values(roomsNamesWithData)[index][jindex] == undefined) {
           priceArray[Object.keys(roomsNamesWithData)[index]].push(0)
         }
-        else{
+        else {
           priceArray[Object.keys(roomsNamesWithData)[index]].push(Object.values(roomsNamesWithData)[index][jindex].price)
         }
       }
-      
+
     }
-    
+
   }
   // console.log(priceArray)
 
@@ -628,10 +640,13 @@ for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
   for (let index = 0; index < Object.values(priceArray).length; index++) {
     // console.log(Object.values(priceArray)[index])
     if (!pricesToShow[Object.keys(priceArray)[index]]) {
-      pricesToShow[Object.keys(priceArray)[index]] = Object.values(priceArray)[index].slice(increment,increment + 10)
+      pricesToShow[Object.keys(priceArray)[index]] = Object.values(priceArray)[index].slice(increment, increment + 10)
     }
   }
   // console.log(pricesToShow)
+// console.log(roomsNamesWithData)
+
+//For Getting the Available, Hold, Booked and Total value of Rooms
 
   return (
     <div className={styles.bigContainer}>
@@ -640,7 +655,7 @@ for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
           <Col className={styles.leftArrow}>
             <MdArrowLeft onClick={oneDayDecrement} />
           </Col>
-          {datesToShow.map((val,i)=>{
+          {datesToShow.map((val, i) => {
             return (
               <Col className={styles.columnDate} key={i}>
                 <div className={styles.spanContainer}>
@@ -655,44 +670,64 @@ for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
             <MdArrowRight onClick={oneDayIncrement} />
           </Col>
         </Row>
-        {Object.keys(roomsNamesWithData).map((val,i)=>{
+        {Object.keys(roomsNamesWithData).map((val, i) => {
           return (
             <Row className={styles.row} key={i}>
-          <Col className={styles.leftArrow2}>
-            {/* <Row> */}
-              <Col className={styles.col1}>
-                {val == Object.keys(imageObj)[i]?<img key={i+1}
+              <Col className={styles.leftArrow2}>
+                {/* <Row> */}
+                <Col className={styles.col1}>
+                  {val == Object.keys(imageObj)[i] ? <img key={i + 1}
                     src={Object.values(imageObj)[i].url}
                     alt=''
-                    className={styles.image}/>: <img key={i+1}
-                    src="https://tse2.explicit.bing.net/th?id=OIP.38eE6cQfShw5U-lGbkcMCgHaEo&pid=Api&P=0&w=250&h=156"
-                    alt=''
-                    className={styles.image}/>}
+                    className={styles.image} /> : <img key={i + 1}
+                      src="https://tse2.explicit.bing.net/th?id=OIP.38eE6cQfShw5U-lGbkcMCgHaEo&pid=Api&P=0&w=250&h=156"
+                      alt=''
+                      className={styles.image} />}
+                </Col>
+                <Col className={styles.col2}>
+                  <span className={styles.text}>
+                    {val}
+                  </span>
+                  <span className={styles.text}>
+                    <Link href="/">More Info</Link>
+                  </span>
+                </Col>
+                <Col className={styles.col3}>
+                  <BsInfoCircle onMouseEnter={()=>showModal(true,i)} onMouseLeave={()=>showModal(false,-1)} />
+                  {modal.state ==true && modal.id == i ? 
+                    <div  className={styles.popupModal}>
+                    <div>
+                      <span><b>Total</b></span>
+                      <span>10</span>
+                    </div>
+                    <div>
+                      <span><b>Booked</b></span>
+                      <span>5</span>
+                    </div>
+                    <div>
+                      <span><b>Hold</b></span>
+                      <span>1</span>
+                    </div>
+                    <div>
+                      <span><b>Available</b></span>
+                      <span>4</span>
+                    </div>
+                  </div> :""
+                  }
+                </Col>
+                {/* </Row> */}
               </Col>
-              <Col className={styles.col2}>
-                <span className={styles.text}>
-                  {val}
-                </span>
-                <span className={styles.text}>
-                  <Link href="/">More Info</Link>
-                </span>
-              </Col>
-              <Col className={styles.col3}>
-                <BsInfoCircle />
-              </Col>
-            {/* </Row> */}
-          </Col>
-          {val == Object.keys(pricesToShow)[i] ? Object.values(pricesToShow)[i].map((val2,j)=>{
-            return (
-              <Col className={styles.column} key={j}>
-            <span>
-              <input type="checkbox" />
-            </span>
-            <span>{val2}</span>
-          </Col>
-            )
-          }): ''}
-          {/* {Object.values(Object.values(roomsNamesWithData)[i]).map((val2,j)=>{
+              {val == Object.keys(pricesToShow)[i] ? Object.values(pricesToShow)[i].map((val2, j) => {
+                return (
+                  <Col className={styles.column} key={j}>
+                    <span>
+                      <input type="checkbox" />
+                    </span>
+                    <span>{val2}</span>
+                  </Col>
+                )
+              }) : ''}
+              {/* {Object.values(Object.values(roomsNamesWithData)[i]).map((val2,j)=>{
             return (
               <Col className={styles.column} key={j}>
             <span>
@@ -702,12 +737,12 @@ for (let index = 0; index < Object.values(roomsNamesWithData).length; index++) {
           </Col>
             )
           })} */}
-          <Col className={styles.rightArrow2}>
-            <button className={styles.btn}>
-              <span className={styles.span}>Book Now</span>
-            </button>
-          </Col>
-        </Row>
+              <Col className={styles.rightArrow2}>
+                <button className={styles.btn}>
+                  <span className={styles.span}>Book Now</span>
+                </button>
+              </Col>
+            </Row>
           )
         })}
       </div>
@@ -719,44 +754,44 @@ export default Home;
 
 export async function getServerSideProps(context) {
   const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/property/237/rooms', {
-  // const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=495', {
-  // const response = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForRoom?PropertyId=495&RoomId=1539', {
+    // const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=495', {
+    // const response = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForRoom?PropertyId=495&RoomId=1539', {
     method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWhhYmlyLmdhbGF4eUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX1BST1BfQURNSU4iLCJpYXQiOjE2NTc0NDE5MjcsImV4cCI6MTY1Nzg3MzkyN30.BdApPr1hs6DR_NYdR3VWRaan8GQehajWRIPWohSfIT8',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'APP_ID': 'BOOKONE_WEB_APP'
-      }
-    })
-    const properties = await propertiesResponse.json();
+    headers: {
+      Accept: 'application/json',
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWhhYmlyLmdhbGF4eUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX1BST1BfQURNSU4iLCJpYXQiOjE2NTc0NDE5MjcsImV4cCI6MTY1Nzg3MzkyN30.BdApPr1hs6DR_NYdR3VWRaan8GQehajWRIPWohSfIT8',
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'APP_ID': 'BOOKONE_WEB_APP'
+    }
+  })
+  const properties = await propertiesResponse.json();
 
   const propertyResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=237', {
     method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWhhYmlyLmdhbGF4eUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX1BST1BfQURNSU4iLCJpYXQiOjE2NTc0NDE5MjcsImV4cCI6MTY1Nzg3MzkyN30.BdApPr1hs6DR_NYdR3VWRaan8GQehajWRIPWohSfIT8',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'APP_ID': 'BOOKONE_WEB_APP'
-      }
-    })
-    const property = await propertyResponse.json();
+    headers: {
+      Accept: 'application/json',
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWhhYmlyLmdhbGF4eUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX1BST1BfQURNSU4iLCJpYXQiOjE2NTc0NDE5MjcsImV4cCI6MTY1Nzg3MzkyN30.BdApPr1hs6DR_NYdR3VWRaan8GQehajWRIPWohSfIT8',
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'APP_ID': 'BOOKONE_WEB_APP'
+    }
+  })
+  const property = await propertyResponse.json();
 
   const roomsArray = [];
   for (let index = 0; index < properties.length; index++) {
     const roomsResponse = await fetch(`https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForRoom?PropertyId=237&RoomId=${properties[index].id}`, {
       method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWhhYmlyLmdhbGF4eUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX1BST1BfQURNSU4iLCJpYXQiOjE2NTc0NDE5MjcsImV4cCI6MTY1Nzg3MzkyN30.BdApPr1hs6DR_NYdR3VWRaan8GQehajWRIPWohSfIT8',
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'APP_ID': 'BOOKONE_WEB_APP'
-        }
-      })
-      const rooms = await roomsResponse.json();
-      roomsArray.push(rooms);
+      headers: {
+        Accept: 'application/json',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWhhYmlyLmdhbGF4eUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX1BST1BfQURNSU4iLCJpYXQiOjE2NTc0NDE5MjcsImV4cCI6MTY1Nzg3MzkyN30.BdApPr1hs6DR_NYdR3VWRaan8GQehajWRIPWohSfIT8',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'APP_ID': 'BOOKONE_WEB_APP'
+      }
+    })
+    const rooms = await roomsResponse.json();
+    roomsArray.push(rooms);
   }
   return {
-    props: {properties,roomsArray,property}, // will be passed to the page component as props
+    props: { properties, roomsArray, property }, // will be passed to the page component as props
   }
 }
