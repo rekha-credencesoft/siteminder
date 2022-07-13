@@ -21,7 +21,6 @@ const Home = ({ properties, roomsArray, property }) => {
   const roomTypes = [];
   let room = [];
   let roomDetail = [];
-
   const showModal = (state, id) => {
     setModal({
       state: state,
@@ -39,7 +38,7 @@ const Home = ({ properties, roomsArray, property }) => {
   // console.log(Object.values(roomTypes)[0].roomFacilities)
 
 
-  // console.log(roomsArray)
+  console.log(roomsArray)
 
 
   //237
@@ -486,7 +485,7 @@ const Home = ({ properties, roomsArray, property }) => {
     }
 
   }
-  // console.log(priceArray)
+  console.log(priceArray)
 
   let pricesToShow = [];
   for (let index = 0; index < Object.values(priceArray).length; index++) {
@@ -701,8 +700,12 @@ function MyVerticallyCenteredModal(props) {
 }
 
 export async function getServerSideProps(context) {
+<<<<<<< HEAD
   console.log(context)
   const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/property/237/rooms', {
+=======
+  const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/property/368/rooms', {
+>>>>>>> da756fe6d03ca8a6cd90affcb05a15633878477d
     // const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=495', {
     // const response = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForRoom?PropertyId=495&RoomId=1539', {
     method: 'GET',
@@ -714,8 +717,49 @@ export async function getServerSideProps(context) {
     }
   })
   const properties = await propertiesResponse.json();
+   
+  
+  // const propertyResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getRatesAndAvailabilityForPropertyByDate', {
+  //   method: 'POST',
+  //   body: JSON.stringify({
+  //     "fromDate": "2022-07-13",
+  //     "propertyId": 495,
+  //     "toDate": "2022-07-28"
+  //   }),
+  //   headers: {
+  //     Accept: 'application/json',
+  //     'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rb25ldGVzdGJ1c2luZXNzQGdtYWlsLmNvbSIsInNjb3BlcyI6IlJPTEVfUFJPUF9BRE1JTiIsImlhdCI6MTY1NzY4MzYwNiwiZXhwIjoxNjU4MTE1NjA2fQ.x_9KgO6qzcNbn8bqX4BuVGYmuEwAhbfeD9H_Q-LUWBo',
+  //     'Content-Type': 'application/json',
+  //     'APP_ID': 'BOOKONE_WEB_APP'
+  //   }
+  // })
+  // const property = await propertyResponse.json()
 
-  const propertyResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=237', {
+
+  
+  // const roomsArray = [];
+  // for (let index = 0; index < properties.length; index++) {
+  //   const roomsResponse = await fetch(`https://api.bookonelocal.in/api-bookone/api/availability/getRatesAndAvailabilityForPropertyByDate`, {
+  //     method: 'POST',
+  //     body: JSON.stringify({
+  //       "fromDate": "2022-07-13",
+  //       "propertyId": 495,
+  //       "roomId": properties[index].id,
+  //       "toDate": "2022-07-28"
+  //     }),
+  //     headers: {
+  //       Accept: 'application/json',
+  //       'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rb25ldGVzdGJ1c2luZXNzQGdtYWlsLmNvbSIsInNjb3BlcyI6IlJPTEVfUFJPUF9BRE1JTiIsImlhdCI6MTY1NzY4MzYwNiwiZXhwIjoxNjU4MTE1NjA2fQ.x_9KgO6qzcNbn8bqX4BuVGYmuEwAhbfeD9H_Q-LUWBo',
+  //       'Content-Type': 'application/json',
+  //       'APP_ID': 'BOOKONE_WEB_APP'
+  //     }
+  //   })
+  //   const rooms = await roomsResponse.json();
+  //   roomsArray.push(rooms);
+  // }
+
+  // Original One of Property
+  const propertyResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=368', {
     method: 'GET',
     headers: {
       Accept: 'application/json',
@@ -726,9 +770,13 @@ export async function getServerSideProps(context) {
   })
   const property = await propertyResponse.json();
 
+
+
+
+  //Original One of  Rooms
   const roomsArray = [];
   for (let index = 0; index < properties.length; index++) {
-    const roomsResponse = await fetch(`https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForRoom?PropertyId=237&RoomId=${properties[index].id}`, {
+    const roomsResponse = await fetch(`https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForRoom?PropertyId=368&RoomId=${properties[index].id}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
