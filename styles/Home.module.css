@@ -219,6 +219,7 @@
 }
 .modalBodyText{
   color:gray;
+  width: 100%;
 }
 .modalContainer{
   margin: 10px 10px;
