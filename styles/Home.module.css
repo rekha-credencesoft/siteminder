@@ -227,7 +227,7 @@
     display: flex;
     flex: 3;
     text-align: center;
-    padding: 6px 0;
+    padding: 6px 5px;
     /* border-right: 1px solid #000; */
     flex-direction: column;
 }
@@ -241,6 +241,5 @@
 }
 .modalColBody{
   display: flex;
-  gap: 10px;
-  padding: 2.5px 20px ;
+  gap: 2px;
 }
