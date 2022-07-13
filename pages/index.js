@@ -565,13 +565,14 @@ const Home = ({ properties, roomsArray, property }) => {
                     {val}
                   </span>
                   <span className={styles.text}>
-                    <span className={styles.moreInfo} onClick={() => { setModalShow(true), setDetails({ name: Object.keys(roomTypes)[i], facilities: Object.values(roomTypes)[i].roomFacilities, images: Object.values(imageObj)[i] }) }} >More Info</span>
+                    <span className={styles.moreInfo} onClick={() => { setModalShow(true), setDetails({ name: Object.keys(roomTypes)[i], facilities: Object.values(roomTypes)[i].roomFacilities, images: Object.values(imageObj)[i], plans: Object.keys(Object.values(roomPlansToShowTrial)[i]) }) }} >More Info</span>
                     {val == Object.keys(roomTypes)[i] ? <MyVerticallyCenteredModal
                       show={modalShow}
                       onHide={() => setModalShow(false)}
                       name={details.name}
                       facilities={details.facilities}
                       images={details.images}
+                      plans={details.plans}
                     /> : ''}
                     {/* <MyVerticallyCenteredModal
                       show={modalShow}
@@ -643,7 +644,7 @@ const Home = ({ properties, roomsArray, property }) => {
 export default Home;
 
 function MyVerticallyCenteredModal(props) {
-  console.log(props.facilities)
+  // console.log(props.plans)
   return (
     <Modal
       {...props}
@@ -676,7 +677,7 @@ function MyVerticallyCenteredModal(props) {
             </Carousel>
           </div>
           <div className={styles.modalBodyText}>
-            <span>1 King or 2 Twin beds, Jungle or Lawn facing, Balcony</span>
+            <span>{props.plans.join(", ")}</span>
             <hr />
           </div>
         </div>
