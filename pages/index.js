@@ -203,7 +203,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
         // console.log(Object.values(roomsPlansNames)[index][jindex][zindex]);
         if (
           !roomsPlansToShow[
-            Object.values(roomsPlansNames)[index][jindex][zindex].name
+          Object.values(roomsPlansNames)[index][jindex][zindex].name
           ]
         ) {
           roomsPlansToShow[
@@ -250,7 +250,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
           // console.log(Object.values(roomsPlansToShow)[zindex][ndex].name)
           if (
             !roomPlansToShowTrial[
-              Object.values(roomsNamesWithData)[index][jindex].roomName
+            Object.values(roomsNamesWithData)[index][jindex].roomName
             ]
           ) {
             roomPlansToShowTrial[
@@ -259,10 +259,10 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
 
             if (
               !roomPlansToShowTrial[
-                Object.values(roomsNamesWithData)[index][jindex].roomName
+              Object.values(roomsNamesWithData)[index][jindex].roomName
               ][Object.values(roomsPlansToShow)[zindex][ndex].name] &&
               Object.values(roomsNamesWithData)[index][jindex].roomId ==
-                Object.values(roomsPlansToShow)[zindex][ndex].roomId
+              Object.values(roomsPlansToShow)[zindex][ndex].roomId
             ) {
               roomPlansToShowTrial[
                 Object.values(roomsNamesWithData)[index][jindex].roomName
@@ -301,10 +301,10 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
           } else {
             if (
               !roomPlansToShowTrial[
-                Object.values(roomsNamesWithData)[index][jindex].roomName
+              Object.values(roomsNamesWithData)[index][jindex].roomName
               ][Object.values(roomsPlansToShow)[zindex][ndex].name] &&
               Object.values(roomsNamesWithData)[index][jindex].roomId ==
-                Object.values(roomsPlansToShow)[zindex][ndex].roomId
+              Object.values(roomsPlansToShow)[zindex][ndex].roomId
             ) {
               roomPlansToShowTrial[
                 Object.values(roomsNamesWithData)[index][jindex].roomName
@@ -840,8 +840,8 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                   <Col className={styles.col3}>
                     <span
                       style={{
-                        backgroundColor: "#9acc54",
-                        color: "white",
+                        border:"1px solid #9acc54",
+                        color: "#9acc54",
                         padding: "2px 12px",
                         borderRadius: "8px",
                       }}
@@ -901,13 +901,13 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                 </Col>
                 {val == Object.keys(pricesToShow)[i]
                   ? Object.values(pricesToShow)[i].map((val2, j) => {
-                      return (
-                        <Col className={styles.column} key={j}>
-                          <BsInfoCircle style={{ marginLeft: "5.5vh" }} />
-                          <span>{val2}</span>
-                        </Col>
-                      );
-                    })
+                    return (
+                      <Col className={styles.column} key={j}>
+                        <BsInfoCircle style={{ marginLeft: "5.5vh",position:"absolute",top:"-1vh" }} />
+                        <span>{val2}</span>
+                      </Col>
+                    );
+                  })
                   : ""}
                 {/* {Object.values(Object.values(roomsNamesWithData)[i]).map((val2,j)=>{
           return (
@@ -929,31 +929,23 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                 <Col className={styles.leftArrow2}>
                   {/* <Row> */}
                   <Col
-                    className={styles.col1}
-                    style={{
-                      backgroundColor: "white",
+                    className={styles.colPlans}
+                  >
+                    <Col className={styles.colButton}>
+                      <span>
+                        Plans
+                      </span>
+
+                    </Col>
+                  </Col>
+
+                  <Col className={styles.col3}>
+                    <span style={{
                       color: "#9acc54",
                       padding: "2px 12px",
                       borderRadius: "8px",
-                      border: "1px solid #9acc54",
-                      fontSize: "15px",
-                    }}
-                  >
-                    Deluxe Room
-                  </Col>
-                  <Col className={styles.col2}></Col>
-
-                  <Col className={styles.col3}>
-                    <span
-                      style={{
-                        backgroundColor: "#9acc54",
-                        color: "white",
-                        padding: "2px 12px",
-                        borderRadius: "8px",
-                      }}
-                    >
-                      Plans
-                    </span>
+                      border:"1px solid #9acc54"
+                    }}>Deluxe Room</span>
                   </Col>
                 </Col>
 

@@ -67,6 +67,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
   /* padding: 6px 0; */
   /* border-right: 1px solid #000; */
   /* flex-direction: column; */
@@ -76,6 +77,26 @@
   display: flex;
   flex: 1;
   text-align: center;
+  /* padding: 10px 0px 0px 0px; */
+  /* border-right: 1px solid #000; */
+  flex-direction: column;
+}
+.colButton{
+  display: flex;
+  flex: 2;
+}
+.colButton > span{
+  border: 1px solid #9acc54;
+  padding: 2px 5px;
+  border-radius: 2px 7px;
+  color: white;
+  background-color: #9acc54;
+
+}
+.colPlans{
+  display: flex;
+  flex: 1;
+  text-align: left;
   /* padding: 10px 0px 0px 0px; */
   /* border-right: 1px solid #000; */
   flex-direction: column;
