@@ -6,17 +6,23 @@ import { Row, Col } from "react-bootstrap";
 import { MdArrowLeft, MdArrowRight } from "react-icons/md";
 import { FaCaretSquareRight } from "react-icons/fa"
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Carousel from 'react-bootstrap/Carousel';
 import { AiFillCopyrightCircle } from "react-icons/ai";
 
-const Home = ({ properties, roomsArray, property }) => {
+const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   const [increment, setIncrement] = useState(0);
   const [modal, setModal] = useState({ state: false, id: -1 });
   const [modalShow, setModalShow] = React.useState(false);
   const [details, setDetails] = useState({});
+  const [property, setProperty] = useState(oldProperty);
+  const [roomsArray, setRoomsArray] = useState(oldRoomsArray);
+  const [startDate, setStartDate] = useState({});
+  const lastDateString = new Date();
+  const startDateString = new Date();
+  const [lastDate, setLastDate] = useState({});
   const roomTypes = [];
   let room = [];
   let roomDetail = [];
@@ -39,6 +45,14 @@ const Home = ({ properties, roomsArray, property }) => {
   
   // console.log(property);
   // console.log(roomsArray)
+  // console.log(properties)
+  // const date1 = new Date('2022-08-20');
+  // date1.setDate(date1.getDate() + 10)
+  // console.log(date1)
+  // console.log(startDateString);
+  // console.log(lastDateString);
+  // console.log(startDate);
+  // console.log(lastDate);
 
 
   //237
@@ -53,10 +67,52 @@ const Home = ({ properties, roomsArray, property }) => {
   }
   // console.log(roomsData)
 
-  let DoubleRoom = [];
-  let TwinRoom = [];
-  let BanquetHall = [];
-  let OneDayTrip = [];
+   //This function will Decrement Seven Days
+   const newPropertyAndRoomsResponseFunc = async()=>{
+    const newPropertyResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getRatesAndAvailabilityForPropertyByDate', {
+  method: 'POST',
+  body: JSON.stringify({
+    "fromDate": "2022-07-14",
+    // "fromDate": `${startDate.year}-${startDate.month<10?'0'+startDate.month:startDate.month}-${startDate.date<10?'0'+startDate.date:startDate.date}`,
+    "propertyId": 237,
+    "toDate": "2022-08-03"
+    // "toDate": `${lastDate.year}-${lastDate.month<10?'0'+lastDate.month:lastDate.month}-${lastDate.date<10?'0'+lastDate.date:lastDate.date}`
+  }),
+  headers: {
+    Accept: 'application/json',
+    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rb25ldGVzdGJ1c2luZXNzQGdtYWlsLmNvbSIsInNjb3BlcyI6IlJPTEVfUFJPUF9BRE1JTiIsImlhdCI6MTY1NzY4MzYwNiwiZXhwIjoxNjU4MTE1NjA2fQ.x_9KgO6qzcNbn8bqX4BuVGYmuEwAhbfeD9H_Q-LUWBo',
+    'Content-Type': 'application/json',
+    'APP_ID': 'BOOKONE_WEB_APP'
+  }
+})
+  const newProperty = await newPropertyResponse.json()
+  setProperty(newProperty)
+
+  const newRoomsArray = [];
+  for (let index = 0; index < properties.length; index++) {
+    const newRoomsResponse = await fetch(`https://api.bookonelocal.in/api-bookone/api/availability/getRatesAndAvailabilityForRoomByDate`, {
+      method: 'POST',
+      body: JSON.stringify({
+        // "fromDate": `${startDate.year}-${startDate.month<10?'0'+startDate.month:startDate.month}-${startDate.date<10?'0'+startDate.date:startDate.date}`,
+        "fromDate": "2022-07-14",
+        "propertyId": 237,
+        "roomId":properties[index].id,
+        // "toDate": `${lastDate.year}-${lastDate.month<10?'0'+lastDate.month:lastDate.month}-${lastDate.date<10?'0'+lastDate.date:lastDate.date}`
+        "toDate": "2022-08-03" 
+      }),
+      headers: {
+        Accept: 'application/json',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rb25ldGVzdGJ1c2luZXNzQGdtYWlsLmNvbSIsInNjb3BlcyI6IlJPTEVfUFJPUF9BRE1JTiIsImlhdCI6MTY1NzY4MzYwNiwiZXhwIjoxNjU4MTE1NjA2fQ.x_9KgO6qzcNbn8bqX4BuVGYmuEwAhbfeD9H_Q-LUWBo',
+        'Content-Type': 'application/json',
+        'APP_ID': 'BOOKONE_WEB_APP'
+      }
+    })
+    const newRooms = await newRoomsResponse.json();
+    newRoomsArray.push(newRooms);
+  }
+  setRoomsArray(newRoomsArray)
+  }
+
   for (let i = 0; i < roomsArray.length; i++) {
     let room = roomsArray[i];
     for (let j = 0; j < room.length; j++) {
@@ -393,19 +449,38 @@ const Home = ({ properties, roomsArray, property }) => {
   // console.log(dates.length)
   // console.log(increment)
   //This function will Increement Seven Days
-  const oneDayIncrement = () => {
-    if (increment < dates.length -7 ) {
-      setIncrement(increment + 7)
+  const tenDayIncrement = () => {
+    setStartDate(
+      {
+        date: startDateString.getDate(),
+        month: startDateString.getMonth()+1,
+        year: startDateString.getFullYear()
+      }
+      )
+      lastDateString.setDate(lastDateString.getDate() + 20);
+      setLastDate(
+        {
+          date: lastDateString.getDate(),
+          month: lastDateString.getMonth()+1,
+          year: lastDateString.getFullYear()
+        }
+        )
+        newPropertyAndRoomsResponseFunc()
+    if (increment < dates.length - 10 ) {
+      setIncrement(increment + 10)
     }
   }
 
-  //This function will Decrement Seven Days
-  const oneDayDecrement = () => {
+
+  // console.log(`${lastDate.year}-${lastDate.month<10?'0'+lastDate.month:lastDate.month}-${lastDate.date<10?'0'+lastDate.date:lastDate.date}`)
+
+  const tenDayDecrement = () => {
     if (increment !== 0) {
-      setIncrement(increment - 7)
+      setIncrement(increment - 10)
     }
 
   }
+  // console.log(property)
 
   //This will Decrement Days by Fourteen
   const fourteenDaysDecrement = () => {
@@ -532,7 +607,7 @@ const Home = ({ properties, roomsArray, property }) => {
       <div className={styles.topContainer}>
         <Row className={styles.upperRow}>
           <Col className={styles.leftArrow}>
-            <MdArrowLeft onClick={oneDayDecrement} />
+            <MdArrowLeft onClick={tenDayDecrement} />
           </Col>
           {datesToShow.map((val, i) => {
             return (
@@ -546,7 +621,7 @@ const Home = ({ properties, roomsArray, property }) => {
             )
           })}
           <Col className={styles.rightArrow}>
-            <MdArrowRight onClick={oneDayIncrement} />
+            <MdArrowRight onClick={tenDayIncrement} />
           </Col>
         </Row>
         {Object.keys(roomsNamesWithData).map((val, i) => {
@@ -717,9 +792,9 @@ export async function getServerSideProps(context) {
   const propertyResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getRatesAndAvailabilityForPropertyByDate', {
     method: 'POST',
     body: JSON.stringify({
-      "fromDate": "2022-07-13",
+      "fromDate": "2022-07-14",
       "propertyId": 237,
-      "toDate": "2022-07-28"
+      "toDate": "2022-07-24"
     }),
     headers: {
       Accept: 'application/json',
@@ -728,20 +803,20 @@ export async function getServerSideProps(context) {
       'APP_ID': 'BOOKONE_WEB_APP'
     }
   })
-  const property = await propertyResponse.json()
+  const oldProperty = await propertyResponse.json()
 
 
   
   //This is for fetching rooms data by dates
-  const roomsArray = [];
+  const oldRoomsArray = [];
   for (let index = 0; index < properties.length; index++) {
-    const roomsResponse = await fetch(`https://api.bookonelocal.in/api-bookone/api/availability/getRatesAndAvailabilityForRoomByDate`, {
+    const oldRoomsResponse = await fetch(`https://api.bookonelocal.in/api-bookone/api/availability/getRatesAndAvailabilityForRoomByDate`, {
       method: 'POST',
       body: JSON.stringify({
-        "fromDate": "2022-07-13",
+        "fromDate": "2022-07-14",
         "propertyId": 237,
         "roomId":properties[index].id,
-        "toDate": "2022-07-28"
+        "toDate": "2022-07-24"
       }),
       headers: {
         Accept: 'application/json',
@@ -750,10 +825,10 @@ export async function getServerSideProps(context) {
         'APP_ID': 'BOOKONE_WEB_APP'
       }
     })
-    const rooms = await roomsResponse.json();
-    roomsArray.push(rooms);
+    const oldRooms = await oldRoomsResponse.json();
+    oldRoomsArray.push(oldRooms);
   }
-  console.log(roomsArray)
+  // console.log(roomsArray)
 
   // This is for fetching 7 days data for Property
   // const propertyResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=237', {
@@ -786,6 +861,6 @@ export async function getServerSideProps(context) {
   //   roomsArray.push(rooms);
   // }
   return {
-    props: { properties, roomsArray, property }, // will be passed to the page component as props
+    props: { properties, oldRoomsArray, oldProperty }, // will be passed to the page component as props
   }
 }
