@@ -38,7 +38,7 @@ const Home = ({ properties, roomsArray, property }) => {
   
   
   // console.log(property);
-  console.log(roomsArray)
+  // console.log(roomsArray)
 
 
   //237
