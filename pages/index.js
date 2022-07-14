@@ -757,7 +757,16 @@ const Home = ({ properties, roomsArray, property }) => {
                     </span>
                   </Col>
                   <Col className={styles.col3}>
-                    Price
+                    <span
+                      style={{
+                        backgroundColor: "#9acc54",
+                        color: "white",
+                        padding: "2px 12px",
+                        borderRadius: "8px",
+                      }}
+                    >
+                      Price
+                    </span>
                     {modal.state == true && modal.id == i ? (
                       <>
                         {val == Object.keys(roomsInfo)[i] ? (
@@ -813,8 +822,8 @@ const Home = ({ properties, roomsArray, property }) => {
                   ? Object.values(pricesToShow)[i].map((val2, j) => {
                       return (
                         <Col className={styles.column} key={j}>
+                          <BsInfoCircle style={{ marginLeft: "5.5vh" }} />
                           <span>{val2}</span>
-                          <BsInfoCircle style={{ marginLeft: "6px" }} />
                         </Col>
                       );
                     })
@@ -838,10 +847,33 @@ const Home = ({ properties, roomsArray, property }) => {
               <Row className={styles.secondRow}>
                 <Col className={styles.leftArrow2}>
                   {/* <Row> */}
-                  <Col className={styles.col1}>Deluxe Room</Col>
+                  <Col
+                    className={styles.col1}
+                    style={{
+                      backgroundColor: "white",
+                      color: "#9acc54",
+                      padding: "2px 12px",
+                      borderRadius: "8px",
+                      border: "1px solid #9acc54",
+                      fontSize: "15px",
+                    }}
+                  >
+                    Deluxe Room
+                  </Col>
                   <Col className={styles.col2}></Col>
 
-                  <Col className={styles.col3}>Plans</Col>
+                  <Col className={styles.col3}>
+                    <span
+                      style={{
+                        backgroundColor: "#9acc54",
+                        color: "white",
+                        padding: "2px 12px",
+                        borderRadius: "8px",
+                      }}
+                    >
+                      Plans
+                    </span>
+                  </Col>
                 </Col>
 
                 <Col className={styles.column}>
