@@ -81,19 +81,18 @@
   /* border-right: 1px solid #000; */
   flex-direction: column;
 }
-.colButton{
+.colButton {
   display: flex;
   flex: 2;
 }
-.colButton > span{
+.colButton > span {
   border: 1px solid #9acc54;
   padding: 2px 5px;
   border-radius: 2px 7px;
   color: white;
   background-color: #9acc54;
-
 }
-.colPlans{
+.colPlans {
   display: flex;
   flex: 1;
   text-align: left;
@@ -112,7 +111,7 @@
 .col3 {
   display: flex;
   flex: 0.7;
-  justify-content: center;
+  justify-content: flex-end;
   text-align: center;
   /* padding-top: 10px; */
   position: relative;
