@@ -696,16 +696,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                   </Col>
                 )
               }) : ''}
-              {/* {Object.values(Object.values(roomsNamesWithData)[i]).map((val2,j)=>{
-            return (
-              <Col className={styles.column} key={j}>
-            <span>
-              <input type="checkbox" />
-            </span>
-            <span>{val2.price}</span>
-          </Col>
-            )
-          })} */}
               <Col className={styles.rightArrow2}>
                 <button className={styles.btn}>
                   <span className={styles.span}>Book Now</span>
