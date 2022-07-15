@@ -928,7 +928,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                                     <div>
                                       <span>
                                         <b>Available</b>
-                                        {/* com */}
                                       </span>
                                       <span>
                                         {
