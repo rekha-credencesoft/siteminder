@@ -892,7 +892,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                             modal.id == j &&
                             modal.row == i ? (
                               <>
-                                {val == Object.keys(roomsInfo)[i] ? (
+                                {val == Object.keys(roomsNamesWithData)[i] ? (
                                   <div
                                     className={styles.popupModal}
                                     onMouseEnter={() => showModal(true, i)}
@@ -904,7 +904,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                                       </span>
                                       <span>
                                         {
-                                          Object.values(roomsInfo)[i]
+                                          Object.values(Object.values(roomsNamesWithData)[i])[j]
                                             .totalNoRooms
                                         }
                                       </span>
@@ -914,7 +914,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                                         <b>Booked</b>
                                       </span>
                                       <span>
-                                        {Object.values(roomsInfo)[i].noOfBooked}
+                                        {Object.values(Object.values(roomsNamesWithData)[i])[j].noOfBooked}
                                       </span>
                                     </div>
                                     <div>
@@ -922,7 +922,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                                         <b>Hold</b>
                                       </span>
                                       <span>
-                                        {Object.values(roomsInfo)[i].noOfOnHold}
+                                        {Object.values(Object.values(roomsNamesWithData)[i])[j].noOfOnHold}
                                       </span>
                                     </div>
                                     <div>
@@ -931,7 +931,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                                       </span>
                                       <span>
                                         {
-                                          Object.values(roomsInfo)[i]
+                                          Object.values(Object.values(roomsNamesWithData)[i])[j]
                                             .noOfAvailable
                                         }
                                       </span>
@@ -1090,12 +1090,11 @@ function MyVerticallyCenteredModal(props) {
               props.facilities.map((val, i) => {
                 return (
                   <div key={i}>
-                    {" "}
                     <img
                       src={val.logoUrl}
                       alt=""
                       className={styles.logo}
-                    />{" "}
+                    />
                     {val.name}
                   </div>
                 );
