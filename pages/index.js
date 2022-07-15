@@ -707,6 +707,8 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   // console.log(pricesToShow)
   // console.log(roomsNamesWithData)
 
+  // console.log(roomPlansToShowTrial)
+
   //For Getting the Available, Hold, Booked and Total value of Rooms
   let roomsInfo = {};
   for (
@@ -925,7 +927,10 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
               </button> */}
                 </Col>
               </Row>
-              <Row className={styles.secondRow}>
+              {val == Object.keys(roomPlansToShowTrial)[i]?
+              Object.keys(Object.values(roomPlansToShowTrial)[i]).map((val2,j)=>{
+                  return (
+                    <Row className={styles.secondRow} key={j}>
                 <Col className={styles.leftArrow2}>
                   {/* <Row> */}
                   <Col
@@ -945,11 +950,17 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                       padding: "2px 12px",
                       borderRadius: "8px",
                       border:"1px solid #9acc54"
-                    }}>Deluxe Room</span>
+                    }}>{val2}</span>
                   </Col>
                 </Col>
 
-                <Col className={styles.column}>
+                {Object.values(Object.values(roomPlansToShowTrial)[i])[j].map((val3,k)=>{
+                  return (
+                  <Col className={styles.column} key={k}>
+                  <span>{parseInt(val3.amount)}</span>
+                  </Col>)})
+                }
+                {/* <Col className={styles.column}>
                   <span>Yes</span>
                 </Col>
                 <Col className={styles.column}>
@@ -975,13 +986,12 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                 </Col>
                 <Col className={styles.column}>
                   <span>Yes</span>
-                </Col>
-                <Col className={styles.column}>
-                  <span>Yes</span>
-                </Col>
+                </Col> */}
 
                 <Col className={styles.rightArrow2}> </Col>
               </Row>
+                  )
+                }): ''}
               <hr />
             </>
           );
