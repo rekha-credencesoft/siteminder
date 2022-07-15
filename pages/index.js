@@ -958,7 +958,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                     }}>{val2}</span>
                   </Col>
                 </Col>
-
+                {/* okok */}
                 {Object.values(Object.values(plansToShow)[i])[j].map((val3,k)=>{
                   return (
                   <Col className={styles.column} key={k}>
