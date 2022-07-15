@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
-import { BsInfoCircle } from "react-icons/bs";
-import { Row, Col } from "react-bootstrap";
+import { BsBasket3, BsInfoCircle } from "react-icons/bs";
+import { Row, Col, NavDropdown } from "react-bootstrap";
 import { MdArrowLeft, MdArrowRight } from "react-icons/md";
 import { FaCaretSquareRight } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -11,10 +11,9 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
 import { AiFillCopyrightCircle } from "react-icons/ai";
-
 const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   const [increment, setIncrement] = useState(0);
-  const [modal, setModal] = useState({ state: false, id: -1 , row: -1});
+  const [modal, setModal] = useState({ state: false, id: -1, row: -1 });
   const [modalShow, setModalShow] = React.useState(false);
   const [details, setDetails] = useState({});
   const [property, setProperty] = useState(oldProperty);
@@ -30,9 +29,18 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
     setModal({
       state: state,
       id: id,
-      row: row
+      row: row,
     });
   };
+
+  const [shopModal, setshopModal] = useState(false);
+  const [profileModal, setprofileModal] = useState(false);
+
+  const handleShopModal1 = () => {
+    setprofileModal(false);
+    setshopModal(!shopModal);
+  };
+
   //This loop will extract the name of property and will make it as a key of its data
   for (let index = 0; index < properties.length; index++) {
     if (!roomTypes[properties[index].name]) {
@@ -44,7 +52,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   delete roomTypes["Official  Use"];
   // console.log(roomTypes)
   // console.log(Object.values(roomTypes)[0].roomFacilities)
-
   // console.log(property);
   // console.log(roomsArray)
   // console.log(properties)
@@ -55,10 +62,8 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   // console.log(lastDateString);
   // console.log(startDate);
   // console.log(lastDate);
-
   // console.log(property);
   // console.log(roomsArray);
-
   //237
   let roomsData = [];
   let roomsNamesWithData = {};
@@ -70,7 +75,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
     }
   }
   // console.log(roomsData)
-
   //This function will Decrement Seven Days
   const newPropertyAndRoomsResponseFunc = async () => {
     const newPropertyResponse = await fetch(
@@ -95,7 +99,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
     );
     const newProperty = await newPropertyResponse.json();
     setProperty(newProperty);
-
     const newRoomsArray = [];
     for (let index = 0; index < properties.length; index++) {
       const newRoomsResponse = await fetch(
@@ -124,7 +127,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
     }
     setRoomsArray(newRoomsArray);
   };
-
   for (let i = 0; i < roomsArray.length; i++) {
     let room = roomsArray[i];
     for (let j = 0; j < room.length; j++) {
@@ -151,9 +153,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   // console.log(roomsNamesWithData)
   // console.log(Object.keys(roomsNamesWithData))
   // console.log(Object.values(roomsNamesWithData)[0])
-
   //This will fetch The room Rate Plans of each room in their particular room keys
-
   // console.log(roomsData[0][0].roomRatePlans)
   let roomsPlansToShow = [];
   let roomsPlansNames = {};
@@ -183,10 +183,8 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
       }
     }
   }
-
   // console.log(roomsData)
   // console.log(roomsPlansNames);
-
   //Fetching room rate plans
   for (let index = 0; index < Object.values(roomsPlansNames).length; index++) {
     // console.log(Object.values(roomsPlansNames)[index]);
@@ -204,7 +202,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
         // console.log(Object.values(roomsPlansNames)[index][jindex][zindex]);
         if (
           !roomsPlansToShow[
-          Object.values(roomsPlansNames)[index][jindex][zindex].name
+            Object.values(roomsPlansNames)[index][jindex][zindex].name
           ]
         ) {
           roomsPlansToShow[
@@ -221,7 +219,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
       }
     }
   }
-
   let roomPlansToShowTrial = [];
   for (
     let index = 0;
@@ -251,19 +248,18 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
           // console.log(Object.values(roomsPlansToShow)[zindex][ndex].name)
           if (
             !roomPlansToShowTrial[
-            Object.values(roomsNamesWithData)[index][jindex].roomName
+              Object.values(roomsNamesWithData)[index][jindex].roomName
             ]
           ) {
             roomPlansToShowTrial[
               Object.values(roomsNamesWithData)[index][jindex].roomName
             ] = [];
-
             if (
               !roomPlansToShowTrial[
-              Object.values(roomsNamesWithData)[index][jindex].roomName
+                Object.values(roomsNamesWithData)[index][jindex].roomName
               ][Object.values(roomsPlansToShow)[zindex][ndex].name] &&
               Object.values(roomsNamesWithData)[index][jindex].roomId ==
-              Object.values(roomsPlansToShow)[zindex][ndex].roomId
+                Object.values(roomsPlansToShow)[zindex][ndex].roomId
             ) {
               roomPlansToShowTrial[
                 Object.values(roomsNamesWithData)[index][jindex].roomName
@@ -302,10 +298,10 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
           } else {
             if (
               !roomPlansToShowTrial[
-              Object.values(roomsNamesWithData)[index][jindex].roomName
+                Object.values(roomsNamesWithData)[index][jindex].roomName
               ][Object.values(roomsPlansToShow)[zindex][ndex].name] &&
               Object.values(roomsNamesWithData)[index][jindex].roomId ==
-              Object.values(roomsPlansToShow)[zindex][ndex].roomId
+                Object.values(roomsPlansToShow)[zindex][ndex].roomId
             ) {
               roomPlansToShowTrial[
                 Object.values(roomsNamesWithData)[index][jindex].roomName
@@ -347,7 +343,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
     }
   }
   // console.log(roomPlansToShowTrial)
-
   let fullRoomDeatils = [];
   for (
     let index = 0;
@@ -372,35 +367,28 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
       }
     }
   }
-
   // console.log(fullRoomDeatils);
-
   //Function to find out last date of the month
   const lastday = function (y, m) {
     return new Date(y, m + 1, 0);
   };
   // console.log(lastday(2022,6));
   // console.log(currentDate)
-
   //This will create an Array of Dates in a Month
   function dateRange(startDate, endDate, steps = 1) {
     const dateArray = [];
     let currentDate = new Date(startDate);
-
     while (currentDate <= new Date(endDate)) {
       dateArray.push(new Date(currentDate).toDateString());
       // Use UTC date to prevent problems with time zones and DST
       currentDate.setUTCDate(currentDate.getUTCDate() + steps);
     }
-
     return dateArray;
   }
-
   const date = new Date();
   let monthToShow = [];
   let datesToShow = [];
   let daysToShow = [];
-
   const dates = dateRange(date, lastday(2023, 6));
   // console.log(dates)
   for (let index = 0; index < dates.length; index++) {
@@ -429,7 +417,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
       case 6:
         daysToShow.push("Sat");
     }
-
     switch (month) {
       case 0:
         monthToShow.push("Jan");
@@ -467,7 +454,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
       case 11:
         monthToShow.push("Dec");
     }
-
     switch (date) {
       case 0:
         datesToShow.push(0);
@@ -567,7 +553,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
         break;
     }
   }
-
   // console.log(dates.length)
   // console.log(increment)
   //This function will Increement Seven Days
@@ -588,16 +573,13 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
       setIncrement(increment + 10);
     }
   };
-
   // console.log(`${lastDate.year}-${lastDate.month<10?'0'+lastDate.month:lastDate.month}-${lastDate.date<10?'0'+lastDate.date:lastDate.date}`)
-
   const tenDayDecrement = () => {
     if (increment !== 0) {
       setIncrement(increment - 10);
     }
   };
   // console.log(property)
-
   //This will Decrement Days by Fourteen
   const fourteenDaysDecrement = () => {
     if (increment == 7) {
@@ -606,17 +588,14 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
       setIncrement(increment - 14);
     }
   };
-
   //This will Increment Days by Fourteen
   const fourteenDaysIncrement = () => {
     setIncrement(increment + 14);
   };
-
   //This will refresh dates
   const refreshDates = () => {
     setIncrement(0);
   };
-
   //To Show Single Image of room Types
   let imageObj = {};
   for (
@@ -650,7 +629,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   }
   // console.log(Object.values(imageObj))
   // console.log(imageObj)
-
   datesToShow = datesToShow.slice(increment, increment + 10);
   daysToShow = daysToShow.slice(increment, increment + 10);
   monthToShow = monthToShow.slice(increment, increment + 10);
@@ -659,7 +637,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   // console.log(datesToShow);
   // console.log(roomTypes)
   // console.log(Object.values(deluxPlansToShow)[0])
-
   // console.log(Object.keys(fullRoomDeatils))
   // console.log(Object.values(fullRoomDeatils)[0].Details[0].roomName)
   // console.log(Object.values(roomsNamesWithData)[0])
@@ -695,7 +672,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
     }
   }
   // console.log(priceArray)
-
   let pricesToShow = [];
   for (let index = 0; index < Object.values(priceArray).length; index++) {
     // console.log(Object.values(priceArray)[index])
@@ -707,64 +683,78 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   }
   // console.log(pricesToShow)
   // console.log(roomsNamesWithData)
-
   // console.log(roomPlansToShowTrial)
   let plansToShow = [];
-  for (let index = 0; index < Object.keys(roomPlansToShowTrial).length; index++) {
+  for (
+    let index = 0;
+    index < Object.keys(roomPlansToShowTrial).length;
+    index++
+  ) {
     // console.log(Object.keys(roomPlansToShowTrial)[index])
     if (!plansToShow[Object.keys(roomPlansToShowTrial)[index]]) {
-      plansToShow[Object.keys(roomPlansToShowTrial)[index]] = []
+      plansToShow[Object.keys(roomPlansToShowTrial)[index]] = [];
     }
-    for (let jindex = 0; jindex < Object.keys(Object.values(roomPlansToShowTrial)[index]).length; jindex++) {
+    for (
+      let jindex = 0;
+      jindex < Object.keys(Object.values(roomPlansToShowTrial)[index]).length;
+      jindex++
+    ) {
       // console.log(Object.values(Object.values(roomPlansToShowTrial)[index])[jindex])
-      if (!plansToShow[Object.keys(roomPlansToShowTrial)[index]][Object.keys(Object.values(roomPlansToShowTrial)[index])[jindex]]) {
-        plansToShow[Object.keys(roomPlansToShowTrial)[index]][Object.keys(Object.values(roomPlansToShowTrial)[index])[jindex]] = {};
-        plansToShow[Object.keys(roomPlansToShowTrial)[index]][Object.keys(Object.values(roomPlansToShowTrial)[index])[jindex]] = Object.values(Object.values(roomPlansToShowTrial)[index])[jindex].slice(increment, increment + 10);
+      if (
+        !plansToShow[Object.keys(roomPlansToShowTrial)[index]][
+          Object.keys(Object.values(roomPlansToShowTrial)[index])[jindex]
+        ]
+      ) {
+        plansToShow[Object.keys(roomPlansToShowTrial)[index]][
+          Object.keys(Object.values(roomPlansToShowTrial)[index])[jindex]
+        ] = {};
+        plansToShow[Object.keys(roomPlansToShowTrial)[index]][
+          Object.keys(Object.values(roomPlansToShowTrial)[index])[jindex]
+        ] = Object.values(Object.values(roomPlansToShowTrial)[index])[
+          jindex
+        ].slice(increment, increment + 10);
       }
       // else{
       //   plansToShow[Object.keys(roomPlansToShowTrial)[index]][Object.keys(Object.values(roomPlansToShowTrial)[index])[jindex]].push(Object.values(Object.values(roomPlansToShowTrial)[index])[jindex])
       // }
       // for (let zindex = 0; zindex < Object.values(Object.values(roomPlansToShowTrial)[index])[jindex].length; zindex++) {
       //   console.log(Object.values(Object.values(roomPlansToShowTrial)[index])[jindex][zindex])
-        
-      // }
-      
-    }
-    
-  }
 
+      // }
+    }
+  }
   // console.log(plansToShow)
-  
   //For Getting the Available, Hold, Booked and Total value of Rooms
   let roomsInfo = {};
+  let fullRoomInfo = [];
   for (
-      let index = 0;
-      index < Object.values(roomsNamesWithData).length;
-      index++
-    ) {
-        // console.log(Object.values(roomsNamesWithData)[index])
-        for (
-            let jindex = 0;
-            jindex < Object.values(roomsNamesWithData)[index].length;
+    let index = 0;
+    index < Object.values(roomsNamesWithData).length;
+    index++
+  ) {
+    // console.log(Object.values(roomsNamesWithData)[index])
+    for (
+      let jindex = 0;
+      jindex < Object.values(roomsNamesWithData)[index].length;
       jindex++
     ) {
-        // console.log(Object.values(roomsNamesWithData)[index][jindex]
-        if (!roomsInfo[Object.keys(roomsNamesWithData)[index]]) {
-            roomsInfo[Object.keys(roomsNamesWithData)[index]] = {
-                noOfAvailable: "",
-                totalNoRooms: "",
-                noOfBooked: "",
-                noOfOnHold: "",
-              };
-              roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfAvailable =
-                Object.values(roomsNamesWithData)[index][jindex].noOfAvailable;
-              roomsInfo[Object.keys(roomsNamesWithData)[index]].totalNoRooms =
-                Object.values(roomsNamesWithData)[index][jindex].totalNoRooms;
-              roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfBooked =
-                Object.values(roomsNamesWithData)[index][jindex].noOfBooked;
-              roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfOnHold =
-                Object.values(roomsNamesWithData)[index][jindex].noOfOnHold;
-            } else {
+      // console.log(Object.values(roomsNamesWithData)[index][jindex]
+      if (!roomsInfo[Object.keys(roomsNamesWithData)[index]]) {
+        roomsInfo[Object.keys(roomsNamesWithData)[index]] = {
+          noOfAvailable: "",
+          totalNoRooms: "",
+          noOfBooked: "",
+          noOfOnHold: "",
+        };
+        roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfAvailable =
+          Object.values(roomsNamesWithData)[index][jindex].noOfAvailable;
+        roomsInfo[Object.keys(roomsNamesWithData)[index]].totalNoRooms =
+          Object.values(roomsNamesWithData)[index][jindex].totalNoRooms;
+        roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfBooked =
+          Object.values(roomsNamesWithData)[index][jindex].noOfBooked;
+        roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfOnHold =
+          Object.values(roomsNamesWithData)[index][jindex].noOfOnHold;
+      } else {
         roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfAvailable =
           roomsInfo[Object.keys(roomsNamesWithData)[index]].noOfAvailable +
           Object.values(roomsNamesWithData)[index][jindex].noOfAvailable;
@@ -780,14 +770,10 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
       }
     }
   }
-  
-  // console.log(roomsNamesWithData)
-
-  // console.log(roomsInfo)
+  console.log(roomsInfo);
   // console.log(fullRoomInfo)
   // console.log(roomsNamesWithData)
   // console.log(Object.values(roomsInfo)[0])
-
   return (
     <div className={styles.bigContainer}>
       <div className={styles.topContainer}>
@@ -814,111 +800,156 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
           return (
             <>
               <Row className={styles.row} key={i}>
-                <Col className={styles.leftArrow2}>
-                  {/* <Row> */}
-                  <Col className={styles.col1}>
-                    {val == Object.keys(imageObj)[i] ? (
-                      <img
-                        key={i + 1}
-                        src={Object.values(imageObj)[i][0].url}
-                        alt=""
-                        className={styles.image}
-                      />
-                    ) : (
-                      <img
-                        key={i + 1}
-                        src="https://tse2.explicit.bing.net/th?id=OIP.38eE6cQfShw5U-lGbkcMCgHaEo&pid=Api&P=0&w=250&h=156"
-                        alt=""
-                        className={styles.image}
-                      />
-                    )}
-                  </Col>
-                  <Col className={styles.col2}>
-                    <span className={styles.text}>{val}</span>
-                    <span className={styles.text}>
-                      <span
-                        className={styles.moreInfo}
-                        onClick={() => {
-                          setModalShow(true),
-                            setDetails({
-                              name: Object.keys(roomTypes)[i],
-                              facilities:
-                                Object.values(roomTypes)[i].roomFacilities,
-                              images: Object.values(imageObj)[i],
-                              plans: Object.keys(
-                                Object.values(roomPlansToShowTrial)[i]
-                              ),
-                            });
-                        }}
-                      >
-                        More Info
-                      </span>
-                      {val == Object.keys(roomTypes)[i] ? (
-                        <MyVerticallyCenteredModal
-                          show={modalShow}
-                          onHide={() => setModalShow(false)}
-                          name={details.name}
-                          facilities={details.facilities}
-                          images={details.images}
-                          plans={details.plans}
+                <Col className={styles.firstOuterColumn}>
+                  <Col className={styles.leftArrow2}>
+                    {/* <Row> */}
+                    <Col className={styles.col1}>
+                      {val == Object.keys(imageObj)[i] ? (
+                        <img
+                          key={i + 1}
+                          src={Object.values(imageObj)[i][0].url}
+                          alt=""
+                          className={styles.image}
                         />
                       ) : (
-                        ""
+                        <img
+                          key={i + 1}
+                          src="https://tse2.explicit.bing.net/th?id=OIP.38eE6cQfShw5U-lGbkcMCgHaEo&pid=Api&P=0&w=250&h=156"
+                          alt=""
+                          className={styles.image}
+                        />
                       )}
-                      {/* <MyVerticallyCenteredModal
+                    </Col>
+                    <Col className={styles.col2}>
+                      <span className={styles.text}>{val}</span>
+                      <span className={styles.text}>
+                        <span
+                          className={styles.moreInfo}
+                          onClick={() => {
+                            setModalShow(true),
+                              setDetails({
+                                name: Object.keys(roomTypes)[i],
+                                facilities:
+                                  Object.values(roomTypes)[i].roomFacilities,
+                                images: Object.values(imageObj)[i],
+                                plans: Object.keys(
+                                  Object.values(roomPlansToShowTrial)[i]
+                                ),
+                              });
+                          }}
+                        >
+                          More Info
+                        </span>
+                        {val == Object.keys(roomTypes)[i] ? (
+                          <MyVerticallyCenteredModal
+                            show={modalShow}
+                            onHide={() => setModalShow(false)}
+                            name={details.name}
+                            facilities={details.facilities}
+                            images={details.images}
+                            plans={details.plans}
+                          />
+                        ) : (
+                          ""
+                        )}
+                        {/* <MyVerticallyCenteredModal
                         show={modalShow}
                         onHide={() => setModalShow(false)}
                       /> */}
-                    </span>
+                      </span>
+                    </Col>
+                    <Col className={styles.col3}>
+                      <span
+                        style={{
+                          border: "1px solid #9acc54",
+                          color: "#9acc54",
+                          padding: "2px 12px",
+                          borderRadius: "8px",
+                        }}
+                      >
+                        Price
+                      </span>
+                    </Col>
+                    {/* </Row> */}
                   </Col>
-                  <Col className={styles.col3}>
-                    <span
-                      style={{
-                        border: "1px solid #9acc54",
-                        color: "#9acc54",
-                        padding: "2px 12px",
-                        borderRadius: "8px",
-                      }}
-                    >
-                      Price
-                    </span>
-                  </Col>
-                  {/* </Row> */}
                 </Col>
-                {val == Object.keys(pricesToShow)[i]
-                  ? Object.values(pricesToShow)[i].map((val2, j) => {
-                    return (
-                      <Col className={styles.column} key={j}>
-                        <BsInfoCircle onMouseEnter={() => showModal(true, j,i)} onMouseLeave={() => showModal(false, -1,-1)} style={{ marginLeft: "5.5vh", position: "absolute", top: "-1vh", cursor: "pointer" }} />
-                        {modal.state == true && modal.id == j && modal.row == i?
-                          <>
-                            {val == Object.keys(roomsNamesWithData)[i] ?
-                              <div className={styles.popupModal} onMouseEnter={() => showModal(true, i)} onMouseLeave={() => showModal(false, -1)}>
-                                <div>
-                                  <span><b>Total</b></span>
-                                  <span>{Object.values(Object.values(roomsNamesWithData)[i])[j].totalNoRooms}</span>
-                                </div>
-                                <div>
-                                  <span><b>Booked</b></span>
-                                  <span>{Object.values(Object.values(roomsNamesWithData)[i])[j].noOfBooked}</span>
-                                </div>
-                                <div>
-                                  <span><b>Hold</b></span>
-                                  <span>{Object.values(Object.values(roomsNamesWithData)[i])[j].noOfOnHold}</span>
-                                </div>
-                                <div>
-                                  <span><b>Available</b></span>
-                                  <span>{Object.values(Object.values(roomsNamesWithData)[i])[j].noOfAvailable}</span>
-                                </div>
-                              </div> : ''}
-                          </> : ""
-                        }
-                        <span>{val2}</span>
-                      </Col>
-                    );
-                  })
-                  : ""}
-                {/* {Object.values(Object.values(roomsNamesWithData)[i]).map((val2,j)=>{
+                <Col className={styles.secondOuterColumn}>
+                  {val == Object.keys(pricesToShow)[i]
+                    ? Object.values(pricesToShow)[i].map((val2, j) => {
+                        return (
+                          <Col className={styles.column} key={j}>
+                            <BsInfoCircle
+                              onMouseEnter={() => showModal(true, j, i)}
+                              onMouseLeave={() => showModal(false, -1, -1)}
+                              style={{
+                                marginLeft: "5.5vh",
+                                position: "absolute",
+                                top: "-1vh",
+                                cursor: "pointer",
+                              }}
+                            />
+                            {modal.state == true &&
+                            modal.id == j &&
+                            modal.row == i ? (
+                              <>
+                                {val == Object.keys(roomsInfo)[i] ? (
+                                  <div
+                                    className={styles.popupModal}
+                                    onMouseEnter={() => showModal(true, i)}
+                                    onMouseLeave={() => showModal(false, -1)}
+                                  >
+                                    <div>
+                                      <span>
+                                        <b>Total</b>
+                                      </span>
+                                      <span>
+                                        {
+                                          Object.values(roomsInfo)[i]
+                                            .totalNoRooms
+                                        }
+                                      </span>
+                                    </div>
+                                    <div>
+                                      <span>
+                                        <b>Booked</b>
+                                      </span>
+                                      <span>
+                                        {Object.values(roomsInfo)[i].noOfBooked}
+                                      </span>
+                                    </div>
+                                    <div>
+                                      <span>
+                                        <b>Hold</b>
+                                      </span>
+                                      <span>
+                                        {Object.values(roomsInfo)[i].noOfOnHold}
+                                      </span>
+                                    </div>
+                                    <div>
+                                      <span>
+                                        <b>Available</b>
+                                      </span>
+                                      <span>
+                                        {
+                                          Object.values(roomsInfo)[i]
+                                            .noOfAvailable
+                                        }
+                                      </span>
+                                    </div>
+                                  </div>
+                                ) : (
+                                  ""
+                                )}
+                              </>
+                            ) : (
+                              ""
+                            )}
+                            <span>{val2}</span>
+                          </Col>
+                        );
+                      })
+                    : ""}
+                  {/* {Object.values(Object.values(roomsNamesWithData)[i]).map((val2,j)=>{
           return (
             <Col className={styles.column} key={j}>
           <span>
@@ -928,45 +959,53 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
         </Col>
           )
         })} */}
-                <Col className={styles.rightArrow2}>
-                  {/* <button className={styles.btn}>
+                  <Col className={styles.rightArrow2}>
+                    {/* <button className={styles.btn}>
                 <span className={styles.span}>Book Now</span>
+
               </button> */}
+                  </Col>
                 </Col>
               </Row>
-              {val == Object.keys(plansToShow)[i]?
-              Object.keys(Object.values(plansToShow)[i]).map((val2,j)=>{
-                  return (
-                    <Row className={styles.secondRow} key={j}>
-                <Col className={styles.leftArrow2}>
-                  {/* <Row> */}
-                  <Col
-                    className={styles.colPlans}
-                  >
-                    <Col className={styles.colButton}>
-                      <span>
-                        Plans
-                      </span>
+              {val == Object.keys(plansToShow)[i]
+                ? Object.keys(Object.values(plansToShow)[i]).map((val2, j) => {
+                    return (
+                      <Row className={styles.secondRow} key={j}>
+                        <Col className={styles.firstOuterColumn}>
+                          <Col className={styles.leftArrow2}>
+                            {/* <Row> */}
+                            <Col className={styles.colPlans}>
+                              <Col className={styles.colButton}>
+                                <span>Plans</span>
+                              </Col>
+                            </Col>
+                            <Col className={styles.col3}>
+                              <span
+                                style={{
+                                  color: "#9acc54",
+                                  padding: "2px 12px",
+                                  borderRadius: "8px",
+                                  border: "1px solid #9acc54",
+                                }}
+                              >
+                                {val2}
+                              </span>
+                            </Col>
+                          </Col>
+                        </Col>
 
-                    </Col>
-                  </Col>
-
-                  <Col className={styles.col3}>
-                    <span style={{
-                      color: "#9acc54",
-                      padding: "2px 12px",
-                      borderRadius: "8px",
-                      border:"1px solid #9acc54"
-                    }}>{val2}</span>
-                  </Col>
-                </Col>
-                {Object.values(Object.values(plansToShow)[i])[j].map((val3,k)=>{
-                  return (
-                  <Col className={styles.column} key={k}>
-                  <span>{parseInt(val3.amount)}</span>
-                  </Col>)})
-                }
-                {/* <Col className={styles.column}>
+                        {/* okok */}
+                        <Col className={styles.secondOuterColumn}>
+                          {Object.values(Object.values(plansToShow)[i])[j].map(
+                            (val3, k) => {
+                              return (
+                                <Col className={styles.column} key={k}>
+                                  <span>{parseInt(val3.amount)}</span>
+                                </Col>
+                              );
+                            }
+                          )}
+                          {/* <Col className={styles.column}>
                   <span>Yes</span>
                 </Col>
                 <Col className={styles.column}>
@@ -993,11 +1032,12 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                 <Col className={styles.column}>
                   <span>Yes</span>
                 </Col> */}
-
-                <Col className={styles.rightArrow2}> </Col>
-              </Row>
-                  )
-                }): ''}
+                          <Col className={styles.rightArrow2}> </Col>
+                        </Col>
+                      </Row>
+                    );
+                  })
+                : ""}
               <hr />
             </>
           );
@@ -1006,9 +1046,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
     </div>
   );
 };
-
 export default Home;
-
 function MyVerticallyCenteredModal(props) {
   // console.log(props.plans)
   return (
@@ -1068,7 +1106,6 @@ function MyVerticallyCenteredModal(props) {
     </Modal>
   );
 }
-
 export async function getServerSideProps(context) {
   const propertiesResponse = await fetch(
     "https://api.bookonelocal.in/api-bookone/api/property/237/rooms",
@@ -1086,7 +1123,6 @@ export async function getServerSideProps(context) {
     }
   );
   const properties = await propertiesResponse.json();
-
   //This is for fetching property data by dates
   const propertyResponse = await fetch(
     "https://api.bookonelocal.in/api-bookone/api/availability/getRatesAndAvailabilityForPropertyByDate",
@@ -1107,7 +1143,6 @@ export async function getServerSideProps(context) {
     }
   );
   const oldProperty = await propertyResponse.json();
-
   //This is for fetching rooms data by dates
   const oldRoomsArray = [];
   for (let index = 0; index < properties.length; index++) {
@@ -1134,7 +1169,6 @@ export async function getServerSideProps(context) {
     oldRoomsArray.push(oldRooms);
   }
   // console.log(roomsArray)
-
   // This is for fetching 7 days data for Property
   // const propertyResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=237', {
   //   method: 'GET',
@@ -1146,7 +1180,6 @@ export async function getServerSideProps(context) {
   //   }
   // })
   // const property = await propertyResponse.json();
-
   //This is for fetching 7 days Data of rooms
   // const roomsArray = [];
   // for (let index = 0; index < properties.length; index++) {
