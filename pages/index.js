@@ -14,7 +14,7 @@ import { AiFillCopyrightCircle } from "react-icons/ai";
 
 const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   const [increment, setIncrement] = useState(0);
-  const [modal, setModal] = useState({ state: false, id: -1 });
+  const [modal, setModal] = useState({ state: false, id: -1 , row: -1});
   const [modalShow, setModalShow] = React.useState(false);
   const [details, setDetails] = useState({});
   const [property, setProperty] = useState(oldProperty);
@@ -26,10 +26,11 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   const roomTypes = [];
   let room = [];
   let roomDetail = [];
-  const showModal = (state, id) => {
+  const showModal = (state, id, row) => {
     setModal({
       state: state,
       id: id,
+      row: row
     });
   };
   //This loop will extract the name of property and will make it as a key of its data
@@ -708,9 +709,35 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   // console.log(roomsNamesWithData)
 
   // console.log(roomPlansToShowTrial)
+  let plansToShow = [];
+  for (let index = 0; index < Object.keys(roomPlansToShowTrial).length; index++) {
+    // console.log(Object.keys(roomPlansToShowTrial)[index])
+    if (!plansToShow[Object.keys(roomPlansToShowTrial)[index]]) {
+      plansToShow[Object.keys(roomPlansToShowTrial)[index]] = []
+    }
+    for (let jindex = 0; jindex < Object.keys(Object.values(roomPlansToShowTrial)[index]).length; jindex++) {
+      // console.log(Object.values(Object.values(roomPlansToShowTrial)[index])[jindex])
+      if (!plansToShow[Object.keys(roomPlansToShowTrial)[index]][Object.keys(Object.values(roomPlansToShowTrial)[index])[jindex]]) {
+        plansToShow[Object.keys(roomPlansToShowTrial)[index]][Object.keys(Object.values(roomPlansToShowTrial)[index])[jindex]] = {};
+        plansToShow[Object.keys(roomPlansToShowTrial)[index]][Object.keys(Object.values(roomPlansToShowTrial)[index])[jindex]] = Object.values(Object.values(roomPlansToShowTrial)[index])[jindex].slice(increment, increment + 10);
+      }
+      // else{
+      //   plansToShow[Object.keys(roomPlansToShowTrial)[index]][Object.keys(Object.values(roomPlansToShowTrial)[index])[jindex]].push(Object.values(Object.values(roomPlansToShowTrial)[index])[jindex])
+      // }
+      // for (let zindex = 0; zindex < Object.values(Object.values(roomPlansToShowTrial)[index])[jindex].length; zindex++) {
+      //   console.log(Object.values(Object.values(roomPlansToShowTrial)[index])[jindex][zindex])
+        
+      // }
+      
+    }
+    
+  }
+
+  // console.log(plansToShow)
 
   //For Getting the Available, Hold, Booked and Total value of Rooms
   let roomsInfo = {};
+  let fullRoomInfo =[]
   for (
     let index = 0;
     index < Object.values(roomsNamesWithData).length;
@@ -754,9 +781,10 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
       }
     }
   }
-  // console.log(roomsInfo)
+  console.log(roomsInfo)
+  // console.log(fullRoomInfo)
   // console.log(roomsNamesWithData)
-  console.log(Object.values(roomsInfo)[0])
+  // console.log(Object.values(roomsInfo)[0])
 
   return (
     <div className={styles.bigContainer}>
@@ -859,8 +887,8 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                   ? Object.values(pricesToShow)[i].map((val2, j) => {
                     return (
                       <Col className={styles.column} key={j}>
-                        <BsInfoCircle onMouseEnter={() => showModal(true, i)} onMouseLeave={() => showModal(false, -1)} style={{ marginLeft: "5.5vh", position: "absolute", top: "-1vh", cursor: "pointer" }} />
-                        {modal.state == true && modal.id == i ?
+                        <BsInfoCircle onMouseEnter={() => showModal(true, j,i)} onMouseLeave={() => showModal(false, -1,-1)} style={{ marginLeft: "5.5vh", position: "absolute", top: "-1vh", cursor: "pointer" }} />
+                        {modal.state == true && modal.id == j && modal.row == i?
                           <>
                             {val == Object.keys(roomsInfo)[i] ?
                               <div className={styles.popupModal} onMouseEnter={() => showModal(true, i)} onMouseLeave={() => showModal(false, -1)}>
@@ -904,8 +932,8 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
               </button> */}
                 </Col>
               </Row>
-              {val == Object.keys(roomPlansToShowTrial)[i]?
-              Object.keys(Object.values(roomPlansToShowTrial)[i]).map((val2,j)=>{
+              {val == Object.keys(plansToShow)[i]?
+              Object.keys(Object.values(plansToShow)[i]).map((val2,j)=>{
                   return (
                     <Row className={styles.secondRow} key={j}>
                 <Col className={styles.leftArrow2}>
@@ -931,7 +959,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                   </Col>
                 </Col>
 
-                {Object.values(Object.values(roomPlansToShowTrial)[i])[j].map((val3,k)=>{
+                {Object.values(Object.values(plansToShow)[i])[j].map((val3,k)=>{
                   return (
                   <Col className={styles.column} key={k}>
                   <span>{parseInt(val3.amount)}</span>
