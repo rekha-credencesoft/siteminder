@@ -22,6 +22,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   const lastDateString = new Date();
   const startDateString = new Date();
   const [lastDate, setLastDate] = useState({});
+  const [selectedPlan, setSelectedPlan] = useState('');
   const roomTypes = [];
   let room = [];
   let roomDetail = [];
@@ -692,7 +693,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
     let index = 0;
     index < Object.keys(roomPlansToShowTrial).length;
     index++
-  ) {
+    ) {
     // console.log(Object.keys(roomPlansToShowTrial)[index])
     if (!plansToShow[Object.keys(roomPlansToShowTrial)[index]]) {
       plansToShow[Object.keys(roomPlansToShowTrial)[index]] = [];
@@ -703,11 +704,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
       jindex++
     ) {
       // console.log(Object.values(Object.values(roomPlansToShowTrial)[index])[jindex])
-      if (
-        !plansToShow[Object.keys(roomPlansToShowTrial)[index]][
-        Object.keys(Object.values(roomPlansToShowTrial)[index])[jindex]
-        ]
-      ) {
+      if (!plansToShow[Object.keys(roomPlansToShowTrial)[index]][Object.keys(Object.values(roomPlansToShowTrial)[index])[jindex]]) {
         plansToShow[Object.keys(roomPlansToShowTrial)[index]][
           Object.keys(Object.values(roomPlansToShowTrial)[index])[jindex]
         ] = {};
@@ -773,10 +770,20 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
       }
     }
   }
-  console.log(roomsInfo);
+  // console.log(roomsInfo);
   // console.log(fullRoomInfo)
+  // console.log(plansToShow)
+
+
   // console.log(roomsNamesWithData)
   // console.log(Object.values(roomsInfo)[0])
+  // for (let index = 0; index < Object.keys(plansToShow).length; index++) {
+  //   if (!selectedPlan.includes(Object.keys(plansToShow))) {
+  //     setSelectedPlan(selectedPlan[Object.keys(plansToShow)])
+  //   }
+    
+  // }
+  // console.log(selectedPlan)
   return (
     <div className={styles.bigContainer}>
       <div className={styles.topContainer}>
@@ -951,53 +958,56 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
               </Row>
               {val == Object.keys(plansToShow)[i]
                 ? Object.keys(Object.values(plansToShow)[i]).map((val2, j) => {
-                  return (
-                    <Row className={styles.secondRow} key={j}>
-                      <Col className={styles.firstOuterColumn}>
-                        <Col className={styles.leftArrow2}>
-                          <Col className={styles.colPlans}>
-                            <Col className={styles.colButton}>
-                              <div className={styles.shopBtn} onClick={() => handleShopModal1(shopModal.state, j, i)}>
-                                Plans <AiFillCaretDown />
-                                {shopModal.id == j && shopModal.row == i ? <div className={styles.shopModal} style={shopModal ? { display: 'block' } : { display: 'none' }}>
-                                  <Link href="/"><li>Subscription Meal Selection</li></Link>
-                                  <Link href="/"><li>A la Carte</li></Link>
-                                  <Link href="/"><li>Proteins By The Pound</li></Link>
-                                  <Link href="/"><li>Custom Meal Builder</li></Link>
-                                  <Link href="/extras"><li>Extras</li></Link>
-                                  <Link href="/giftcard"><li>Gift Card</li></Link>
-                                </div> : ""}
+                  return (<Row className={styles.secondRow} key={j}>
+                    <Col className={styles.firstOuterColumn}>
+                      <Col className={styles.leftArrow2}>
+                        <Col className={styles.colPlans}>
+                          <Col className={styles.colButton}>
+                            <div className={styles.shopBtn} onClick={() => handleShopModal1(shopModal.state, j, i)}>
+                              Plans <AiFillCaretDown />
+                              {shopModal.id == j && shopModal.row == i ? <div className={styles.shopModal} style={shopModal ? { display: 'block' } : { display: 'none' }}>
+                                {Object.keys(Object.values(plansToShow)[i]).map((val3,z)=>{
+                                  return (
+                                    <Link key={z} href="/"><li onClick={()=> setSelectedPlan(val3)} >{val3}</li></Link>
+                                  )
+                                })}
+                                {/* <Link href="/"><li>A la Carte</li></Link>
+                                <Link href="/"><li>Proteins By The Pound</li></Link>
+                                <Link href="/"><li>Custom Meal Builder</li></Link>
+                                <Link href="/extras"><li>Extras</li></Link>
+                                <Link href="/giftcard"><li>Gift Card</li></Link> */}
+                              </div> : ""}
 
-                              </div>
-                            </Col>
-                          </Col>
-                          <Col className={styles.colBot}>
-                            <span
-                              style={{
-                                color: "#9acc54",
-                                padding: "2px 12px",
-                                borderRadius: "8px",
-                                border: "1px solid #9acc54",
-                              }}
-                            >
-                              {val2}
-                            </span>
+                            </div>
                           </Col>
                         </Col>
+                        <Col className={styles.colBot}>
+                          <span
+                            style={{
+                              color: "#9acc54",
+                              padding: "2px 12px",
+                              borderRadius: "8px",
+                              border: "1px solid #9acc54",
+                            }}
+                          >
+                            {val2}
+                          </span>
+                        </Col>
                       </Col>
-                      <Col className={styles.secondOuterColumn}>
-                        {Object.values(Object.values(plansToShow)[i])[j].map(
-                          (val3, k) => {
-                            return (
-                              <Col className={styles.column} key={k}>
-                                <span>{parseInt(val3.amount)}</span>
-                              </Col>
-                            );
-                          }
-                        )}
-                        <Col className={styles.rightArrow2}> </Col>
-                      </Col>
-                    </Row>
+                    </Col>
+                    <Col className={styles.secondOuterColumn}>
+                      {Object.values(Object.values(plansToShow)[i])[j].map(
+                        (val3, k) => {
+                          return (
+                            <Col className={styles.column} key={k}>
+                              <span>{parseInt(val3.amount)}</span>
+                            </Col>
+                          );
+                        }
+                      )}
+                      <Col className={styles.rightArrow2}> </Col>
+                    </Col>
+                  </Row>
                   );
                 })
                 : ""}
