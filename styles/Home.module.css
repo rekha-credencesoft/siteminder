@@ -236,7 +236,6 @@
   display: flex;
   justify-content: space-between;
   padding: 2.5px 20px;
-  
 }
 .moreInfo {
   text-decoration: underline;
@@ -290,4 +289,13 @@
 }
 .logo {
   width: 1.2vw;
+}
+
+.firstOuterColumn {
+  flex: 2.5;
+}
+
+.secondOuterColumn {
+  display: flex;
+  flex: 9.5;
 }

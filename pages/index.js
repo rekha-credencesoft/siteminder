@@ -203,7 +203,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
         // console.log(Object.values(roomsPlansNames)[index][jindex][zindex]);
         if (
           !roomsPlansToShow[
-          Object.values(roomsPlansNames)[index][jindex][zindex].name
+            Object.values(roomsPlansNames)[index][jindex][zindex].name
           ]
         ) {
           roomsPlansToShow[
@@ -250,7 +250,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
           // console.log(Object.values(roomsPlansToShow)[zindex][ndex].name)
           if (
             !roomPlansToShowTrial[
-            Object.values(roomsNamesWithData)[index][jindex].roomName
+              Object.values(roomsNamesWithData)[index][jindex].roomName
             ]
           ) {
             roomPlansToShowTrial[
@@ -259,10 +259,10 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
 
             if (
               !roomPlansToShowTrial[
-              Object.values(roomsNamesWithData)[index][jindex].roomName
+                Object.values(roomsNamesWithData)[index][jindex].roomName
               ][Object.values(roomsPlansToShow)[zindex][ndex].name] &&
               Object.values(roomsNamesWithData)[index][jindex].roomId ==
-              Object.values(roomsPlansToShow)[zindex][ndex].roomId
+                Object.values(roomsPlansToShow)[zindex][ndex].roomId
             ) {
               roomPlansToShowTrial[
                 Object.values(roomsNamesWithData)[index][jindex].roomName
@@ -301,10 +301,10 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
           } else {
             if (
               !roomPlansToShowTrial[
-              Object.values(roomsNamesWithData)[index][jindex].roomName
+                Object.values(roomsNamesWithData)[index][jindex].roomName
               ][Object.values(roomsPlansToShow)[zindex][ndex].name] &&
               Object.values(roomsNamesWithData)[index][jindex].roomId ==
-              Object.values(roomsPlansToShow)[zindex][ndex].roomId
+                Object.values(roomsPlansToShow)[zindex][ndex].roomId
             ) {
               roomPlansToShowTrial[
                 Object.values(roomsNamesWithData)[index][jindex].roomName
@@ -756,7 +756,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   }
   // console.log(roomsInfo)
   // console.log(roomsNamesWithData)
-  console.log(Object.values(roomsInfo)[0])
+  console.log(Object.values(roomsInfo)[0]);
 
   return (
     <div className={styles.bigContainer}>
@@ -784,111 +784,154 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
           return (
             <>
               <Row className={styles.row} key={i}>
-                <Col className={styles.leftArrow2}>
-                  {/* <Row> */}
-                  <Col className={styles.col1}>
-                    {val == Object.keys(imageObj)[i] ? (
-                      <img
-                        key={i + 1}
-                        src={Object.values(imageObj)[i][0].url}
-                        alt=""
-                        className={styles.image}
-                      />
-                    ) : (
-                      <img
-                        key={i + 1}
-                        src="https://tse2.explicit.bing.net/th?id=OIP.38eE6cQfShw5U-lGbkcMCgHaEo&pid=Api&P=0&w=250&h=156"
-                        alt=""
-                        className={styles.image}
-                      />
-                    )}
-                  </Col>
-                  <Col className={styles.col2}>
-                    <span className={styles.text}>{val}</span>
-                    <span className={styles.text}>
-                      <span
-                        className={styles.moreInfo}
-                        onClick={() => {
-                          setModalShow(true),
-                            setDetails({
-                              name: Object.keys(roomTypes)[i],
-                              facilities:
-                                Object.values(roomTypes)[i].roomFacilities,
-                              images: Object.values(imageObj)[i],
-                              plans: Object.keys(
-                                Object.values(roomPlansToShowTrial)[i]
-                              ),
-                            });
-                        }}
-                      >
-                        More Info
-                      </span>
-                      {val == Object.keys(roomTypes)[i] ? (
-                        <MyVerticallyCenteredModal
-                          show={modalShow}
-                          onHide={() => setModalShow(false)}
-                          name={details.name}
-                          facilities={details.facilities}
-                          images={details.images}
-                          plans={details.plans}
+                <Col className={styles.firstOuterColumn}>
+                  <Col className={styles.leftArrow2}>
+                    {/* <Row> */}
+                    <Col className={styles.col1}>
+                      {val == Object.keys(imageObj)[i] ? (
+                        <img
+                          key={i + 1}
+                          src={Object.values(imageObj)[i][0].url}
+                          alt=""
+                          className={styles.image}
                         />
                       ) : (
-                        ""
+                        <img
+                          key={i + 1}
+                          src="https://tse2.explicit.bing.net/th?id=OIP.38eE6cQfShw5U-lGbkcMCgHaEo&pid=Api&P=0&w=250&h=156"
+                          alt=""
+                          className={styles.image}
+                        />
                       )}
-                      {/* <MyVerticallyCenteredModal
+                    </Col>
+                    <Col className={styles.col2}>
+                      <span className={styles.text}>{val}</span>
+                      <span className={styles.text}>
+                        <span
+                          className={styles.moreInfo}
+                          onClick={() => {
+                            setModalShow(true),
+                              setDetails({
+                                name: Object.keys(roomTypes)[i],
+                                facilities:
+                                  Object.values(roomTypes)[i].roomFacilities,
+                                images: Object.values(imageObj)[i],
+                                plans: Object.keys(
+                                  Object.values(roomPlansToShowTrial)[i]
+                                ),
+                              });
+                          }}
+                        >
+                          More Info
+                        </span>
+                        {val == Object.keys(roomTypes)[i] ? (
+                          <MyVerticallyCenteredModal
+                            show={modalShow}
+                            onHide={() => setModalShow(false)}
+                            name={details.name}
+                            facilities={details.facilities}
+                            images={details.images}
+                            plans={details.plans}
+                          />
+                        ) : (
+                          ""
+                        )}
+                        {/* <MyVerticallyCenteredModal
                         show={modalShow}
                         onHide={() => setModalShow(false)}
                       /> */}
-                    </span>
+                      </span>
+                    </Col>
+                    <Col className={styles.col3}>
+                      <span
+                        style={{
+                          border: "1px solid #9acc54",
+                          color: "#9acc54",
+                          padding: "2px 12px",
+                          borderRadius: "8px",
+                        }}
+                      >
+                        Price
+                      </span>
+                    </Col>
+                    {/* </Row> */}
                   </Col>
-                  <Col className={styles.col3}>
-                    <span
-                      style={{
-                        border: "1px solid #9acc54",
-                        color: "#9acc54",
-                        padding: "2px 12px",
-                        borderRadius: "8px",
-                      }}
-                    >
-                      Price
-                    </span>
-                  </Col>
-                  {/* </Row> */}
                 </Col>
-                {val == Object.keys(pricesToShow)[i]
-                  ? Object.values(pricesToShow)[i].map((val2, j) => {
-                    return (
-                      <Col className={styles.column} key={j}>
-                        <BsInfoCircle onMouseEnter={() => showModal(true, i)} onMouseLeave={() => showModal(false, -1)} style={{ marginLeft: "5.5vh", position: "absolute", top: "-1vh", cursor: "pointer" }} />
-                        {modal.state == true && modal.id == i ?
-                          <>
-                            {val == Object.keys(roomsInfo)[i] ?
-                              <div className={styles.popupModal} onMouseEnter={() => showModal(true, i)} onMouseLeave={() => showModal(false, -1)}>
-                                <div>
-                                  <span><b>Total</b></span>
-                                  <span>{Object.values(roomsInfo)[i].totalNoRooms}</span>
-                                </div>
-                                <div>
-                                  <span><b>Booked</b></span>
-                                  <span>{Object.values(roomsInfo)[i].noOfBooked}</span>
-                                </div>
-                                <div>
-                                  <span><b>Hold</b></span>
-                                  <span>{Object.values(roomsInfo)[i].noOfOnHold}</span>
-                                </div>
-                                <div>
-                                  <span><b>Available</b></span>
-                                  <span>{Object.values(roomsInfo)[i].noOfAvailable}</span>
-                                </div>
-                              </div> : ''}
-                          </> : ""
-                        }
-                        <span>{val2}</span>
-                      </Col>
-                    );
-                  })
-                  : ""}
-                {/* {Object.values(Object.values(roomsNamesWithData)[i]).map((val2,j)=>{
+                <Col className={styles.secondOuterColumn}>
+                  {val == Object.keys(pricesToShow)[i]
+                    ? Object.values(pricesToShow)[i].map((val2, j) => {
+                        return (
+                          <Col className={styles.column} key={j}>
+                            <BsInfoCircle
+                              onMouseEnter={() => showModal(true, i)}
+                              onMouseLeave={() => showModal(false, -1)}
+                              style={{
+                                marginLeft: "5.5vh",
+                                position: "absolute",
+                                top: "-1vh",
+                                cursor: "pointer",
+                              }}
+                            />
+                            {modal.state == true && modal.id == i ? (
+                              <>
+                                {val == Object.keys(roomsInfo)[i] ? (
+                                  <div
+                                    className={styles.popupModal}
+                                    onMouseEnter={() => showModal(true, i)}
+                                    onMouseLeave={() => showModal(false, -1)}
+                                  >
+                                    <div>
+                                      <span>
+                                        <b>Total</b>
+                                      </span>
+                                      <span>
+                                        {
+                                          Object.values(roomsInfo)[i]
+                                            .totalNoRooms
+                                        }
+                                      </span>
+                                    </div>
+                                    <div>
+                                      <span>
+                                        <b>Booked</b>
+                                      </span>
+                                      <span>
+                                        {Object.values(roomsInfo)[i].noOfBooked}
+                                      </span>
+                                    </div>
+                                    <div>
+                                      <span>
+                                        <b>Hold</b>
+                                      </span>
+                                      <span>
+                                        {Object.values(roomsInfo)[i].noOfOnHold}
+                                      </span>
+                                    </div>
+                                    <div>
+                                      <span>
+                                        <b>Available</b>
+                                      </span>
+                                      <span>
+                                        {
+                                          Object.values(roomsInfo)[i]
+                                            .noOfAvailable
+                                        }
+                                      </span>
+                                    </div>
+                                  </div>
+                                ) : (
+                                  ""
+                                )}
+                              </>
+                            ) : (
+                              ""
+                            )}
+                            <span>{val2}</span>
+                          </Col>
+                        );
+                      })
+                    : ""}
+                  {/* {Object.values(Object.values(roomsNamesWithData)[i]).map((val2,j)=>{
           return (
             <Col className={styles.column} key={j}>
           <span>
@@ -898,46 +941,53 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
         </Col>
           )
         })} */}
-                <Col className={styles.rightArrow2}>
-                  {/* <button className={styles.btn}>
+                  <Col className={styles.rightArrow2}>
+                    {/* <button className={styles.btn}>
                 <span className={styles.span}>Book Now</span>
               </button> */}
+                  </Col>
                 </Col>
               </Row>
-              {val == Object.keys(roomPlansToShowTrial)[i]?
-              Object.keys(Object.values(roomPlansToShowTrial)[i]).map((val2,j)=>{
-                  return (
-                    <Row className={styles.secondRow} key={j}>
-                <Col className={styles.leftArrow2}>
-                  {/* <Row> */}
-                  <Col
-                    className={styles.colPlans}
-                  >
-                    <Col className={styles.colButton}>
-                      <span>
-                        Plans
-                      </span>
+              {val == Object.keys(roomPlansToShowTrial)[i]
+                ? Object.keys(Object.values(roomPlansToShowTrial)[i]).map(
+                    (val2, j) => {
+                      return (
+                        <Row className={styles.secondRow} key={j}>
+                          <Col className={styles.firstOuterColumn}>
+                            <Col className={styles.leftArrow2}>
+                              {/* <Row> */}
+                              <Col className={styles.colPlans}>
+                                <Col className={styles.colButton}>
+                                  <span>Plans</span>
+                                </Col>
+                              </Col>
 
-                    </Col>
-                  </Col>
+                              <Col className={styles.col3}>
+                                <span
+                                  style={{
+                                    color: "#9acc54",
+                                    padding: "2px 12px",
+                                    borderRadius: "8px",
+                                    border: "1px solid #9acc54",
+                                  }}
+                                >
+                                  {val2}
+                                </span>
+                              </Col>
+                            </Col>
+                          </Col>
 
-                  <Col className={styles.col3}>
-                    <span style={{
-                      color: "#9acc54",
-                      padding: "2px 12px",
-                      borderRadius: "8px",
-                      border:"1px solid #9acc54"
-                    }}>{val2}</span>
-                  </Col>
-                </Col>
-
-                {Object.values(Object.values(roomPlansToShowTrial)[i])[j].map((val3,k)=>{
-                  return (
-                  <Col className={styles.column} key={k}>
-                  <span>{parseInt(val3.amount)}</span>
-                  </Col>)})
-                }
-                {/* <Col className={styles.column}>
+                          <Col className={styles.secondOuterColumn}>
+                            {Object.values(
+                              Object.values(roomPlansToShowTrial)[i]
+                            )[j].map((val3, k) => {
+                              return (
+                                <Col className={styles.column} key={k}>
+                                  <span>{parseInt(val3.amount)}</span>
+                                </Col>
+                              );
+                            })}
+                            {/* <Col className={styles.column}>
                   <span>Yes</span>
                 </Col>
                 <Col className={styles.column}>
@@ -965,10 +1015,13 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                   <span>Yes</span>
                 </Col> */}
 
-                <Col className={styles.rightArrow2}> </Col>
-              </Row>
+                            <Col className={styles.rightArrow2}> </Col>
+                          </Col>
+                        </Row>
+                      );
+                    }
                   )
-                }): ''}
+                : ""}
               <hr />
             </>
           );
