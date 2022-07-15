@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
-import { AiFillCopyrightCircle } from "react-icons/ai";
+import { AiFillCopyrightCircle, AiFillCaretDown } from "react-icons/ai";
 const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   const [increment, setIncrement] = useState(0);
   const [modal, setModal] = useState({ state: false, id: -1, row: -1 });
@@ -33,12 +33,15 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
     });
   };
 
-  const [shopModal, setshopModal] = useState(false);
-  const [profileModal, setprofileModal] = useState(false);
+  const [shopModal, setshopModal] = useState({ state: false, id: -1, row: -1 });
 
-  const handleShopModal1 = () => {
-    setprofileModal(false);
-    setshopModal(!shopModal);
+
+  const handleShopModal1 = (state, i, row) => {
+    if (state == true) {
+      setshopModal({ state: false, id: i, row: row });
+    } else {
+      setshopModal({ state: true, id: -1, row: -1 });
+    }
   };
 
   //This loop will extract the name of property and will make it as a key of its data
@@ -202,7 +205,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
         // console.log(Object.values(roomsPlansNames)[index][jindex][zindex]);
         if (
           !roomsPlansToShow[
-            Object.values(roomsPlansNames)[index][jindex][zindex].name
+          Object.values(roomsPlansNames)[index][jindex][zindex].name
           ]
         ) {
           roomsPlansToShow[
@@ -248,7 +251,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
           // console.log(Object.values(roomsPlansToShow)[zindex][ndex].name)
           if (
             !roomPlansToShowTrial[
-              Object.values(roomsNamesWithData)[index][jindex].roomName
+            Object.values(roomsNamesWithData)[index][jindex].roomName
             ]
           ) {
             roomPlansToShowTrial[
@@ -256,10 +259,10 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
             ] = [];
             if (
               !roomPlansToShowTrial[
-                Object.values(roomsNamesWithData)[index][jindex].roomName
+              Object.values(roomsNamesWithData)[index][jindex].roomName
               ][Object.values(roomsPlansToShow)[zindex][ndex].name] &&
               Object.values(roomsNamesWithData)[index][jindex].roomId ==
-                Object.values(roomsPlansToShow)[zindex][ndex].roomId
+              Object.values(roomsPlansToShow)[zindex][ndex].roomId
             ) {
               roomPlansToShowTrial[
                 Object.values(roomsNamesWithData)[index][jindex].roomName
@@ -298,10 +301,10 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
           } else {
             if (
               !roomPlansToShowTrial[
-                Object.values(roomsNamesWithData)[index][jindex].roomName
+              Object.values(roomsNamesWithData)[index][jindex].roomName
               ][Object.values(roomsPlansToShow)[zindex][ndex].name] &&
               Object.values(roomsNamesWithData)[index][jindex].roomId ==
-                Object.values(roomsPlansToShow)[zindex][ndex].roomId
+              Object.values(roomsPlansToShow)[zindex][ndex].roomId
             ) {
               roomPlansToShowTrial[
                 Object.values(roomsNamesWithData)[index][jindex].roomName
@@ -702,7 +705,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
       // console.log(Object.values(Object.values(roomPlansToShowTrial)[index])[jindex])
       if (
         !plansToShow[Object.keys(roomPlansToShowTrial)[index]][
-          Object.keys(Object.values(roomPlansToShowTrial)[index])[jindex]
+        Object.keys(Object.values(roomPlansToShowTrial)[index])[jindex]
         ]
       ) {
         plansToShow[Object.keys(roomPlansToShowTrial)[index]][
@@ -778,23 +781,29 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
     <div className={styles.bigContainer}>
       <div className={styles.topContainer}>
         <Row className={styles.upperRow}>
-          <Col className={styles.leftArrow}>
-            <MdArrowLeft onClick={tenDayDecrement} />
+          <Col className={styles.firstOuterColumn}>
+            <Col className={styles.leftArrow}>
+              <MdArrowLeft onClick={tenDayDecrement} />
+            </Col>
           </Col>
-          {datesToShow.map((val, i) => {
-            return (
-              <Col className={styles.columnDate} key={i}>
-                <div className={styles.spanContainer}>
-                  <span>{daysToShow[i]}</span>
-                  <span>{val}</span>
-                  <span>{monthToShow[i]}</span>
-                </div>
-              </Col>
-            );
-          })}
-          <Col className={styles.rightArrow}>
-            <MdArrowRight onClick={tenDayIncrement} />
+          <Col className={styles.secondOuterColumn}>
+            {datesToShow.map((val, i) => {
+              return (
+                <Col className={styles.columnDate} key={i}>
+                  <div className={styles.spanContainer}>
+                    <span>{daysToShow[i]}</span>
+                    <span>{val}</span>
+                    <span>{monthToShow[i]}</span>
+                  </div>
+                </Col>
+              );
+            })}
+            <Col className={styles.rightArrow}>
+              <MdArrowRight onClick={tenDayIncrement} />
+            </Col>
           </Col>
+
+
         </Row>
         {Object.keys(roomsNamesWithData).map((val, i) => {
           return (
@@ -870,27 +879,20 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                 <Col className={styles.secondOuterColumn}>
                   {val == Object.keys(pricesToShow)[i]
                     ? Object.values(pricesToShow)[i].map((val2, j) => {
-                        return (
-                          <Col className={styles.column} key={j}>
-                            <BsInfoCircle
-                              onMouseEnter={() => showModal(true, j, i)}
-                              onMouseLeave={() => showModal(false, -1, -1)}
-                              style={{
-                                marginLeft: "5.5vh",
-                                position: "absolute",
-                                top: "-1vh",
-                                cursor: "pointer",
-                              }}
-                            />
+                      return (
+                        <Col className={styles.column} key={j}>
+                          <a 
+                            onMouseEnter={() => showModal(true, j, i)}
+                            onMouseLeave={() => showModal(false, -1, -1)}> <BsInfoCircle
+                            className={styles.infoIcon}
+                          />
                             {modal.state == true &&
-                            modal.id == j &&
-                            modal.row == i ? (
+                              modal.id == j &&
+                              modal.row == i ? (
                               <>
                                 {val == Object.keys(roomsNamesWithData)[i] ? (
                                   <div
                                     className={styles.popupModal}
-                                    onMouseEnter={() => showModal(true, i)}
-                                    onMouseLeave={() => showModal(false, -1)}
                                   >
                                     <div>
                                       <span>
@@ -937,11 +939,11 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                               </>
                             ) : (
                               ""
-                            )}
-                            <span>{val2}</span>
-                          </Col>
-                        );
-                      })
+                            )}</a>
+                          <span>{val2}</span>
+                        </Col>
+                      );
+                    })
                     : ""}
                   <Col className={styles.rightArrow2}>
                   </Col>
@@ -949,51 +951,62 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
               </Row>
               {val == Object.keys(plansToShow)[i]
                 ? Object.keys(Object.values(plansToShow)[i]).map((val2, j) => {
-                    return (
-                      <Row className={styles.secondRow} key={j}>
-                        <Col className={styles.firstOuterColumn}>
-                          <Col className={styles.leftArrow2}>
-                            <Col className={styles.colPlans}>
-                              <Col className={styles.colButton}>
-                                <span>Plans</span>
-                              </Col>
-                            </Col>
-                            <Col className={styles.col3}>
-                              <span
-                                style={{
-                                  color: "#9acc54",
-                                  padding: "2px 12px",
-                                  borderRadius: "8px",
-                                  border: "1px solid #9acc54",
-                                }}
-                              >
-                                {val2}
-                              </span>
+                  return (
+                    <Row className={styles.secondRow} key={j}>
+                      <Col className={styles.firstOuterColumn}>
+                        <Col className={styles.leftArrow2}>
+                          <Col className={styles.colPlans}>
+                            <Col className={styles.colButton}>
+                              <div className={styles.shopBtn} onClick={() => handleShopModal1(shopModal.state, j, i)}>
+                                Plans <AiFillCaretDown />
+                                {shopModal.id == j && shopModal.row == i ? <div className={styles.shopModal} style={shopModal ? { display: 'block' } : { display: 'none' }}>
+                                  <Link href="/"><li>Subscription Meal Selection</li></Link>
+                                  <Link href="/"><li>A la Carte</li></Link>
+                                  <Link href="/"><li>Proteins By The Pound</li></Link>
+                                  <Link href="/"><li>Custom Meal Builder</li></Link>
+                                  <Link href="/extras"><li>Extras</li></Link>
+                                  <Link href="/giftcard"><li>Gift Card</li></Link>
+                                </div> : ""}
+
+                              </div>
                             </Col>
                           </Col>
+                          <Col className={styles.colBot}>
+                            <span
+                              style={{
+                                color: "#9acc54",
+                                padding: "2px 12px",
+                                borderRadius: "8px",
+                                border: "1px solid #9acc54",
+                              }}
+                            >
+                              {val2}
+                            </span>
+                          </Col>
                         </Col>
-                        <Col className={styles.secondOuterColumn}>
-                          {Object.values(Object.values(plansToShow)[i])[j].map(
-                            (val3, k) => {
-                              return (
-                                <Col className={styles.column} key={k}>
-                                  <span>{parseInt(val3.amount)}</span>
-                                </Col>
-                              );
-                            }
-                          )}
-                         <Col className={styles.rightArrow2}> </Col>
-                        </Col>
-                      </Row>
-                    );
-                  })
+                      </Col>
+                      <Col className={styles.secondOuterColumn}>
+                        {Object.values(Object.values(plansToShow)[i])[j].map(
+                          (val3, k) => {
+                            return (
+                              <Col className={styles.column} key={k}>
+                                <span>{parseInt(val3.amount)}</span>
+                              </Col>
+                            );
+                          }
+                        )}
+                        <Col className={styles.rightArrow2}> </Col>
+                      </Col>
+                    </Row>
+                  );
+                })
                 : ""}
               <hr />
             </>
           );
         })}
       </div>
-    </div>
+    </div >
   );
 };
 export default Home;
