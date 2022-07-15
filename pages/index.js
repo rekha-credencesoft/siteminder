@@ -753,6 +753,8 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
     }
   }
   // console.log(roomsInfo)
+  // console.log(roomsNamesWithData)
+  console.log(Object.values(roomsInfo)[0])
 
   return (
     <div className={styles.bigContainer}>
@@ -840,7 +842,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                   <Col className={styles.col3}>
                     <span
                       style={{
-                        border:"1px solid #9acc54",
+                        border: "1px solid #9acc54",
                         color: "#9acc54",
                         padding: "2px 12px",
                         borderRadius: "8px",
@@ -848,54 +850,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                     >
                       Price
                     </span>
-                    {modal.state == true && modal.id == i ? (
-                      <>
-                        {val == Object.keys(roomsInfo)[i] ? (
-                          <div
-                            className={styles.popupModal}
-                            onMouseEnter={() => showModal(true, i)}
-                            onMouseLeave={() => showModal(false, -1)}
-                          >
-                            <div>
-                              <span>
-                                <b>Total</b>
-                              </span>
-                              <span>
-                                {Object.values(roomsInfo)[i].totalNoRooms}
-                              </span>
-                            </div>
-                            <div>
-                              <span>
-                                <b>Booked</b>
-                              </span>
-                              <span>
-                                {Object.values(roomsInfo)[i].noOfBooked}
-                              </span>
-                            </div>
-                            <div>
-                              <span>
-                                <b>Hold</b>
-                              </span>
-                              <span>
-                                {Object.values(roomsInfo)[i].noOfOnHold}
-                              </span>
-                            </div>
-                            <div>
-                              <span>
-                                <b>Available</b>
-                              </span>
-                              <span>
-                                {Object.values(roomsInfo)[i].noOfAvailable}
-                              </span>
-                            </div>
-                          </div>
-                        ) : (
-                          ""
-                        )}
-                      </>
-                    ) : (
-                      ""
-                    )}
                   </Col>
                   {/* </Row> */}
                 </Col>
@@ -903,7 +857,30 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                   ? Object.values(pricesToShow)[i].map((val2, j) => {
                     return (
                       <Col className={styles.column} key={j}>
-                        <BsInfoCircle style={{ marginLeft: "5.5vh",position:"absolute",top:"-1vh" }} />
+                        <BsInfoCircle onMouseEnter={() => showModal(true, i)} onMouseLeave={() => showModal(false, -1)} style={{ marginLeft: "5.5vh", position: "absolute", top: "-1vh", cursor: "pointer" }} />
+                        {modal.state == true && modal.id == i ?
+                          <>
+                            {val == Object.keys(roomsInfo)[i] ?
+                              <div className={styles.popupModal} onMouseEnter={() => showModal(true, i)} onMouseLeave={() => showModal(false, -1)}>
+                                <div>
+                                  <span><b>Total</b></span>
+                                  <span>{Object.values(roomsInfo)[i].totalNoRooms}</span>
+                                </div>
+                                <div>
+                                  <span><b>Booked</b></span>
+                                  <span>{Object.values(roomsInfo)[i].noOfBooked}</span>
+                                </div>
+                                <div>
+                                  <span><b>Hold</b></span>
+                                  <span>{Object.values(roomsInfo)[i].noOfOnHold}</span>
+                                </div>
+                                <div>
+                                  <span><b>Available</b></span>
+                                  <span>{Object.values(roomsInfo)[i].noOfAvailable}</span>
+                                </div>
+                              </div> : ''}
+                          </> : ""
+                        }
                         <span>{val2}</span>
                       </Col>
                     );
@@ -944,7 +921,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                       color: "#9acc54",
                       padding: "2px 12px",
                       borderRadius: "8px",
-                      border:"1px solid #9acc54"
+                      border: "1px solid #9acc54"
                     }}>Deluxe Room</span>
                   </Col>
                 </Col>
