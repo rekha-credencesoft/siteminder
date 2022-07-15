@@ -802,7 +802,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
               <Row className={styles.row} key={i}>
                 <Col className={styles.firstOuterColumn}>
                   <Col className={styles.leftArrow2}>
-                    {/* <Row> */}
                     <Col className={styles.col1}>
                       {val == Object.keys(imageObj)[i] ? (
                         <img
@@ -852,10 +851,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                         ) : (
                           ""
                         )}
-                        {/* <MyVerticallyCenteredModal
-                        show={modalShow}
-                        onHide={() => setModalShow(false)}
-                      /> */}
                       </span>
                     </Col>
                     <Col className={styles.col3}>
@@ -870,7 +865,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                         Price
                       </span>
                     </Col>
-                    {/* </Row> */}
                   </Col>
                 </Col>
                 <Col className={styles.secondOuterColumn}>
@@ -949,21 +943,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                         );
                       })
                     : ""}
-                  {/* {Object.values(Object.values(roomsNamesWithData)[i]).map((val2,j)=>{
-          return (
-            <Col className={styles.column} key={j}>
-          <span>
-            <input type="checkbox" />
-          </span>
-          <span>{val2.price}</span>
-        </Col>
-          )
-        })} */}
                   <Col className={styles.rightArrow2}>
-                    {/* <button className={styles.btn}>
-                <span className={styles.span}>Book Now</span>
-
-              </button> */}
                   </Col>
                 </Col>
               </Row>
@@ -973,7 +953,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                       <Row className={styles.secondRow} key={j}>
                         <Col className={styles.firstOuterColumn}>
                           <Col className={styles.leftArrow2}>
-                            {/* <Row> */}
                             <Col className={styles.colPlans}>
                               <Col className={styles.colButton}>
                                 <span>Plans</span>
@@ -993,8 +972,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                             </Col>
                           </Col>
                         </Col>
-
-                        {/* okok */}
                         <Col className={styles.secondOuterColumn}>
                           {Object.values(Object.values(plansToShow)[i])[j].map(
                             (val3, k) => {
@@ -1005,34 +982,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                               );
                             }
                           )}
-                          {/* <Col className={styles.column}>
-                  <span>Yes</span>
-                </Col>
-                <Col className={styles.column}>
-                  <span>Yes</span>
-                </Col>
-                <Col className={styles.column}>
-                  <span>Yes</span>
-                </Col>
-                <Col className={styles.column}>
-                  <span>Yes</span>
-                </Col>
-                <Col className={styles.column}>
-                  <span>Yes</span>
-                </Col>
-                <Col className={styles.column}>
-                  <span>Yes</span>
-                </Col>
-                <Col className={styles.column}>
-                  <span>Yes</span>
-                </Col>
-                <Col className={styles.column}>
-                  <span>Yes</span>
-                </Col>
-                <Col className={styles.column}>
-                  <span>Yes</span>
-                </Col> */}
-                          <Col className={styles.rightArrow2}> </Col>
+                         <Col className={styles.rightArrow2}> </Col>
                         </Col>
                       </Row>
                     );
