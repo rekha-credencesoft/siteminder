@@ -960,7 +960,8 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                       );
                     })
                     : ""}
-                  <Col className={styles.rightArrow2}>
+                  <Col className={styles.rightArrow}>
+                  <MdArrowRight style={{color: 'none'}} />
                   </Col>
                 </Col>
               </Row>
@@ -1015,7 +1016,9 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                         );
                       }
                     )}
-                    <Col className={styles.rightArrow2}> </Col>
+                    <Col className={styles.rightArrow}>
+                    <MdArrowRight style={{color: 'none'}} />
+                    </Col>
                   </Col>
                 </Row>:''}
                   </>
