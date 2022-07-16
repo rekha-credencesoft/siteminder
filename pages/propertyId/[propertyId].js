@@ -958,10 +958,10 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                     <div className={styles.shopModal} style={shopModal ? { display: 'block' } : { display: 'none' }}>
                         {Object.keys(Object.values(plansToShow)[i]).map((val3,z)=>{
                         return (
-                            <Link key={z} href="/"><li onClick={()=> setSelectedPlan({
+                            <li key={z} onClick={()=> setSelectedPlan({
                             planName: val3,
                             planId: i
-                            })} >{val3}</li></Link>
+                            })} >{val3}</li>
                         )
                         })}
                     </div> : ""}
