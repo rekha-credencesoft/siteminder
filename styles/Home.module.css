@@ -370,3 +370,57 @@
   top: -20px;
   right: 12px;
 }
+
+
+@media screen and (max-width: 1200px) {
+  .topContainer{
+    margin: 5vh;
+  }
+  .upperRow{
+    flex-wrap: nowrap;
+  }
+  .row{
+    flex-wrap: nowrap;
+    margin-top: 0;
+    margin: 6vh 0px;
+    position: relative;
+  }
+  .firstOuterColumn{
+    min-width: 30vw;
+    
+  }
+  .secondOuterColumn{
+    display: flex;
+    align-items: flex-start;
+    overflow-x: scroll;
+  }
+  .leftArrow2{
+    flex-direction: column-reverse;
+  }
+  .columnDate{
+    min-width: 20vw;
+  }
+  .column{
+    min-width: 20vw;
+  }
+  .col1{
+    padding: 1vh;
+  }
+  .col2{
+    position: absolute;
+    right: 0;
+    bottom: 2vh;
+    padding: 1vh;
+  }
+  .col3{
+    padding: 1vh;
+    padding-top: 0;
+  }
+  .image{
+    height: 15vh;
+    width: 22vw;
+  }
+  .rightArrow > svg{
+    margin-top: 3vh;
+  }
+}
