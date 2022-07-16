@@ -394,6 +394,23 @@
     display: flex;
     align-items: flex-start;
     overflow-x: scroll;
+    
+  }
+  .secondOuterColumn::-webkit-scrollbar {
+    width: 10px;
+    height: 3px;
+  }
+  
+  /* Track */
+  .secondOuterColumn::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 2px rgb(198, 198, 198);
+    border-radius: 20px;
+  }
+  
+  /* Handle */
+  .secondOuterColumn::-webkit-scrollbar-thumb {
+    background: rgb(234, 234, 234);
+    border-radius: 10px;
   }
   .leftArrow2{
     flex-direction: column-reverse;
