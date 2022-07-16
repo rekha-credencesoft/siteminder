@@ -80,8 +80,8 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   }
   let currentDateToShow = currentFilteredDate.join('-')
   let lastDateToShow = lastFilteredDate.join('-')
-  console.log(lastDateToShow)
-  console.log(currentDateToShow)
+//   console.log(lastDateToShow)
+//   console.log(currentDateToShow)
 //   console.log(currentFilteredDate)
 //   console.log(lastFilteredDate)
 
