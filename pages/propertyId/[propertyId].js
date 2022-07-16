@@ -964,20 +964,22 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                   </Col>
                 </Col>
               </Row>
+              {
+              Object.values(plansToShow)[i]!== undefined && Object.values(plansToShow)[i]!== null?
               <div className={styles.shopBtn} onClick={() => handleShopModal1(shopModal.state, i)}>
-                              Plans <AiFillCaretDown />
-                              {shopModal.state == true && shopModal.row == i ? <div className={styles.shopModal} style={shopModal ? { display: 'block' } : { display: 'none' }}>
-                                {Object.keys(Object.values(plansToShow)[i]).map((val3,z)=>{
-                                  return (
-                                    <Link key={z} href="/"><li onClick={()=> setSelectedPlan({
-                                      planName: val3,
-                                      planId: i
-                                    })} >{val3}</li></Link>
-                                  )
-                                })}
-                </div> : ""}
-
-                            </div>
+                Plans <AiFillCaretDown />
+                {shopModal.state == true && shopModal.row == i ? 
+                    <div className={styles.shopModal} style={shopModal ? { display: 'block' } : { display: 'none' }}>
+                        {Object.keys(Object.values(plansToShow)[i]).map((val3,z)=>{
+                        return (
+                            <Link key={z} href="/"><li onClick={()=> setSelectedPlan({
+                            planName: val3,
+                            planId: i
+                            })} >{val3}</li></Link>
+                        )
+                        })}
+                    </div> : ""}
+                </div>:''}
               {val == Object.keys(plansToShow)[i]
                 ? Object.keys(Object.values(plansToShow)[i]).map((val2, j) => {
                   return (
