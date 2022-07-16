@@ -374,7 +374,7 @@
 
 @media screen and (max-width: 1200px) {
   .topContainer{
-    margin: 5vh;
+    margin: 1.5vh;
   }
   .upperRow{
     flex-wrap: nowrap;
@@ -387,7 +387,7 @@
   }
   .firstOuterColumn{
     min-width: 30vw;
-    
+    padding-left: 0px;
   }
   .secondOuterColumn{
     display: flex;
@@ -408,7 +408,7 @@
   }
   .col2{
     position: absolute;
-    right: 3vh;
+    right: 1vh;
     bottom: 2vh;
     padding: 1vh;
   }
@@ -417,10 +417,13 @@
     padding-top: 0;
   }
   .image{
-    height: 15vh;
-    width: 22vw;
+    height: 16vh;
+    width: 28vw;
   }
   .rightArrow > svg{
     margin-top: 3vh;
+  }
+  .text{
+    font-size: 2.2vh;
   }
 }
