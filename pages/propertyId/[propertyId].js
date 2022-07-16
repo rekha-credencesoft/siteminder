@@ -57,19 +57,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   }
   delete roomTypes["Official  Use"];
   // console.log(roomTypes)
-  // console.log(Object.values(roomTypes)[0].roomFacilities)
-  // console.log(property);
-  // console.log(roomsArray)
-  // console.log(properties)
-  // const date1 = new Date('2022-08-20');
-  // date1.setDate(date1.getDate() + 10)
-  // console.log(date1)
-  // console.log(startDateString);
-  // console.log(lastDateString);
-  // console.log(startDate);
-  // console.log(lastDate);
-  // console.log(property);
-  // console.log(roomsArray);
 
 
   let currentDate = new Date();
@@ -186,8 +173,8 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
     // room = [];
   }
   // console.log(roomsNamesWithData)
-  // console.log(Object.keys(roomsNamesWithData))
-  // console.log(Object.values(roomsNamesWithData)[0])
+
+
   //This will fetch The room Rate Plans of each room in their particular room keys
   // console.log(roomsData[0][0].roomRatePlans)
   let roomsPlansToShow = [];
@@ -661,14 +648,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   // console.log(monthToShow)
   // console.log(monthToShow)
   // console.log(datesToShow);
-  // console.log(roomTypes)
-  // console.log(Object.values(deluxPlansToShow)[0])
-  // console.log(Object.keys(fullRoomDeatils))
-  // console.log(Object.values(fullRoomDeatils)[0].Details[0].roomName)
-  // console.log(Object.values(roomsNamesWithData)[0])
-  // console.log(Object.keys(roomsNamesWithData))
-  // console.log(Object.values(roomsNamesWithData))
-  // console.log(dates);
+
   let priceArray = [];
   for (
     let index = 0;
@@ -736,16 +716,11 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
           jindex
         ].slice(increment, increment + 10);
       }
-      // else{
-      //   plansToShow[Object.keys(roomPlansToShowTrial)[index]][Object.keys(Object.values(roomPlansToShowTrial)[index])[jindex]].push(Object.values(Object.values(roomPlansToShowTrial)[index])[jindex])
-      // }
-      // for (let zindex = 0; zindex < Object.values(Object.values(roomPlansToShowTrial)[index])[jindex].length; zindex++) {
-      //   console.log(Object.values(Object.values(roomPlansToShowTrial)[index])[jindex][zindex])
-
-      // }
     }
   }
   // console.log(plansToShow)
+
+
   //For Getting the Available, Hold, Booked and Total value of Rooms
   let roomsInfo = {};
   let fullRoomInfo = [];
@@ -795,21 +770,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   // console.log(roomsInfo);
   // console.log(fullRoomInfo)
   // console.log(plansToShow)
-
-  // for (let index = 0; index < plansToShow.length; index++) {
-  //   const element = array[index];
-    
-  // }
-
-  // console.log(roomsNamesWithData)
-  // console.log(Object.values(roomsInfo)[0])
-  // for (let index = 0; index < Object.keys(plansToShow).length; index++) {
-  //   if (!selectedPlan.includes(Object.keys(plansToShow))) {
-  //     setSelectedPlan(selectedPlan[Object.keys(plansToShow)])
-  //   }
-    
-  // }
-  // console.log(selectedPlan)
   
   return (
     <div className={styles.bigContainer}>
