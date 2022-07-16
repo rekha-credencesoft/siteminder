@@ -22,7 +22,10 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   const lastDateString = new Date();
   const startDateString = new Date();
   const [lastDate, setLastDate] = useState({});
-  const [selectedPlan, setSelectedPlan] = useState('');
+  const [selectedPlan, setSelectedPlan] = useState({
+    planName:'',
+    planId:''
+  });
   const roomTypes = [];
   let room = [];
   let roomDetail = [];
@@ -37,11 +40,11 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   const [shopModal, setshopModal] = useState({ state: false, id: -1, row: -1 });
 
 
-  const handleShopModal1 = (state, i, row) => {
+  const handleShopModal1 = (state,row) => {
     if (state == true) {
-      setshopModal({ state: false, id: i, row: row });
+      setshopModal({ state: false, row: -1 });
     } else {
-      setshopModal({ state: true, id: -1, row: -1 });
+      setshopModal({ state: true, row: row });
     }
   };
 
@@ -774,6 +777,10 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   // console.log(fullRoomInfo)
   // console.log(plansToShow)
 
+  // for (let index = 0; index < plansToShow.length; index++) {
+  //   const element = array[index];
+    
+  // }
 
   // console.log(roomsNamesWithData)
   // console.log(Object.values(roomsInfo)[0])
@@ -784,6 +791,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
     
   // }
   // console.log(selectedPlan)
+  
   return (
     <div className={styles.bigContainer}>
       <div className={styles.topContainer}>
@@ -956,58 +964,59 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                   </Col>
                 </Col>
               </Row>
-              {val == Object.keys(plansToShow)[i]
-                ? Object.keys(Object.values(plansToShow)[i]).map((val2, j) => {
-                  return (<Row className={styles.secondRow} key={j}>
-                    <Col className={styles.firstOuterColumn}>
-                      <Col className={styles.leftArrow2}>
-                        <Col className={styles.colPlans}>
-                          <Col className={styles.colButton}>
-                            <div className={styles.shopBtn} onClick={() => handleShopModal1(shopModal.state, j, i)}>
+              <div className={styles.shopBtn} onClick={() => handleShopModal1(shopModal.state, i)}>
                               Plans <AiFillCaretDown />
-                              {shopModal.id == j && shopModal.row == i ? <div className={styles.shopModal} style={shopModal ? { display: 'block' } : { display: 'none' }}>
+                              {shopModal.state == true && shopModal.row == i ? <div className={styles.shopModal} style={shopModal ? { display: 'block' } : { display: 'none' }}>
                                 {Object.keys(Object.values(plansToShow)[i]).map((val3,z)=>{
                                   return (
-                                    <Link key={z} href="/"><li onClick={()=> setSelectedPlan(val3)} >{val3}</li></Link>
+                                    <Link key={z} href="/"><li onClick={()=> setSelectedPlan({
+                                      planName: val3,
+                                      planId: i
+                                    })} >{val3}</li></Link>
                                   )
                                 })}
-                                {/* <Link href="/"><li>A la Carte</li></Link>
-                                <Link href="/"><li>Proteins By The Pound</li></Link>
-                                <Link href="/"><li>Custom Meal Builder</li></Link>
-                                <Link href="/extras"><li>Extras</li></Link>
-                                <Link href="/giftcard"><li>Gift Card</li></Link> */}
-                              </div> : ""}
+                </div> : ""}
 
                             </div>
-                          </Col>
-                        </Col>
-                        <Col className={styles.colBot}>
-                          <span
-                            style={{
-                              color: "#9acc54",
-                              padding: "2px 12px",
-                              borderRadius: "8px",
-                              border: "1px solid #9acc54",
-                            }}
-                          >
-                            {val2}
-                          </span>
+              {val == Object.keys(plansToShow)[i]
+                ? Object.keys(Object.values(plansToShow)[i]).map((val2, j) => {
+                  return (
+                  <>
+                  {selectedPlan.planName == val2 && selectedPlan.planId == i?<Row className={styles.secondRow} key={j}>
+                  <Col className={styles.firstOuterColumn}>
+                    <Col className={styles.leftArrow2}>
+                      <Col className={styles.colPlans}>
+                        <Col className={styles.colButton}>
                         </Col>
                       </Col>
+                      <Col className={styles.colBot}>
+                        <span
+                          style={{
+                            color: "#9acc54",
+                            padding: "2px 12px",
+                            borderRadius: "8px",
+                            border: "1px solid #9acc54",
+                          }}
+                        >
+                          {val2}
+                        </span>
+                      </Col>
                     </Col>
-                    <Col className={styles.secondOuterColumn}>
-                      {Object.values(Object.values(plansToShow)[i])[j].map(
-                        (val3, k) => {
-                          return (
-                            <Col className={styles.column} key={k}>
-                              <span>{parseInt(val3.amount)}</span>
-                            </Col>
-                          );
-                        }
-                      )}
-                      <Col className={styles.rightArrow2}> </Col>
-                    </Col>
-                  </Row>
+                  </Col>
+                  <Col className={styles.secondOuterColumn}>
+                    {Object.values(Object.values(plansToShow)[i])[j].map(
+                      (val3, k) => {
+                        return (
+                          <Col className={styles.column} key={k}>
+                            <span>{parseInt(val3.amount)}</span>
+                          </Col>
+                        );
+                      }
+                    )}
+                    <Col className={styles.rightArrow2}> </Col>
+                  </Col>
+                </Row>:''}
+                  </>
                   );
                 })
                 : ""}
@@ -1079,6 +1088,7 @@ function MyVerticallyCenteredModal(props) {
   );
 }
 export async function getServerSideProps(context) {
+  console.log(context.query)
   const propertiesResponse = await fetch(
     "https://api.bookonelocal.in/api-bookone/api/property/237/rooms",
     {
