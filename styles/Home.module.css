@@ -1,9 +1,10 @@
+
 .topContainer {
-  margin: 100px;
   /* border: 1px solid black; */
   box-shadow: 2px 2px 10px 10px rgb(238, 238, 238);
   /* border-radius: 50px; */
   /* background-color: aqua; */
+  margin: 0px 10px;
 }
 
 .upperRow {

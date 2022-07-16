@@ -10,19 +10,18 @@ import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
+import LoadingBar from 'react-top-loading-bar';
 import { AiFillCopyrightCircle, AiFillCaretDown } from "react-icons/ai";
 const Home = ({ properties, oldRoomsArray, oldProperty }) => {
-  const [increment, setIncrement] = useState(0);
-  const [modal, setModal] = useState({ state: false, id: -1, row: -1 });
-  const [modalShow, setModalShow] = React.useState(false);
-  const [details, setDetails] = useState({});
-  const [property, setProperty] = useState(oldProperty);
-  const [roomsArray, setRoomsArray] = useState(oldRoomsArray);
-  const [startDate, setStartDate] = useState({});
-  const lastDateString = new Date();
-  const startDateString = new Date();
-  const [lastDate, setLastDate] = useState({});
-  const [selectedPlan, setSelectedPlan] = useState({
+    const [increment, setIncrement] = useState(0);
+    const [modal, setModal] = useState({ state: false, id: -1, row: -1 });
+    const [modalShow, setModalShow] = React.useState(false);
+    const [details, setDetails] = useState({});
+    const [property, setProperty] = useState(oldProperty);
+    const [roomsArray, setRoomsArray] = useState(oldRoomsArray);
+    const [incrementDate, setIncrementDate] = useState(20);
+    const [progress, setProgress] = useState(0);
+    const [selectedPlan, setSelectedPlan] = useState({
     planName:'',
     planId:''
   });
@@ -71,6 +70,34 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   // console.log(lastDate);
   // console.log(property);
   // console.log(roomsArray);
+
+
+  let currentDate = new Date();
+  let lastDate = new Date();
+  lastDate = new Date(lastDate.setDate(currentDate.getDate() + incrementDate))
+  let currentFilteredDate = currentDate.toLocaleDateString().split('/').reverse();
+  let lastFilteredDate = lastDate.toLocaleDateString().split('/').reverse();
+  [currentFilteredDate[1], currentFilteredDate[2]] = [currentFilteredDate[2], currentFilteredDate[1]];
+  [lastFilteredDate[1], lastFilteredDate[2]] = [lastFilteredDate[2], lastFilteredDate[1]];
+  for (let index = 0; index < currentFilteredDate.length; index++) {
+      if (currentFilteredDate[index]<10) {
+          currentFilteredDate[index] = '0'+currentFilteredDate[index]
+      }
+      // console.log(currentFilteredDate[index]) 
+  }
+  for (let index = 0; index < lastFilteredDate.length; index++) {
+      if (lastFilteredDate[index]<10) {
+          lastFilteredDate[index] = '0'+lastFilteredDate[index]
+      }
+      // console.log(currentFilteredDate[index]) 
+  }
+  let currentDateToShow = currentFilteredDate.join('-')
+  let lastDateToShow = lastFilteredDate.join('-')
+  console.log(lastDateToShow)
+  console.log(currentDateToShow)
+//   console.log(currentFilteredDate)
+//   console.log(lastFilteredDate)
+
   //237
   let roomsData = [];
   let roomsNamesWithData = {};
@@ -84,15 +111,16 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   // console.log(roomsData)
   //This function will Decrement Seven Days
   const newPropertyAndRoomsResponseFunc = async () => {
+    setProgress(50)
     const newPropertyResponse = await fetch(
       "https://api.bookonelocal.in/api-bookone/api/availability/getRatesAndAvailabilityForPropertyByDate",
       {
         method: "POST",
         body: JSON.stringify({
-          fromDate: "2022-07-14",
+          fromDate: currentDateToShow,
           // "fromDate": `${startDate.year}-${startDate.month<10?'0'+startDate.month:startDate.month}-${startDate.date<10?'0'+startDate.date:startDate.date}`,
           propertyId: 237,
-          toDate: "2022-08-03",
+          toDate: lastDateToShow,
           // "toDate": `${lastDate.year}-${lastDate.month<10?'0'+lastDate.month:lastDate.month}-${lastDate.date<10?'0'+lastDate.date:lastDate.date}`
         }),
         headers: {
@@ -114,11 +142,10 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
           method: "POST",
           body: JSON.stringify({
             // "fromDate": `${startDate.year}-${startDate.month<10?'0'+startDate.month:startDate.month}-${startDate.date<10?'0'+startDate.date:startDate.date}`,
-            fromDate: "2022-07-14",
+            fromDate: currentDateToShow,
             propertyId: 237,
             roomId: properties[index].id,
-            // "toDate": `${lastDate.year}-${lastDate.month<10?'0'+lastDate.month:lastDate.month}-${lastDate.date<10?'0'+lastDate.date:lastDate.date}`
-            toDate: "2022-08-03",
+            toDate: lastDateToShow,
           }),
           headers: {
             Accept: "application/json",
@@ -133,6 +160,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
       newRoomsArray.push(newRooms);
     }
     setRoomsArray(newRoomsArray);
+    setProgress(100)
   };
   for (let i = 0; i < roomsArray.length; i++) {
     let room = roomsArray[i];
@@ -564,26 +592,17 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
   // console.log(increment)
   //This function will Increement Seven Days
   const tenDayIncrement = () => {
-    setStartDate({
-      date: startDateString.getDate(),
-      month: startDateString.getMonth() + 1,
-      year: startDateString.getFullYear(),
-    });
-    lastDateString.setDate(lastDateString.getDate() + 20);
-    setLastDate({
-      date: lastDateString.getDate(),
-      month: lastDateString.getMonth() + 1,
-      year: lastDateString.getFullYear(),
-    });
+    setProgress(30)
     newPropertyAndRoomsResponseFunc();
     if (increment < dates.length - 10) {
       setIncrement(increment + 10);
+      setIncrementDate(incrementDate + 10)
     }
   };
-  // console.log(`${lastDate.year}-${lastDate.month<10?'0'+lastDate.month:lastDate.month}-${lastDate.date<10?'0'+lastDate.date:lastDate.date}`)
   const tenDayDecrement = () => {
     if (increment !== 0) {
       setIncrement(increment - 10);
+      setIncrementDate(incrementDate - 10)
     }
   };
   // console.log(property)
@@ -796,6 +815,12 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
     <div className={styles.bigContainer}>
       <div className={styles.topContainer}>
         <Row className={styles.upperRow}>
+        <LoadingBar
+        color='#f11946'
+        progress={progress}
+        waitingTime={500}
+        onLoaderFinished={() => setProgress(0)}
+      />
           <Col className={styles.firstOuterColumn}>
             <Col className={styles.leftArrow}>
               <MdArrowLeft onClick={tenDayDecrement} />
@@ -955,7 +980,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                             ) : (
                               ""
                             )}</a>
-                          <span>{val2}</span>
+                          <span>₹{val2}</span>
                         </Col>
                       );
                     })
@@ -1011,7 +1036,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
                       (val3, k) => {
                         return (
                           <Col className={styles.column} key={k}>
-                            <span>{parseInt(val3.amount)}</span>
+                            <span>₹{parseInt(val3.amount)}</span>
                           </Col>
                         );
                       }
@@ -1094,6 +1119,27 @@ function MyVerticallyCenteredModal(props) {
 }
 export async function getServerSideProps(context) {
 //   console.log(context.query.propertyId)
+let currentDate = new Date();
+let lastDate = new Date();
+lastDate = new Date(lastDate.setDate(currentDate.getDate() + 10))
+let currentFilteredDate = currentDate.toLocaleDateString().split('/').reverse();
+let lastFilteredDate = lastDate.toLocaleDateString().split('/').reverse();
+for (let index = 0; index < currentFilteredDate.length; index++) {
+    if (currentFilteredDate[index]<10) {
+        currentFilteredDate[index] = '0'+currentFilteredDate[index]
+    }
+    // console.log(currentFilteredDate[index]) 
+}
+for (let index = 0; index < lastFilteredDate.length; index++) {
+    if (lastFilteredDate[index]<10) {
+        lastFilteredDate[index] = '0'+lastFilteredDate[index]
+    }
+    // console.log(currentFilteredDate[index]) 
+}
+let currentDateToShow = currentFilteredDate.join('-')
+let lastDateToShow = lastFilteredDate.join('-')
+// console.log(lastDateToShow)
+// console.log(currentDateToShow)
   const propertyId = context.query.propertyId
   const propertiesResponse = await fetch(
     `https://api.bookonelocal.in/api-bookone/api/property/${propertyId}/rooms`,
@@ -1117,9 +1163,9 @@ export async function getServerSideProps(context) {
     {
       method: "POST",
       body: JSON.stringify({
-        fromDate: "2022-07-14",
+        fromDate: currentDateToShow,
         propertyId: propertyId,
-        toDate: "2022-07-24",
+        toDate: lastDateToShow,
       }),
       headers: {
         Accept: "application/json",
@@ -1139,10 +1185,10 @@ export async function getServerSideProps(context) {
       {
         method: "POST",
         body: JSON.stringify({
-          fromDate: "2022-07-14",
+          fromDate: currentDateToShow,
           propertyId: propertyId,
           roomId: properties[index].id,
-          toDate: "2022-07-24",
+          toDate: lastDateToShow,
         }),
         headers: {
           Accept: "application/json",
