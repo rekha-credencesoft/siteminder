@@ -12,7 +12,7 @@ import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
 import LoadingBar from "react-top-loading-bar";
 import { AiFillCopyrightCircle, AiFillCaretDown } from "react-icons/ai";
-const Home = ({ properties, oldRoomsArray, oldProperty }) => {
+const Home = ({ properties, oldRoomsArray, oldProperty, propertyId }) => {
   const [increment, setIncrement] = useState(0);
   const [modal, setModal] = useState({ state: false, id: -1, row: -1 });
   const [modalShow, setModalShow] = React.useState(false);
@@ -113,7 +113,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
         body: JSON.stringify({
           fromDate: currentDateToShow,
           // "fromDate": `${startDate.year}-${startDate.month<10?'0'+startDate.month:startDate.month}-${startDate.date<10?'0'+startDate.date:startDate.date}`,
-          propertyId: 237,
+          propertyId: propertyId,
           toDate: lastDateToShow,
           // "toDate": `${lastDate.year}-${lastDate.month<10?'0'+lastDate.month:lastDate.month}-${lastDate.date<10?'0'+lastDate.date:lastDate.date}`
         }),
@@ -137,7 +137,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty }) => {
           body: JSON.stringify({
             // "fromDate": `${startDate.year}-${startDate.month<10?'0'+startDate.month:startDate.month}-${startDate.date<10?'0'+startDate.date:startDate.date}`,
             fromDate: currentDateToShow,
-            propertyId: 237,
+            propertyId: propertyId,
             roomId: properties[index].id,
             toDate: lastDateToShow,
           }),
@@ -1235,6 +1235,6 @@ export async function getServerSideProps(context) {
   //   roomsArray.push(rooms);
   // }
   return {
-    props: { properties, oldRoomsArray, oldProperty }, // will be passed to the page component as props
+    props: { properties, oldRoomsArray, oldProperty, propertyId }, // will be passed to the page component as props
   };
 }
