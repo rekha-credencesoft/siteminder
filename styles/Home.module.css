@@ -1,4 +1,3 @@
-
 .topContainer {
   /* border: 1px solid black; */
   box-shadow: 2px 2px 10px 10px rgb(238, 238, 238);
@@ -8,7 +7,8 @@
   /* overflow-x: scroll; */
   width: 100%;
 }
-.bigContainer{
+
+.bigContainer {
   width: 100%;
 }
 
@@ -98,13 +98,14 @@
   display: flex;
   flex: 2;
 }
+
 .colBot {
   flex: 2;
   justify-content: flex-end;
   display: flex;
 }
 
-.colButton > span {
+.colButton>span {
   border: 1px solid #9acc54;
   padding: 2px 5px;
   border-radius: 2px 7px;
@@ -152,7 +153,7 @@
   /* padding: 0; */
 }
 
-.leftArrow2 > Row {
+.leftArrow2>Row {
   margin-left: 0;
   margin-right: 0;
 }
@@ -257,7 +258,7 @@
   border-radius: 10px;
 }
 
-.popupModal > div {
+.popupModal>div {
   display: flex;
   justify-content: space-between;
   padding: 2.5px 20px;
@@ -318,7 +319,7 @@
   flex-wrap: wrap;
 }
 
-.box > * {
+.box>* {
   flex: 1 1 220px;
   padding: 7px 20px;
 }
@@ -349,7 +350,7 @@
   cursor: pointer;
 }
 
-.shopBtn > .shopModal {
+.shopBtn>.shopModal {
   display: block;
   position: absolute;
   top: 50px;
@@ -364,12 +365,13 @@
   box-shadow: 2px 2px 10px 1px rgb(231, 231, 231);
 }
 
-.shopBtn > .shopModal > li {
+.shopBtn>.shopModal>li {
   padding: 8px 8px;
   margin: 3px 6px;
   border-radius: 6px;
 }
-.shopBtn > .shopModal > li:hover {
+
+.shopBtn>.shopModal>li:hover {
   background-color: #9acc54;
   color: #fff;
   box-shadow: 0 6px 8px 0 rgb(209, 207, 207);
@@ -383,20 +385,59 @@
 
 
 
- @media screen and (max-width: 1200px) { 
-  .topContainer{
+@media screen and (max-width: 1200px) {
+  .topContainer {
     /* margin: 1.5vh; */
     width: 330%;
-    
+
   }
-  .bigContainer{
+
+  .bigContainer {
     overflow-x: scroll;
     max-width: 100%;
 
   }
-  .columnDate{
+
+  .columnDate {
     max-width: 20vw;
   }
+
+  .popupModal {
+    position: absolute;
+    color: white;
+    padding-top: 7px;
+    background-color: rgb(5, 41, 67);
+    top: -155px;
+    bottom: 45px;
+    left: 65px;
+    right: -150px;
+    border-radius: 10px;
+  }
+
+  .popupModal>div {
+    display: flex;
+    justify-content: space-between;
+    padding: 2.5px 20px;
+  }
+
+  .firstOuterColumn {
+    max-width: 70vw;
+    padding-left: 0px;
+  }
+
+  .secondOuterColumn {
+    display: flex;
+
+  }
+
+  .image {
+    margin-left: 10px;
+  }
+
+  .column {
+    max-width: 20vw;
+  }
+
   /* 
   .upperRow{
     flex-wrap: nowrap;
@@ -406,20 +447,7 @@
     margin-top: 0;
     margin: 6vh 0px;
   } */
-  .firstOuterColumn{
-    max-width: 70vw;
-    padding-left: 0px;
-  }
-  .secondOuterColumn{
-    display: flex;
-    
-  }
-  .image{
-    margin-left: 10px;
-  }
-  .column{
-    max-width: 20vw;
-  }
+
   /* .secondOuterColumn::-webkit-scrollbar {
     width: 10px;
     height: 3px;
@@ -465,4 +493,4 @@
   .text{
     font-size: 2.2vh;
   } */
-}  
+}
