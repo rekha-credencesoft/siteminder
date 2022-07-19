@@ -1130,7 +1130,9 @@ function MyVerticallyCenteredModal(props) {
     </Modal>
   );
 }
-Home.getInitialProps=async(context) =>{
+
+// Home.getStaticProps=async(context) =>{
+  export async function getServerSideProps(context) {
     // console.log(context)
   let currentDate = new Date();
   let lastDate = new Date();
@@ -1219,7 +1221,7 @@ Home.getInitialProps=async(context) =>{
     const oldRooms = await oldRoomsResponse.json();
     oldRoomsArray.push(oldRooms);
   }
-//   console.log(oldRoomsArray)
+  console.log(oldRoomsArray)
   // This is for fetching 7 days data for Property
   // const propertyResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=237', {
   //   method: 'GET',
@@ -1246,7 +1248,8 @@ Home.getInitialProps=async(context) =>{
   //   const rooms = await roomsResponse.json();
   //   roomsArray.push(rooms);
   // }
-  return {properties, oldRoomsArray, oldProperty, propertyId  // will be passed to the page component as props
+  return {
+    props:{ properties, oldRoomsArray, oldProperty, propertyId } // will be passed to the page component as props
   };
 }
 
