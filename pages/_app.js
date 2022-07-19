@@ -7,8 +7,8 @@ function MyApp({ Component, pageProps }) {
   return(
   <>
     <SSRProvider>
-    {/* <NavBar /> */}
-    <Component {...pageProps} />
+    <NavBar />
+    <Component {...pageProps}/>
     </SSRProvider>
   </>
   )
