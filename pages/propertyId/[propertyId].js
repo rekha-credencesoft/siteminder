@@ -38,6 +38,13 @@ const Home = ({ properties, oldRoomsArray, oldProperty, propertyId }) => {
 
   const [shopModal, setshopModal] = useState({ state: false, id: -1, row: -1 });
 
+  useEffect(() => {
+    properties,
+    oldRoomsArray,
+    oldProperty,
+    propertyId 
+   },[oldProperty, oldRoomsArray, properties, propertyId]);
+
   const handleShopModal1 = (state, row) => {
     if (state == true) {
       setshopModal({ state: false, row: -1 });
