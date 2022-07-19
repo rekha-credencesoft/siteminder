@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/Home.module.css";
+import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import { BsBasket3, BsInfoCircle } from "react-icons/bs";
 import { Row, Col, NavDropdown } from "react-bootstrap";
