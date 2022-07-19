@@ -12,6 +12,7 @@ import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
 import LoadingBar from "react-top-loading-bar";
 import { AiFillCopyrightCircle, AiFillCaretDown } from "react-icons/ai";
+import {Router, useRouter} from "next/router";
 const Home = ({ properties, oldRoomsArray, oldProperty, propertyId }) => {
   const [increment, setIncrement] = useState(0);
   const [modal, setModal] = useState({ state: false, id: -1, row: -1 });
@@ -20,7 +21,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty, propertyId }) => {
   const [property, setProperty] = useState(oldProperty);
   const [roomsArray, setRoomsArray] = useState(oldRoomsArray);
   const [incrementDate, setIncrementDate] = useState(20);
-//   console.log(oldRoomsArray)
+  //   console.log(oldRoomsArray)
   // const [progress, setProgress] = useState(0);
   const [selectedPlan, setSelectedPlan] = useState({
     planName: "",
@@ -36,15 +37,16 @@ const Home = ({ properties, oldRoomsArray, oldProperty, propertyId }) => {
       row: row,
     });
   };
-
+  
   const [shopModal, setshopModal] = useState({ state: false, id: -1, row: -1 });
-
+  
+  const router = useRouter();
   useEffect(() => {
-    properties,
-    oldRoomsArray,
-    oldProperty,
-    propertyId 
-   },[oldProperty, oldRoomsArray, properties, propertyId]);
+  setTimeout(()=>{
+    router.push(`/propertyId/${propertyId}`)
+    console.log("please come..... :(")
+  },3000)
+   },[]);
 
   const handleShopModal1 = (state, row) => {
     if (state == true) {
