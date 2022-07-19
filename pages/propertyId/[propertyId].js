@@ -1186,7 +1186,7 @@ export async function getServerSideProps(context) {
       body: JSON.stringify({
         fromDate: currentDateToShow,
         propertyId: propertyId,
-        toDate: '2022-07-28',
+        toDate: lastDateToShow,
       }),
       headers: {
         Accept: "application/json",
@@ -1209,7 +1209,7 @@ export async function getServerSideProps(context) {
           fromDate: currentDateToShow,
           propertyId: propertyId,
           roomId: properties[index].id,
-          toDate: '2022-07-28',
+          toDate: lastDateToShow,
         }),
         headers: {
           Accept: "application/json",
