@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
 import Link from "next/link";
 import { BsBasket3, BsInfoCircle } from "react-icons/bs";
 import { Row, Col, NavDropdown } from "react-bootstrap";
@@ -20,7 +20,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty, propertyId }) => {
   const [property, setProperty] = useState(oldProperty);
   const [roomsArray, setRoomsArray] = useState(oldRoomsArray);
   const [incrementDate, setIncrementDate] = useState(20);
-  console.log(oldRoomsArray)
+//   console.log(oldRoomsArray)
   // const [progress, setProgress] = useState(0);
   const [selectedPlan, setSelectedPlan] = useState({
     planName: "",
@@ -1131,7 +1131,7 @@ function MyVerticallyCenteredModal(props) {
   );
 }
 Home.getInitialProps=async(context) =>{
-  //   console.log(context.query.propertyId)
+    // console.log(context)
   let currentDate = new Date();
   let lastDate = new Date();
   lastDate = new Date(lastDate.setDate(currentDate.getDate() + 10));
@@ -1156,6 +1156,7 @@ Home.getInitialProps=async(context) =>{
   let lastDateToShow = lastFilteredDate.join("-");
   // console.log(lastDateToShow)
   // console.log(currentDateToShow)
+//   const propertyId = context.query.params;
   const propertyId = context.query.propertyId;
   const propertiesResponse = await fetch(
     `https://api.bookonelocal.in/api-bookone/api/property/${propertyId}/rooms`,
@@ -1218,7 +1219,7 @@ Home.getInitialProps=async(context) =>{
     const oldRooms = await oldRoomsResponse.json();
     oldRoomsArray.push(oldRooms);
   }
-  console.log(oldRoomsArray)
+//   console.log(oldRoomsArray)
   // This is for fetching 7 days data for Property
   // const propertyResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=237', {
   //   method: 'GET',
