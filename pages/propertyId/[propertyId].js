@@ -12,6 +12,7 @@ import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
 import LoadingBar from "react-top-loading-bar";
 import { AiFillCopyrightCircle, AiFillCaretDown } from "react-icons/ai";
+import {Router, useRouter} from "next/router";
 const Home = ({ properties, oldRoomsArray, oldProperty, propertyId }) => {
   const [increment, setIncrement] = useState(0);
   const [modal, setModal] = useState({ state: false, id: -1, row: -1 });
@@ -36,15 +37,16 @@ const Home = ({ properties, oldRoomsArray, oldProperty, propertyId }) => {
       row: row,
     });
   };
-
+  
   const [shopModal, setshopModal] = useState({ state: false, id: -1, row: -1 });
-
-  useEffect(() => {
-    properties,
-    oldRoomsArray,
-    oldProperty,
-    propertyId 
-   },[oldProperty, oldRoomsArray, properties, propertyId]);
+  
+  // const router = useRouter();
+  // useEffect(() => {
+  // setTimeout(()=>{
+  //   router.push(`/propertyId/${propertyId}`)
+  //   console.log("please come..... :(")
+  // },3000)
+  //  },[]);
 
   const handleShopModal1 = (state, row) => {
     if (state == true) {
@@ -1131,8 +1133,8 @@ function MyVerticallyCenteredModal(props) {
   );
 }
 
-// Home.getStaticProps=async(context) =>{
-  export async function getServerSideProps(context) {
+export async function getServerSideProps(context) {
+  // Home.getInitialProps  = async (context) => {
     // console.log(context)
   let currentDate = new Date();
   let lastDate = new Date();
@@ -1248,8 +1250,8 @@ function MyVerticallyCenteredModal(props) {
   //   const rooms = await roomsResponse.json();
   //   roomsArray.push(rooms);
   // }
-  return {
-    props:{ properties, oldRoomsArray, oldProperty, propertyId } // will be passed to the page component as props
+  return { 
+    props:{properties, oldRoomsArray, oldProperty, propertyId}  // will be passed to the page component as props
   };
 }
 
