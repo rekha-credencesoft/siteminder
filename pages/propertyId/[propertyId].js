@@ -1134,7 +1134,7 @@ function MyVerticallyCenteredModal(props) {
 }
 
 // Home.getStaticProps=async(context) =>{
-  export async function getServerSideProps(context) {
+  Home.getInitialProps  = async (context) => {
     // console.log(context)
   let currentDate = new Date();
   let lastDate = new Date();
@@ -1250,8 +1250,7 @@ function MyVerticallyCenteredModal(props) {
   //   const rooms = await roomsResponse.json();
   //   roomsArray.push(rooms);
   // }
-  return {
-    props:{ properties, oldRoomsArray, oldProperty, propertyId } // will be passed to the page component as props
+  return { properties, oldRoomsArray, oldProperty, propertyId  // will be passed to the page component as props
   };
 }
 
