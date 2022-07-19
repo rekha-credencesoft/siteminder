@@ -40,13 +40,13 @@ const Home = ({ properties, oldRoomsArray, oldProperty, propertyId }) => {
   
   const [shopModal, setshopModal] = useState({ state: false, id: -1, row: -1 });
   
-  const router = useRouter();
-  useEffect(() => {
-  setTimeout(()=>{
-    router.push(`/propertyId/${propertyId}`)
-    console.log("please come..... :(")
-  },3000)
-   },[]);
+  // const router = useRouter();
+  // useEffect(() => {
+  // setTimeout(()=>{
+  //   router.push(`/propertyId/${propertyId}`)
+  //   console.log("please come..... :(")
+  // },3000)
+  //  },[]);
 
   const handleShopModal1 = (state, row) => {
     if (state == true) {
@@ -1133,8 +1133,8 @@ function MyVerticallyCenteredModal(props) {
   );
 }
 
-// Home.getStaticProps=async(context) =>{
-  Home.getInitialProps  = async (context) => {
+export async function getServerSideProps(context) {
+  // Home.getInitialProps  = async (context) => {
     // console.log(context)
   let currentDate = new Date();
   let lastDate = new Date();
@@ -1250,7 +1250,8 @@ function MyVerticallyCenteredModal(props) {
   //   const rooms = await roomsResponse.json();
   //   roomsArray.push(rooms);
   // }
-  return { properties, oldRoomsArray, oldProperty, propertyId  // will be passed to the page component as props
+  return { 
+    props:{properties, oldRoomsArray, oldProperty, propertyId}  // will be passed to the page component as props
   };
 }
 
