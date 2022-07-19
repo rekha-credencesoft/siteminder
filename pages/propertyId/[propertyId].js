@@ -20,7 +20,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty, propertyId }) => {
   const [property, setProperty] = useState(oldProperty);
   const [roomsArray, setRoomsArray] = useState(oldRoomsArray);
   const [incrementDate, setIncrementDate] = useState(20);
-//   console.log(oldRoomsArray)
+  console.log(oldRoomsArray)
   // const [progress, setProgress] = useState(0);
   const [selectedPlan, setSelectedPlan] = useState({
     planName: "",
@@ -1221,7 +1221,7 @@ function MyVerticallyCenteredModal(props) {
     const oldRooms = await oldRoomsResponse.json();
     oldRoomsArray.push(oldRooms);
   }
-  console.log(oldRoomsArray)
+  // console.log(oldRoomsArray)
   // This is for fetching 7 days data for Property
   // const propertyResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=237', {
   //   method: 'GET',
