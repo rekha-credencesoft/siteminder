@@ -11,7 +11,7 @@ function NavBar() {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="me-auto">
-                    <Nav.Link href="#" style={{ fontSize: "12px" }}>DASHBOARD</Nav.Link>
+                    <Nav.Link href="http://localhost:3000/578" style={{ fontSize: "12px" }}>DASHBOARD</Nav.Link>
                     <Nav.Link href="#" style={{ fontSize: "12px" }}>INVENTORY</Nav.Link>
                     <Nav.Link href="#" style={{ fontSize: "12px" }}>ROOMS & RATES</Nav.Link>
                     <Nav.Link href="#" style={{ fontSize: "12px" }}>RESERVATIONS</Nav.Link>
