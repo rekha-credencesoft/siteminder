@@ -1159,7 +1159,7 @@ export async function getServerSideProps(context) {
   let currentDateToShow = currentFilteredDate.join("-");
   let lastDateToShow = lastFilteredDate.join("-");
   // console.log(lastDateToShow)
-  // console.log(currentDateToShow)
+  console.log(currentDateToShow)
   // const propertyId = context.query.params;
   const propertyId = context.query.propertyId;
   const propertiesResponse = await fetch(
@@ -1184,9 +1184,9 @@ export async function getServerSideProps(context) {
     {
       method: "POST",
       body: JSON.stringify({
-        fromDate: currentDateToShow,
+        fromDate: "2022-07-20",
         propertyId: propertyId,
-        toDate: lastDateToShow,
+        toDate: "2022-07-28",
       }),
       headers: {
         Accept: "application/json",
@@ -1206,10 +1206,10 @@ export async function getServerSideProps(context) {
       {
         method: "POST",
         body: JSON.stringify({
-          fromDate: currentDateToShow,
+          fromDate: "2022-07-20",
           propertyId: propertyId,
           roomId: properties[index].id,
-          toDate: lastDateToShow,
+          toDate: "2022-07-28",
         }),
         headers: {
           Accept: "application/json",
