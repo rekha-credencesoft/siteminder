@@ -1,31 +1,30 @@
 import React from "react";
 import styles from "../../styles/Home.module.css";
-import Link from "next/link";
 import { BsBasket3, BsInfoCircle } from "react-icons/bs";
 import { Row, Col, NavDropdown } from "react-bootstrap";
 import { MdArrowLeft, MdArrowRight } from "react-icons/md";
 import { FaCaretSquareRight } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
-import LoadingBar from "react-top-loading-bar";
 import { AiFillCopyrightCircle, AiFillCaretDown } from "react-icons/ai";
 import {Router, useRouter} from "next/router";
-import {currentDateToShow,lastDateToShow} from '../date'
-const Home = ({ properties, oldRoomsArray, oldProperty, propertyId }) => {
+// import {currentDateToShow,lastDateToShow} from '../date'
+const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
   const [increment, setIncrement] = useState(0);
+  const [properties, setProperties] = useState(oldProperties);
   const [modal, setModal] = useState({ state: false, id: -1, row: -1 });
   const [modalShow, setModalShow] = React.useState(false);
   const [details, setDetails] = useState({});
   const [property, setProperty] = useState(oldProperty);
   const [roomsArray, setRoomsArray] = useState(oldRoomsArray);
   const [incrementDate, setIncrementDate] = useState(20);
-  if (oldRoomsArray) {
-    oldRoomsArray[0].splice(10,oldRoomsArray[0].length)
-  }
-  console.log(oldRoomsArray)
+  // if (oldRoomsArray) {
+  //   oldRoomsArray[0].splice(10,oldRoomsArray[0].length)
+  // }
+  // console.log(oldRoomsArray)
   // const [progress, setProgress] = useState(0);
   const [selectedPlan, setSelectedPlan] = useState({
     planName: "",
@@ -1134,8 +1133,143 @@ function MyVerticallyCenteredModal(props) {
   );
 }
 
-export async function getServerSideProps(context) {
-  // Home.getInitialProps  = async (context) => {
+// export async function getServerSideProps(context) {
+//   Home.getInitialProps  = async (context) => {
+//     // console.log(context)
+//     // let dummydate = new Date("2022-07-20");
+//     // console.log(dummydate)
+//   // let currentDate = new Date();
+//   // let lastDate =  new Date();
+//   // lastDate = new Date(lastDate.setDate(currentDate.getDate() + 10));
+//   // let currentFilteredDate = currentDate
+//   //   .toLocaleDateString()
+//   //   .split("/")
+//   //   .reverse();
+//   // let lastFilteredDate = lastDate.toLocaleDateString().split("/").reverse();
+//   // for (let index = 0; index < currentFilteredDate.length; index++) {
+//   //   if (currentFilteredDate[index] < 10) {
+//   //     currentFilteredDate[index] = "0" + currentFilteredDate[index];
+//   //   }
+//   //   // console.log(currentFilteredDate[index])
+//   // }
+//   // for (let index = 0; index < lastFilteredDate.length; index++) {
+//   //   if (lastFilteredDate[index] < 10) {
+//   //     lastFilteredDate[index] = "0" + lastFilteredDate[index];
+//   //   }
+//   //   // console.log(currentFilteredDate[index])
+//   // }
+//   // let currentDateToShow = currentFilteredDate.join("-");
+//   // let lastDateToShow = lastFilteredDate.join("-");
+//   // console.log(lastDateToShow)
+//   // console.log(currentDateToShow)
+//   // const propertyId = context.query.params;
+//   const propertyId = context.query.propertyId;
+//   const propertiesResponse = await fetch(
+//     `https://api.bookonelocal.in/api-bookone/api/property/${propertyId}/rooms`,
+//     {
+//       // const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=495', {
+//       // const response = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForRoom?PropertyId=495&RoomId=1539', {
+//       method: "GET",
+//       headers: {
+//         Accept: "application/json",
+//         Authorization:
+//           "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rb25ldGVzdGJ1c2luZXNzQGdtYWlsLmNvbSIsInNjb3BlcyI6IlJPTEVfUFJPUF9BRE1JTiIsImlhdCI6MTY1ODMxMjE1OSwiZXhwIjoxNjU4NzQ0MTU5fQ.1vNA81BTRT79_qDVpnyofmkgF78qquQqpDcQNgf6vZg",
+//         "Content-Type": "application/x-www-form-urlencoded",
+//         APP_ID: "BOOKONE_WEB_APP",
+//       },
+//     }
+//   );
+//   const properties = await propertiesResponse.json();
+//   //This is for fetching property data by dates
+//   const propertyResponse = await fetch(
+//     "https://api.bookonelocal.in/api-bookone/api/availability/getRatesAndAvailabilityForPropertyByDate",
+//     {
+//       method: "POST",
+//       body: JSON.stringify({
+//         fromDate: "2022-07-20",
+//         propertyId: propertyId,
+//         toDate: "2022-07-30"
+//       }),
+//       headers: {
+//         Accept: "application/json",
+//         Authorization:
+//           "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rb25ldGVzdGJ1c2luZXNzQGdtYWlsLmNvbSIsInNjb3BlcyI6IlJPTEVfUFJPUF9BRE1JTiIsImlhdCI6MTY1ODMxMjE1OSwiZXhwIjoxNjU4NzQ0MTU5fQ.1vNA81BTRT79_qDVpnyofmkgF78qquQqpDcQNgf6vZg",
+//         "Content-Type": "application/json",
+//         APP_ID: "BOOKONE_WEB_APP",
+//       },
+//     }
+//   );
+//   const oldProperty = await propertyResponse.json();
+//   //This is for fetching rooms data by dates
+//   const oldRoomsArray = [];
+//   for (let index = 0; index < properties.length; index++) {
+//     const oldRoomsResponse = await fetch(
+//       `https://api.bookonelocal.in/api-bookone/api/availability/getRatesAndAvailabilityForRoomByDate`,
+//       {
+//         method: "POST",
+//         body: JSON.stringify({
+//           fromDate: "2022-07-20",
+//           propertyId: propertyId,
+//           roomId: properties[index].id,
+//           toDate: "2022-07-30",
+//         }),
+//         headers: {
+//           Accept: "application/json",
+//           Authorization:
+//             "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rb25ldGVzdGJ1c2luZXNzQGdtYWlsLmNvbSIsInNjb3BlcyI6IlJPTEVfUFJPUF9BRE1JTiIsImlhdCI6MTY1ODMxMjE1OSwiZXhwIjoxNjU4NzQ0MTU5fQ.1vNA81BTRT79_qDVpnyofmkgF78qquQqpDcQNgf6vZg",
+//           "Content-Type": "application/json",
+//           APP_ID: "BOOKONE_WEB_APP",
+//         },
+//       }
+//     );
+//     const oldRooms = await oldRoomsResponse.json();
+//     oldRoomsArray.push(oldRooms);
+//   }
+//   // console.log(oldProperty)
+//   // console.log(oldRoomsArray)
+//   // This is for fetching 7 days data for Property
+//   // const propertyResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=237', {
+//   //   method: 'GET',
+//   //   headers: {
+//   //     Accept: 'application/json',
+//   //     'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWhhYmlyLmdhbGF4eUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX1BST1BfQURNSU4iLCJpYXQiOjE2NTc0NDE5MjcsImV4cCI6MTY1Nzg3MzkyN30.BdApPr1hs6DR_NYdR3VWRaan8GQehajWRIPWohSfIT8',
+//   //     'Content-Type': 'application/x-www-form-urlencoded',
+//   //     'APP_ID': 'BOOKONE_WEB_APP'
+//   //   }
+//   // })
+//   // const property = await propertyResponse.json();
+//   //This is for fetching 7 days Data of rooms
+//   // const roomsArray = [];
+//   // for (let index = 0; index < properties.length; index++) {
+//   //   const roomsResponse = await fetch(`https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForRoom?PropertyId=237&RoomId=${properties[index].id}`, {
+//   //     method: 'GET',
+//   //     headers: {
+//   //       Accept: 'application/json',
+//   //       'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWhhYmlyLmdhbGF4eUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX1BST1BfQURNSU4iLCJpYXQiOjE2NTc0NDE5MjcsImV4cCI6MTY1Nzg3MzkyN30.BdApPr1hs6DR_NYdR3VWRaan8GQehajWRIPWohSfIT8',
+//   //       'Content-Type': 'application/x-www-form-urlencoded',
+//   //       'APP_ID': 'BOOKONE_WEB_APP'
+//   //     }
+//   //   })
+//   //   const rooms = await roomsResponse.json();
+//   //   roomsArray.push(rooms);
+//   // }
+//   return {properties, oldRoomsArray, oldProperty, propertyId}  // will be passed to the page component as props;
+// }
+
+
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { propertyId: "237" } },
+      { params: { propertyId: "424" } },
+      { params: { propertyId: "368" } },
+    ],
+    fallback: false, // false or 'blocking'
+  };
+}
+
+export async function getStaticProps(context) {
+  const { propertyId } = context.params;
     // console.log(context)
     // let dummydate = new Date("2022-07-20");
     // console.log(dummydate)
@@ -1164,7 +1298,7 @@ export async function getServerSideProps(context) {
   // console.log(lastDateToShow)
   // console.log(currentDateToShow)
   // const propertyId = context.query.params;
-  const propertyId = context.query.propertyId;
+  // const propertyId = context.query.propertyId;
   const propertiesResponse = await fetch(
     `https://api.bookonelocal.in/api-bookone/api/property/${propertyId}/rooms`,
     {
@@ -1180,16 +1314,16 @@ export async function getServerSideProps(context) {
       },
     }
   );
-  const properties = await propertiesResponse.json();
+  const oldProperties = await propertiesResponse.json();
   //This is for fetching property data by dates
   const propertyResponse = await fetch(
     "https://api.bookonelocal.in/api-bookone/api/availability/getRatesAndAvailabilityForPropertyByDate",
     {
       method: "POST",
       body: JSON.stringify({
-        fromDate: currentDateToShow,
+        fromDate: "2022-07-20",
         propertyId: propertyId,
-        toDate: lastDateToShow
+        toDate: "2022-07-30"
       }),
       headers: {
         Accept: "application/json",
@@ -1203,16 +1337,16 @@ export async function getServerSideProps(context) {
   const oldProperty = await propertyResponse.json();
   //This is for fetching rooms data by dates
   const oldRoomsArray = [];
-  for (let index = 0; index < properties.length; index++) {
+  for (let index = 0; index < oldProperties.length; index++) {
     const oldRoomsResponse = await fetch(
       `https://api.bookonelocal.in/api-bookone/api/availability/getRatesAndAvailabilityForRoomByDate`,
       {
         method: "POST",
         body: JSON.stringify({
-          fromDate: currentDateToShow,
+          fromDate: "2022-07-20",
           propertyId: propertyId,
-          roomId: properties[index].id,
-          toDate: lastDateToShow,
+          roomId: oldProperties[index].id,
+          toDate: "2022-07-30",
         }),
         headers: {
           Accept: "application/json",
@@ -1254,8 +1388,7 @@ export async function getServerSideProps(context) {
   //   const rooms = await roomsResponse.json();
   //   roomsArray.push(rooms);
   // }
-  return { 
-    props:{properties, oldRoomsArray, oldProperty, propertyId}  // will be passed to the page component as props
-  };
+  return { props: {oldProperties, oldRoomsArray, oldProperty, propertyId}};
+
 }
 
