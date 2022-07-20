@@ -1160,9 +1160,8 @@ export async function getServerSideProps(context) {
   let lastDateToShow = lastFilteredDate.join("-");
   // console.log(lastDateToShow)
   // console.log(currentDateToShow)
-//   const propertyId = context.query.params;
-  const propertyId = 237;
-  // const propertyId = context.query.propertyId;
+  // const propertyId = context.query.params;
+  const propertyId = context.query.propertyId;
   const propertiesResponse = await fetch(
     `https://api.bookonelocal.in/api-bookone/api/property/${propertyId}/rooms`,
     {
