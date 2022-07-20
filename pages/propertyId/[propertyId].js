@@ -21,7 +21,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty, propertyId }) => {
   const [property, setProperty] = useState(oldProperty);
   const [roomsArray, setRoomsArray] = useState(oldRoomsArray);
   const [incrementDate, setIncrementDate] = useState(20);
-  oldRoomsArray[0].splice(10,oldRoomsArray[0].length)
+  // oldRoomsArray[0].splice(10,oldRoomsArray[0].length)
   // console.log(oldRoomsArray)
   // const [progress, setProgress] = useState(0);
   const [selectedPlan, setSelectedPlan] = useState({
