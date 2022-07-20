@@ -1051,7 +1051,7 @@ const Home = ({ properties, oldRoomsArray, oldProperty, propertyId }) => {
                               j
                             ].map((val3, k) => {
                               return (
-                                <Col className={styles.column} key={k}>
+                                <Col className={styles.column2} key={k}>
                                   <span>₹{parseInt(val3.amount)}</span>
                                 </Col>
                               );
@@ -1138,7 +1138,7 @@ export async function getServerSideProps(context) {
     // console.log(context)
   let currentDate = new Date();
   let lastDate = new Date();
-  lastDate = new Date(lastDate.setDate(currentDate.getDate() + 10));
+  lastDate = new Date(lastDate.setDate(currentDate.getDate() + 11));
   let currentFilteredDate = currentDate
     .toLocaleDateString()
     .split("/")
@@ -1186,7 +1186,7 @@ export async function getServerSideProps(context) {
       body: JSON.stringify({
         fromDate: "2022-07-20",
         propertyId: propertyId,
-        toDate: "2022-07-28",
+        toDate: "2022-07-30",
       }),
       headers: {
         Accept: "application/json",
@@ -1209,7 +1209,7 @@ export async function getServerSideProps(context) {
           fromDate: "2022-07-20",
           propertyId: propertyId,
           roomId: properties[index].id,
-          toDate: "2022-07-28",
+          toDate: "2022-07-30",
         }),
         headers: {
           Accept: "application/json",
