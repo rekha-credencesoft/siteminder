@@ -21,7 +21,8 @@ const Home = ({ properties, oldRoomsArray, oldProperty, propertyId }) => {
   const [property, setProperty] = useState(oldProperty);
   const [roomsArray, setRoomsArray] = useState(oldRoomsArray);
   const [incrementDate, setIncrementDate] = useState(20);
-  console.log(oldRoomsArray)
+  oldRoomsArray[0].splice(10,oldRoomsArray[0].length)
+  // console.log(oldRoomsArray)
   // const [progress, setProgress] = useState(0);
   const [selectedPlan, setSelectedPlan] = useState({
     planName: "",
@@ -40,13 +41,6 @@ const Home = ({ properties, oldRoomsArray, oldProperty, propertyId }) => {
   
   const [shopModal, setshopModal] = useState({ state: false, id: -1, row: -1 });
   
-  // const router = useRouter();
-  // useEffect(() => {
-  // setTimeout(()=>{
-  //   router.push(`/propertyId/${propertyId}`)
-  //   console.log("please come..... :(")
-  // },3000)
-  //  },[]);
 
   const handleShopModal1 = (state, row) => {
     if (state == true) {
@@ -167,6 +161,8 @@ const Home = ({ properties, oldRoomsArray, oldProperty, propertyId }) => {
     setRoomsArray(newRoomsArray);
     // setProgress(100);
   };
+
+
   for (let i = 0; i < roomsArray.length; i++) {
     let room = roomsArray[i];
     for (let j = 0; j < room.length; j++) {
@@ -381,7 +377,9 @@ const Home = ({ properties, oldRoomsArray, oldProperty, propertyId }) => {
       }
     }
   }
+  // roomPlansToShowTrial.slice(0,7)
   // console.log(roomPlansToShowTrial)
+
   let fullRoomDeatils = [];
   for (
     let index = 0;
@@ -597,8 +595,8 @@ const Home = ({ properties, oldRoomsArray, oldProperty, propertyId }) => {
   //This function will Increement Seven Days
   const tenDayIncrement = () => {
     // setProgress(30);
-    newPropertyAndRoomsResponseFunc();
     if (increment < dates.length - 10) {
+      newPropertyAndRoomsResponseFunc();
       setIncrement(increment + 10);
       setIncrementDate(incrementDate + 10);
     }
@@ -1136,8 +1134,10 @@ function MyVerticallyCenteredModal(props) {
 export async function getServerSideProps(context) {
   // Home.getInitialProps  = async (context) => {
     // console.log(context)
+    // let dummydate = new Date("2022-07-20");
+    // console.log(dummydate)
   let currentDate = new Date();
-  let lastDate = new Date();
+  let lastDate =  new Date();
   lastDate = new Date(lastDate.setDate(currentDate.getDate() + 10));
   let currentFilteredDate = currentDate
     .toLocaleDateString()
@@ -1159,7 +1159,7 @@ export async function getServerSideProps(context) {
   let currentDateToShow = currentFilteredDate.join("-");
   let lastDateToShow = lastFilteredDate.join("-");
   // console.log(lastDateToShow)
-  console.log(currentDateToShow)
+  // console.log(currentDateToShow)
   // const propertyId = context.query.params;
   const propertyId = context.query.propertyId;
   const propertiesResponse = await fetch(
@@ -1186,7 +1186,7 @@ export async function getServerSideProps(context) {
       body: JSON.stringify({
         fromDate: "2022-07-20",
         propertyId: propertyId,
-        toDate: "2022-07-28",
+        toDate: "2022-07-30",
       }),
       headers: {
         Accept: "application/json",
@@ -1209,7 +1209,7 @@ export async function getServerSideProps(context) {
           fromDate: "2022-07-20",
           propertyId: propertyId,
           roomId: properties[index].id,
-          toDate: "2022-07-28",
+          toDate: "2022-07-30",
         }),
         headers: {
           Accept: "application/json",
@@ -1223,6 +1223,7 @@ export async function getServerSideProps(context) {
     const oldRooms = await oldRoomsResponse.json();
     oldRoomsArray.push(oldRooms);
   }
+  // console.log(oldProperty)
   // console.log(oldRoomsArray)
   // This is for fetching 7 days data for Property
   // const propertyResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=237', {
