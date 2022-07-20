@@ -13,6 +13,7 @@ import Carousel from "react-bootstrap/Carousel";
 import LoadingBar from "react-top-loading-bar";
 import { AiFillCopyrightCircle, AiFillCaretDown } from "react-icons/ai";
 import {Router, useRouter} from "next/router";
+import {currentDateToShow,lastDateToShow} from '../date'
 const Home = ({ properties, oldRoomsArray, oldProperty, propertyId }) => {
   const [increment, setIncrement] = useState(0);
   const [modal, setModal] = useState({ state: false, id: -1, row: -1 });
@@ -1136,30 +1137,30 @@ export async function getServerSideProps(context) {
     // console.log(context)
     // let dummydate = new Date("2022-07-20");
     // console.log(dummydate)
-  let currentDate = new Date();
-  let lastDate =  new Date();
-  lastDate = new Date(lastDate.setDate(currentDate.getDate() + 10));
-  let currentFilteredDate = currentDate
-    .toLocaleDateString()
-    .split("/")
-    .reverse();
-  let lastFilteredDate = lastDate.toLocaleDateString().split("/").reverse();
-  for (let index = 0; index < currentFilteredDate.length; index++) {
-    if (currentFilteredDate[index] < 10) {
-      currentFilteredDate[index] = "0" + currentFilteredDate[index];
-    }
-    // console.log(currentFilteredDate[index])
-  }
-  for (let index = 0; index < lastFilteredDate.length; index++) {
-    if (lastFilteredDate[index] < 10) {
-      lastFilteredDate[index] = "0" + lastFilteredDate[index];
-    }
-    // console.log(currentFilteredDate[index])
-  }
-  let currentDateToShow = currentFilteredDate.join("-");
-  let lastDateToShow = lastFilteredDate.join("-");
-  console.log(lastDateToShow)
-  console.log(currentDateToShow)
+  // let currentDate = new Date();
+  // let lastDate =  new Date();
+  // lastDate = new Date(lastDate.setDate(currentDate.getDate() + 10));
+  // let currentFilteredDate = currentDate
+  //   .toLocaleDateString()
+  //   .split("/")
+  //   .reverse();
+  // let lastFilteredDate = lastDate.toLocaleDateString().split("/").reverse();
+  // for (let index = 0; index < currentFilteredDate.length; index++) {
+  //   if (currentFilteredDate[index] < 10) {
+  //     currentFilteredDate[index] = "0" + currentFilteredDate[index];
+  //   }
+  //   // console.log(currentFilteredDate[index])
+  // }
+  // for (let index = 0; index < lastFilteredDate.length; index++) {
+  //   if (lastFilteredDate[index] < 10) {
+  //     lastFilteredDate[index] = "0" + lastFilteredDate[index];
+  //   }
+  //   // console.log(currentFilteredDate[index])
+  // }
+  // let currentDateToShow = currentFilteredDate.join("-");
+  // let lastDateToShow = lastFilteredDate.join("-");
+  // console.log(lastDateToShow)
+  // console.log(currentDateToShow)
   // const propertyId = context.query.params;
   const propertyId = context.query.propertyId;
   const propertiesResponse = await fetch(
@@ -1184,9 +1185,9 @@ export async function getServerSideProps(context) {
     {
       method: "POST",
       body: JSON.stringify({
-        fromDate: "2022-07-20",
+        fromDate: currentDateToShow,
         propertyId: propertyId,
-        toDate: "2022-07-30",
+        toDate: lastDateToShow
       }),
       headers: {
         Accept: "application/json",
@@ -1206,10 +1207,10 @@ export async function getServerSideProps(context) {
       {
         method: "POST",
         body: JSON.stringify({
-          fromDate: "2022-07-20",
+          fromDate: currentDateToShow,
           propertyId: propertyId,
           roomId: properties[index].id,
-          toDate: "2022-07-30",
+          toDate: lastDateToShow,
         }),
         headers: {
           Accept: "application/json",
