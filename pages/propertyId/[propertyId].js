@@ -18,6 +18,7 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
   const [modal, setModal] = useState({ state: false, id: -1, row: -1 });
   const [modalShow, setModalShow] = React.useState(false);
   const [details, setDetails] = useState({});
+  const [count, setCount] = useState(10);
   const [property, setProperty] = useState(oldProperty);
   const [roomsArray, setRoomsArray] = useState(oldRoomsArray);
   const [incrementDate, setIncrementDate] = useState(20);
@@ -164,6 +165,7 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
     setRoomsArray(newRoomsArray);
     // setProgress(100);
   };
+  // console.log(roomsArray)
 
 
   for (let i = 0; i < roomsArray.length; i++) {
@@ -222,7 +224,38 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
     }
   }
   // console.log(roomsData)
-  // console.log(roomsPlansNames);
+  // console.log(roomsPlansNames)
+
+
+  
+  let roomsPlansToShowNew = {};
+  // console.log(Object.keys(roomsPlansNames))
+  for (let index = 0; index < Object.values(roomsPlansNames).length; index++) {
+    // console.log(Object.keys(roomsPlansNames)[index])
+    if (!roomsPlansToShowNew[Object.keys(roomsPlansNames)[index]]) {
+      roomsPlansToShowNew[Object.keys(roomsPlansNames)[index]] = []
+      for (let jindex = 0; jindex < Object.values(roomsPlansNames)[index].length; jindex++) {
+        // console.log(Object.values(roomsPlansNames)[index][jindex])
+        // console.log(Object.values(roomsPlansNames)[index][jindex])
+        if(Object.values(roomsPlansNames)[index][jindex].length == 0){
+          // console.log(Object.values(roomsPlansNames)[index][jindex].name)
+          roomsPlansToShowNew[Object.keys(roomsPlansNames)[index]].push({name: 'No Plan'})
+        }
+        else{
+          for (let zindex = 0; zindex < Object.values(roomsPlansNames)[index][jindex].length; zindex++) {
+            // console.log(Object.values(roomsPlansNames)[index][jindex][zindex])
+            roomsPlansToShowNew[Object.keys(roomsPlansNames)[index]].push(Object.values(roomsPlansNames)[index][jindex][zindex])
+            
+          }
+        }
+        
+      }
+    }
+    
+  }
+
+  // console.log(roomsPlansToShowNew)
+
   //Fetching room rate plans
   for (let index = 0; index < Object.values(roomsPlansNames).length; index++) {
     // console.log(Object.values(roomsPlansNames)[index]);
@@ -262,11 +295,35 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
   }
   // console.log(roomsPlansToShow)
 
-  // for (let index = 0; index < Object.values(roomsPlansNames).length; index++) {
-  //   console.log(Object.values(roomsPlansNames)[index])
+  let newRoom = [];
+  for (let index = 0; index < Object.keys(roomsPlansToShow).length; index++) {
+    // console.log(Object.values(roomsPlansToShow)[index][0])
+    // console.log(Object.keys(roomsPlansToShow)[index])
+    if (roomsPlansToShow[Object.keys(roomsPlansToShow)[index]]) {
+      // console.log(Object.values(roomsPlansToShow)[index].length)
+      if (roomsPlansToShow[Object.keys(roomsPlansToShow)[index]].length < count) {
+        // roomsPlansToShow[Object.keys(roomsPlansToShow)[index]]
+        // console.log(roomsPlansToShow[Object.keys(roomsPlansToShow)[index]])
+        // console.log(Object.values(roomsPlansToShow)[index])
+        // let newRoom = roomsArray[i]
+        // let newRoom = roomsArray[i]
+        // for (let zindex = 0; zindex < Object.keys(roomsNamesWithData).length; zindex++) {
+        //   // console.log(roomsArray[zindex][0])
+        //   if(!newRoom.includes(roomsArray[zindex][0])) {
+        //     newRoom.push(roomsArray[zindex][0])
+        //   }
+        // }
+        for (let jindex = roomsPlansToShow[Object.keys(roomsPlansToShow)[index]].length; jindex < count; jindex++) {
+          roomsPlansToShow[Object.keys(roomsPlansToShow)[index]].push({name: Object.keys(roomsPlansToShow)[index],amount: 0, roomId: Object.values(roomsPlansToShow)[index][0].roomId})
+          
+        }
+      }
+    }
     
-  // }
+  }
 
+  console.log(newRoom)
+  // console.log(roomsPlansToShow)
 
   let roomPlansToShowTrial = [];
   for (
@@ -275,6 +332,7 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
     index++
   ) {
     // console.log(Object.values(roomsNamesWithData)[index])
+    // console.log(Object.keys(roomsNamesWithData)[index])
     for (
       let jindex = 0;
       jindex < Object.values(roomsNamesWithData)[index].length;
@@ -391,7 +449,48 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
       }
     }
   }
-  // roomPlansToShowTrial.slice(0,7)
+  // oldRoomPlansToShowTrial.slice(0,7)
+  // console.log(roomPlansToShowTrial)
+  // let roomPlansToShowTrial = [];
+  // for (let index = 0; index < Object.values(oldRoomPlansToShowTrial).length; index++) {
+  //   // console.log(Object.keys(roomPlansToShowTrial)[index])
+  //   // console.log(Object.values(Object.values(roomPlansToShowTrial)[index])[0])
+  //   if (!roomPlansToShowTrial[Object.keys(oldRoomPlansToShowTrial)[index]]) {
+  //     roomPlansToShowTrial[Object.keys(oldRoomPlansToShowTrial)[index]] = [];
+  //     for (let jindex = 0; jindex < Object.keys(Object.values(oldRoomPlansToShowTrial)[index]).length; jindex++) {
+  //       // console.log(Object.values(Object.values(roomPlansToShowTrial)[index])[jindex])
+  //       roomPlansToShowTrial[Object.keys(oldRoomPlansToShowTrial)[index]][Object.keys(Object.values(oldRoomPlansToShowTrial)[index])[jindex]] = [];
+  //       for (let zindex = 0; zindex < 10; zindex++) {
+  //         // console.log(Object.values(Object.values(roomPlansToShowTrial)[index])[jindex][zindex])
+  //         if(Object.values(Object.values(oldRoomPlansToShowTrial)[index])[jindex][zindex] == undefined){
+  //           roomPlansToShowTrial[Object.keys(oldRoomPlansToShowTrial)[index]][Object.keys(Object.values(oldRoomPlansToShowTrial)[index])[jindex]].push({amount: 0})
+  //         }
+  //         else{
+  //           roomPlansToShowTrial[Object.keys(oldRoomPlansToShowTrial)[index]][Object.keys(Object.values(oldRoomPlansToShowTrial)[index])[jindex]].push(Object.values(Object.values(oldRoomPlansToShowTrial)[index])[jindex][zindex])
+  //         }
+          
+  //       }
+  //     }
+  //   }
+  //   else{
+  //     for (let jindex = 0; jindex < Object.keys(Object.values(oldRoomPlansToShowTrial)[index]).length; jindex++) {
+  //       // console.log(Object.values(Object.values(roomPlansToShowTrial)[index])[jindex])
+  //       roomPlansToShowTrial[Object.keys(oldRoomPlansToShowTrial)[index]][Object.keys(Object.values(oldRoomPlansToShowTrial)[index])[jindex]] = [];
+  //       for (let zindex = 0; zindex < count; zindex++) {
+  //         // console.log(Object.values(Object.values(roomPlansToShowTrial)[index])[jindex][zindex])
+  //         if(Object.values(Object.values(oldRoomPlansToShowTrial)[index])[jindex][zindex] == undefined){
+  //           roomPlansToShowTrial[Object.keys(oldRoomPlansToShowTrial)[index]][Object.keys(Object.values(oldRoomPlansToShowTrial)[index])[jindex]].push({amount: 0})
+  //         }
+  //         else{
+  //           roomPlansToShowTrial[Object.keys(oldRoomPlansToShowTrial)[index]][Object.keys(Object.values(oldRoomPlansToShowTrial)[index])[jindex]].push(Object.values(Object.values(oldRoomPlansToShowTrial)[index])[jindex][zindex])
+  //         }
+          
+  //       }
+  //     }
+  //   }
+    
+  // }
+
   // console.log(roomPlansToShowTrial)
 
   let fullRoomDeatils = [];
@@ -610,6 +709,7 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
   const tenDayIncrement = () => {
     // setProgress(30);
     if (increment < dates.length - 10) {
+      setCount(count + 10)
       newPropertyAndRoomsResponseFunc();
       setIncrement(increment + 10);
       setIncrementDate(incrementDate + 10);
@@ -617,6 +717,7 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
   };
   const tenDayDecrement = () => {
     if (increment !== 0) {
+      setCount(count - 10)
       setIncrement(increment - 10);
       setIncrementDate(incrementDate - 10);
     }
@@ -718,7 +819,7 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
   }
   // console.log(pricesToShow)
   // console.log(roomsNamesWithData)
-  // console.log(roomPlansToShowTrial)
+  // console.log("This is room Plans TO show trial" ,roomPlansToShowTrial)
   let plansToShow = [];
   for (
     let index = 0;
@@ -751,7 +852,7 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
       }
     }
   }
-  // console.log(plansToShow)
+  // console.log('This is plans To Show' ,plansToShow)
 
   //For Getting the Available, Hold, Booked and Total value of Rooms
   let roomsInfo = {};
