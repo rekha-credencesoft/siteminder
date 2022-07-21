@@ -1029,7 +1029,7 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
                 )}
               </div>
             ) : (
-              <h2>No Plans</h2>
+              <div className={styles.shopBtn}>No Plans</div>
             )}
             {val == Object.keys(plansToShow)[i]
               ? Object.keys(Object.values(plansToShow)[i]).map((val2, j) => {
