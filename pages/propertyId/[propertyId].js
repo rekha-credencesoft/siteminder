@@ -21,10 +21,11 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
   const [property, setProperty] = useState(oldProperty);
   const [roomsArray, setRoomsArray] = useState(oldRoomsArray);
   const [incrementDate, setIncrementDate] = useState(20);
-  // if (oldRoomsArray) {
-  //   oldRoomsArray[0].splice(10,oldRoomsArray[0].length)
-  // }
-  // console.log(oldRoomsArray)
+  if (oldRoomsArray) {
+    oldRoomsArray[0].splice(10,oldRoomsArray[0].length)
+  }
+  // console.log(roomsArray)
+  // console.log(oldProperty)
   // const [progress, setProgress] = useState(0);
   const [selectedPlan, setSelectedPlan] = useState({
     planName: "",
@@ -231,11 +232,14 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
       jindex++
     ) {
       // console.log(Object.values(roomsPlansNames)[index][jindex]);
+      if (Object.values(roomsPlansNames)[index][jindex].length == 0) {
+        // console.log(Object.values(roomsPlansNames)[index][jindex]);
+      }
       for (
         let zindex = 0;
         zindex < Object.values(roomsPlansNames)[index][jindex].length;
         zindex++
-      ) {
+        ) {
         // console.log(Object.values(roomsPlansNames)[index][jindex][zindex]);
         if (
           !roomsPlansToShow[
@@ -256,6 +260,14 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
       }
     }
   }
+  // console.log(roomsPlansToShow)
+
+  // for (let index = 0; index < Object.values(roomsPlansNames).length; index++) {
+  //   console.log(Object.values(roomsPlansNames)[index])
+    
+  // }
+
+
   let roomPlansToShowTrial = [];
   for (
     let index = 0;
@@ -898,7 +910,6 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
                             onMouseEnter={() => showModal(true, j, i)}
                             onMouseLeave={() => showModal(false, -1, -1)}
                           >
-                            {" "}
                             <BsInfoCircle className={styles.infoIcon} />
                             {modal.state == true &&
                             modal.id == j &&
@@ -982,7 +993,7 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
               </Col>
             </Row>
             {Object.values(plansToShow)[i] !== undefined &&
-            Object.values(plansToShow)[i] !== null ? (
+            Object.values(plansToShow)[i] !== null && Object.keys(Object.values(plansToShow)[i]).length !== 0 ? (
               <div
                 className={styles.shopBtn}
                 onClick={() => handleShopModal1(shopModal.state, i)}
@@ -1018,7 +1029,7 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
                 )}
               </div>
             ) : (
-              ""
+              <h2>No Plans</h2>
             )}
             {val == Object.keys(plansToShow)[i]
               ? Object.keys(Object.values(plansToShow)[i]).map((val2, j) => {
@@ -1273,28 +1284,28 @@ export async function getStaticProps(context) {
     // console.log(context)
     // let dummydate = new Date("2022-07-20");
     // console.log(dummydate)
-  // let currentDate = new Date();
-  // let lastDate =  new Date();
-  // lastDate = new Date(lastDate.setDate(currentDate.getDate() + 10));
-  // let currentFilteredDate = currentDate
-  //   .toLocaleDateString()
-  //   .split("/")
-  //   .reverse();
-  // let lastFilteredDate = lastDate.toLocaleDateString().split("/").reverse();
-  // for (let index = 0; index < currentFilteredDate.length; index++) {
-  //   if (currentFilteredDate[index] < 10) {
-  //     currentFilteredDate[index] = "0" + currentFilteredDate[index];
-  //   }
-  //   // console.log(currentFilteredDate[index])
-  // }
-  // for (let index = 0; index < lastFilteredDate.length; index++) {
-  //   if (lastFilteredDate[index] < 10) {
-  //     lastFilteredDate[index] = "0" + lastFilteredDate[index];
-  //   }
-  //   // console.log(currentFilteredDate[index])
-  // }
-  // let currentDateToShow = currentFilteredDate.join("-");
-  // let lastDateToShow = lastFilteredDate.join("-");
+  let currentDate = new Date();
+  let lastDate =  new Date();
+  lastDate = new Date(lastDate.setDate(currentDate.getDate() + 11));
+  let currentFilteredDate = currentDate
+    .toLocaleDateString()
+    .split("/")
+    .reverse();
+  let lastFilteredDate = lastDate.toLocaleDateString().split("/").reverse();
+  for (let index = 0; index < currentFilteredDate.length; index++) {
+    if (currentFilteredDate[index] < 10) {
+      currentFilteredDate[index] = "0" + currentFilteredDate[index];
+    }
+    // console.log(currentFilteredDate[index])
+  }
+  for (let index = 0; index < lastFilteredDate.length; index++) {
+    if (lastFilteredDate[index] < 10) {
+      lastFilteredDate[index] = "0" + lastFilteredDate[index];
+    }
+    // console.log(currentFilteredDate[index])
+  }
+  let currentDateToShow = currentFilteredDate.join("-");
+  let lastDateToShow = lastFilteredDate.join("-");
   // console.log(lastDateToShow)
   // console.log(currentDateToShow)
   // const propertyId = context.query.params;
@@ -1321,9 +1332,10 @@ export async function getStaticProps(context) {
     {
       method: "POST",
       body: JSON.stringify({
-        fromDate: "2022-07-20",
+        fromDate: currentDateToShow,
+        // fromDate: "2022-07-21",
         propertyId: propertyId,
-        toDate: "2022-07-30"
+        toDate: lastDateToShow
       }),
       headers: {
         Accept: "application/json",
@@ -1343,10 +1355,10 @@ export async function getStaticProps(context) {
       {
         method: "POST",
         body: JSON.stringify({
-          fromDate: "2022-07-20",
+          fromDate: currentDateToShow,
           propertyId: propertyId,
           roomId: oldProperties[index].id,
-          toDate: "2022-07-30",
+          toDate: lastDateToShow,
         }),
         headers: {
           Accept: "application/json",
