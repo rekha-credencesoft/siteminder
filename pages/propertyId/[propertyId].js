@@ -5,12 +5,36 @@ import { Row, Col, NavDropdown } from "react-bootstrap";
 import { MdArrowLeft, MdArrowRight } from "react-icons/md";
 import { FaCaretSquareRight } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState} from "react";
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
 import { AiFillCopyrightCircle, AiFillCaretDown } from "react-icons/ai";
-import {Router, useRouter} from "next/router";
+import { Router, useRouter } from "next/router";
+let currentDate1 = new Date();
+let lastDate1 = new Date();
+lastDate1 = new Date(lastDate1.setDate(currentDate1.getDate() + 11));
+let currentFilteredDate1 = currentDate1
+  .toLocaleDateString()
+  .split("/")
+  .reverse();
+let lastFilteredDate1 = lastDate1.toLocaleDateString().split("/").reverse();
+for (let index = 0; index < currentFilteredDate1.length; index++) {
+  if (currentFilteredDate1[index] < 10) {
+    currentFilteredDate1[index] = "0" + currentFilteredDate1[index];
+  }
+  // console.log(currentFilteredDate[index])
+}
+for (let index = 0; index < lastFilteredDate1.length; index++) {
+  if (lastFilteredDate1[index] < 10) {
+    lastFilteredDate1[index] = "0" + lastFilteredDate1[index];
+  }
+  // console.log(currentFilteredDate[index])
+}
+let currentDateToShow1 = currentFilteredDate1.join("-");
+let lastDateToShow1 = lastFilteredDate1.join("-");
+console.log(lastDateToShow1)
+console.log(currentDateToShow1)
 const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
   const [increment, setIncrement] = useState(0);
   const [properties, setProperties] = useState(oldProperties);
@@ -21,8 +45,11 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
   const [property, setProperty] = useState(oldProperty);
   const [roomsArray, setRoomsArray] = useState(oldRoomsArray);
   const [incrementDate, setIncrementDate] = useState(20);
+
+
+
   if (oldRoomsArray) {
-    oldRoomsArray[0].splice(10,oldRoomsArray[0].length)
+    oldRoomsArray[0].splice(10, oldRoomsArray[0].length)
   }
   // console.log(roomsArray)
   // console.log(oldProperty)
@@ -41,9 +68,9 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
       row: row,
     });
   };
-  
+
   const [shopModal, setshopModal] = useState({ state: false, id: -1, row: -1 });
-  
+
 
   const handleShopModal1 = (state, row) => {
     if (state == true) {
@@ -227,7 +254,7 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
   // console.log(roomsPlansNames)
 
 
-  
+
   // let roomsPlansToShowNew = {};
   // // console.log(Object.keys(roomsPlansNames))
   // for (let index = 0; index < Object.values(roomsPlansNames).length; index++) {
@@ -245,13 +272,13 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
   //         for (let zindex = 0; zindex < Object.values(roomsPlansNames)[index][jindex].length; zindex++) {
   //           // console.log(Object.values(roomsPlansNames)[index][jindex][zindex])
   //           roomsPlansToShowNew[Object.keys(roomsPlansNames)[index]].push(Object.values(roomsPlansNames)[index][jindex][zindex])
-            
+
   //         }
   //       }
-        
+
   //     }
   //   }
-    
+
   // }
 
   // console.log(roomsPlansToShowNew)
@@ -272,11 +299,11 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
         let zindex = 0;
         zindex < Object.values(roomsPlansNames)[index][jindex].length;
         zindex++
-        ) {
+      ) {
         // console.log(Object.values(roomsPlansNames)[index][jindex][zindex]);
         if (
           !roomsPlansToShow[
-            Object.values(roomsPlansNames)[index][jindex][zindex].name
+          Object.values(roomsPlansNames)[index][jindex][zindex].name
           ]
         ) {
           roomsPlansToShow[
@@ -313,12 +340,12 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
         //   }
         // }
         for (let jindex = roomsPlansToShow[Object.keys(roomsPlansToShow)[index]].length; jindex < count; jindex++) {
-          roomsPlansToShow[Object.keys(roomsPlansToShow)[index]].push({name: Object.keys(roomsPlansToShow)[index],amount: 0, roomId: Object.values(roomsPlansToShow)[index][0].roomId})
-          
+          roomsPlansToShow[Object.keys(roomsPlansToShow)[index]].push({ name: Object.keys(roomsPlansToShow)[index], amount: 0, roomId: Object.values(roomsPlansToShow)[index][0].roomId })
+
         }
       }
     }
-    
+
   }
 
   // console.log(newRoom)
@@ -354,7 +381,7 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
           // console.log(Object.values(roomsPlansToShow)[zindex][ndex].name)
           if (
             !roomPlansToShowTrial[
-              Object.values(roomsNamesWithData)[index][jindex].roomName
+            Object.values(roomsNamesWithData)[index][jindex].roomName
             ]
           ) {
             roomPlansToShowTrial[
@@ -362,10 +389,10 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
             ] = [];
             if (
               !roomPlansToShowTrial[
-                Object.values(roomsNamesWithData)[index][jindex].roomName
+              Object.values(roomsNamesWithData)[index][jindex].roomName
               ][Object.values(roomsPlansToShow)[zindex][ndex].name] &&
               Object.values(roomsNamesWithData)[index][jindex].roomId ==
-                Object.values(roomsPlansToShow)[zindex][ndex].roomId
+              Object.values(roomsPlansToShow)[zindex][ndex].roomId
             ) {
               roomPlansToShowTrial[
                 Object.values(roomsNamesWithData)[index][jindex].roomName
@@ -404,10 +431,10 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
           } else {
             if (
               !roomPlansToShowTrial[
-                Object.values(roomsNamesWithData)[index][jindex].roomName
+              Object.values(roomsNamesWithData)[index][jindex].roomName
               ][Object.values(roomsPlansToShow)[zindex][ndex].name] &&
               Object.values(roomsNamesWithData)[index][jindex].roomId ==
-                Object.values(roomsPlansToShow)[zindex][ndex].roomId
+              Object.values(roomsPlansToShow)[zindex][ndex].roomId
             ) {
               roomPlansToShowTrial[
                 Object.values(roomsNamesWithData)[index][jindex].roomName
@@ -467,7 +494,7 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
   //         else{
   //           roomPlansToShowTrial[Object.keys(oldRoomPlansToShowTrial)[index]][Object.keys(Object.values(oldRoomPlansToShowTrial)[index])[jindex]].push(Object.values(Object.values(oldRoomPlansToShowTrial)[index])[jindex][zindex])
   //         }
-          
+
   //       }
   //     }
   //   }
@@ -483,11 +510,11 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
   //         else{
   //           roomPlansToShowTrial[Object.keys(oldRoomPlansToShowTrial)[index]][Object.keys(Object.values(oldRoomPlansToShowTrial)[index])[jindex]].push(Object.values(Object.values(oldRoomPlansToShowTrial)[index])[jindex][zindex])
   //         }
-          
+
   //       }
   //     }
   //   }
-    
+
   // }
 
   // console.log(roomPlansToShowTrial)
@@ -837,7 +864,7 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
       // console.log(Object.values(Object.values(roomPlansToShowTrial)[index])[jindex])
       if (
         !plansToShow[Object.keys(roomPlansToShowTrial)[index]][
-          Object.keys(Object.values(roomPlansToShowTrial)[index])[jindex]
+        Object.keys(Object.values(roomPlansToShowTrial)[index])[jindex]
         ]
       ) {
         plansToShow[Object.keys(roomPlansToShowTrial)[index]][
@@ -905,286 +932,286 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
 
   return (
     <>
-    {roomsNamesWithData && <div className={styles.bigContainer}>
-    <div className={styles.topContainer}>
-      <Row className={styles.upperRow}>
-        <Col className={styles.firstOuterColumn}>
-          <Col className={styles.leftArrow}>
-            <MdArrowLeft onClick={tenDayDecrement} />
-          </Col>
-        </Col>
-        <Col className={styles.secondOuterColumn}>
-          {datesToShow.map((val, i) => {
+      {roomsNamesWithData && <div className={styles.bigContainer}>
+        <div className={styles.topContainer}>
+          <Row className={styles.upperRow}>
+            <Col className={styles.firstOuterColumn}>
+              <Col className={styles.leftArrow}>
+                <MdArrowLeft onClick={tenDayDecrement} />
+              </Col>
+            </Col>
+            <Col className={styles.secondOuterColumn}>
+              {datesToShow.map((val, i) => {
+                return (
+                  <Col className={styles.columnDate} key={i}>
+                    <div className={styles.spanContainer}>
+                      <span>{daysToShow[i]}</span>
+                      <span>{val}</span>
+                      <span>{monthToShow[i]}</span>
+                    </div>
+                  </Col>
+                );
+              })}
+              <Col className={styles.rightArrow}>
+                <MdArrowRight onClick={tenDayIncrement} />
+              </Col>
+            </Col>
+          </Row>
+          {Object.keys(roomsNamesWithData).map((val, i) => {
             return (
-              <Col className={styles.columnDate} key={i}>
-                <div className={styles.spanContainer}>
-                  <span>{daysToShow[i]}</span>
-                  <span>{val}</span>
-                  <span>{monthToShow[i]}</span>
-                </div>
-              </Col>
-            );
-          })}
-          <Col className={styles.rightArrow}>
-            <MdArrowRight onClick={tenDayIncrement} />
-          </Col>
-        </Col>
-      </Row>
-      {Object.keys(roomsNamesWithData).map((val, i) => {
-        return (
-          <>
-            <Row className={styles.row} key={i}>
-              <Col className={styles.firstOuterColumn}>
-                <Col className={styles.leftArrow2}>
-                  <Col className={styles.col1}>
-                    {val == Object.keys(imageObj)[i] ? (
-                      <img
-                        key={i + 1}
-                        src={Object.values(imageObj)[i][0].url}
-                        alt=""
-                        className={styles.image}
-                      />
-                    ) : (
-                      <img
-                        key={i + 1}
-                        src="https://tse2.explicit.bing.net/th?id=OIP.38eE6cQfShw5U-lGbkcMCgHaEo&pid=Api&P=0&w=250&h=156"
-                        alt=""
-                        className={styles.image}
-                      />
-                    )}
-                  </Col>
-                  <Col className={styles.col2}>
-                    <span className={styles.text}>{val}</span>
-                    <span className={styles.text}>
-                      <span
-                        className={styles.moreInfo}
-                        onClick={() => {
-                          setModalShow(true),
-                            setDetails({
-                              name: Object.keys(roomTypes)[i],
-                              facilities:
-                                Object.values(roomTypes)[i].roomFacilities,
-                              images: Object.values(imageObj)[i],
-                              plans: Object.keys(
-                                Object.values(roomPlansToShowTrial)[i]
-                              ),
-                            });
-                        }}
-                      >
-                        More Info
-                      </span>
-                      {val == Object.keys(roomTypes)[i] ? (
-                        <MyVerticallyCenteredModal
-                          show={modalShow}
-                          onHide={() => setModalShow(false)}
-                          name={details.name}
-                          facilities={details.facilities}
-                          images={details.images}
-                          plans={details.plans}
-                        />
-                      ) : (
-                        ""
-                      )}
-                    </span>
-                  </Col>
-                  <Col className={styles.col3}>
-                    <span
-                      style={{
-                        border: "1px solid #9acc54",
-                        color: "#9acc54",
-                        padding: "2px 12px",
-                        borderRadius: "8px",
-                      }}
-                    >
-                      Price
-                    </span>
-                  </Col>
-                </Col>
-              </Col>
-              <Col className={styles.secondOuterColumn}>
-                {val == Object.keys(pricesToShow)[i]
-                  ? Object.values(pricesToShow)[i].map((val2, j) => {
-                      return (
-                        <Col className={styles.column} key={j}>
-                          <a
-                            onMouseEnter={() => showModal(true, j, i)}
-                            onMouseLeave={() => showModal(false, -1, -1)}
+              <>
+                <Row className={styles.row} key={i}>
+                  <Col className={styles.firstOuterColumn}>
+                    <Col className={styles.leftArrow2}>
+                      <Col className={styles.col1}>
+                        {val == Object.keys(imageObj)[i] ? (
+                          <img
+                            key={i + 1}
+                            src={Object.values(imageObj)[i][0].url}
+                            alt=""
+                            className={styles.image}
+                          />
+                        ) : (
+                          <img
+                            key={i + 1}
+                            src="https://tse2.explicit.bing.net/th?id=OIP.38eE6cQfShw5U-lGbkcMCgHaEo&pid=Api&P=0&w=250&h=156"
+                            alt=""
+                            className={styles.image}
+                          />
+                        )}
+                      </Col>
+                      <Col className={styles.col2}>
+                        <span className={styles.text}>{val}</span>
+                        <span className={styles.text}>
+                          <span
+                            className={styles.moreInfo}
+                            onClick={() => {
+                              setModalShow(true),
+                                setDetails({
+                                  name: Object.keys(roomTypes)[i],
+                                  facilities:
+                                    Object.values(roomTypes)[i].roomFacilities,
+                                  images: Object.values(imageObj)[i],
+                                  plans: Object.keys(
+                                    Object.values(roomPlansToShowTrial)[i]
+                                  ),
+                                });
+                            }}
                           >
-                            <BsInfoCircle className={styles.infoIcon} />
-                            {modal.state == true &&
-                            modal.id == j &&
-                            modal.row == i ? (
-                              <>
-                                {val == Object.keys(roomsNamesWithData)[i] ? (
-                                  <div className={styles.popupModal}>
-                                    <div>
-                                      <span>
-                                        <b>Total</b>
-                                      </span>
-                                      <span>
-                                        {
-                                          Object.values(
-                                            Object.values(roomsNamesWithData)[
-                                              i
-                                            ]
-                                          )[j].totalNoRooms
-                                        }
-                                      </span>
-                                    </div>
-                                    <div>
-                                      <span>
-                                        <b>Booked</b>
-                                      </span>
-                                      <span>
-                                        {
-                                          Object.values(
-                                            Object.values(roomsNamesWithData)[
-                                              i
-                                            ]
-                                          )[j].noOfBooked
-                                        }
-                                      </span>
-                                    </div>
-                                    <div>
-                                      <span>
-                                        <b>Hold</b>
-                                      </span>
-                                      <span>
-                                        {
-                                          Object.values(
-                                            Object.values(roomsNamesWithData)[
-                                              i
-                                            ]
-                                          )[j].noOfOnHold
-                                        }
-                                      </span>
-                                    </div>
-                                    <div>
-                                      <span>
-                                        <b>Available</b>
-                                      </span>
-                                      <span>
-                                        {
-                                          Object.values(
-                                            Object.values(roomsNamesWithData)[
-                                              i
-                                            ]
-                                          )[j].noOfAvailable
-                                        }
-                                      </span>
-                                    </div>
-                                  </div>
-                                ) : (
-                                  ""
-                                )}
-                              </>
-                            ) : (
-                              ""
-                            )}
-                          </a>
-                          <span>₹{val2}</span>
-                        </Col>
-                      );
-                    })
-                  : ""}
-                <Col className={styles.rightArrow}>
-                  <MdArrowRight style={{ color: "none" }} />
-                </Col>
-              </Col>
-            </Row>
-            {Object.values(plansToShow)[i] !== undefined &&
-            Object.values(plansToShow)[i] !== null && Object.keys(Object.values(plansToShow)[i]).length !== 0 ? (
-              <div
-                className={styles.shopBtn}
-                onClick={() => handleShopModal1(shopModal.state, i)}
-              >
-                Plans <AiFillCaretDown />
-                {shopModal.state == true && shopModal.row == i ? (
-                  <div
-                    className={styles.shopModal}
-                    style={
-                      shopModal ? { display: "block" } : { display: "none" }
-                    }
-                  >
-                    {Object.keys(Object.values(plansToShow)[i]).map(
-                      (val3, z) => {
+                            More Info
+                          </span>
+                          {val == Object.keys(roomTypes)[i] ? (
+                            <MyVerticallyCenteredModal
+                              show={modalShow}
+                              onHide={() => setModalShow(false)}
+                              name={details.name}
+                              facilities={details.facilities}
+                              images={details.images}
+                              plans={details.plans}
+                            />
+                          ) : (
+                            ""
+                          )}
+                        </span>
+                      </Col>
+                      <Col className={styles.col3}>
+                        <span
+                          style={{
+                            border: "1px solid #9acc54",
+                            color: "#9acc54",
+                            padding: "2px 12px",
+                            borderRadius: "8px",
+                          }}
+                        >
+                          Price
+                        </span>
+                      </Col>
+                    </Col>
+                  </Col>
+                  <Col className={styles.secondOuterColumn}>
+                    {val == Object.keys(pricesToShow)[i]
+                      ? Object.values(pricesToShow)[i].map((val2, j) => {
                         return (
-                          <li
-                            key={z}
-                            onClick={() =>
-                              setSelectedPlan({
-                                planName: val3,
-                                planId: i,
-                              })
-                            }
-                          >
-                            {val3}
-                          </li>
+                          <Col className={styles.column} key={j}>
+                            <a
+                              onMouseEnter={() => showModal(true, j, i)}
+                              onMouseLeave={() => showModal(false, -1, -1)}
+                            >
+                              <BsInfoCircle className={styles.infoIcon} />
+                              {modal.state == true &&
+                                modal.id == j &&
+                                modal.row == i ? (
+                                <>
+                                  {val == Object.keys(roomsNamesWithData)[i] ? (
+                                    <div className={styles.popupModal}>
+                                      <div>
+                                        <span>
+                                          <b>Total</b>
+                                        </span>
+                                        <span>
+                                          {
+                                            Object.values(
+                                              Object.values(roomsNamesWithData)[
+                                              i
+                                              ]
+                                            )[j].totalNoRooms
+                                          }
+                                        </span>
+                                      </div>
+                                      <div>
+                                        <span>
+                                          <b>Booked</b>
+                                        </span>
+                                        <span>
+                                          {
+                                            Object.values(
+                                              Object.values(roomsNamesWithData)[
+                                              i
+                                              ]
+                                            )[j].noOfBooked
+                                          }
+                                        </span>
+                                      </div>
+                                      <div>
+                                        <span>
+                                          <b>Hold</b>
+                                        </span>
+                                        <span>
+                                          {
+                                            Object.values(
+                                              Object.values(roomsNamesWithData)[
+                                              i
+                                              ]
+                                            )[j].noOfOnHold
+                                          }
+                                        </span>
+                                      </div>
+                                      <div>
+                                        <span>
+                                          <b>Available</b>
+                                        </span>
+                                        <span>
+                                          {
+                                            Object.values(
+                                              Object.values(roomsNamesWithData)[
+                                              i
+                                              ]
+                                            )[j].noOfAvailable
+                                          }
+                                        </span>
+                                      </div>
+                                    </div>
+                                  ) : (
+                                    ""
+                                  )}
+                                </>
+                              ) : (
+                                ""
+                              )}
+                            </a>
+                            <span>₹{val2}</span>
+                          </Col>
                         );
-                      }
+                      })
+                      : ""}
+                    <Col className={styles.rightArrow}>
+                      <MdArrowRight style={{ color: "none" }} />
+                    </Col>
+                  </Col>
+                </Row>
+                {Object.values(plansToShow)[i] !== undefined &&
+                  Object.values(plansToShow)[i] !== null && Object.keys(Object.values(plansToShow)[i]).length !== 0 ? (
+                  <div
+                    className={styles.shopBtn}
+                    onClick={() => handleShopModal1(shopModal.state, i)}
+                  >
+                    Plans <AiFillCaretDown />
+                    {shopModal.state == true && shopModal.row == i ? (
+                      <div
+                        className={styles.shopModal}
+                        style={
+                          shopModal ? { display: "block" } : { display: "none" }
+                        }
+                      >
+                        {Object.keys(Object.values(plansToShow)[i]).map(
+                          (val3, z) => {
+                            return (
+                              <li
+                                key={z}
+                                onClick={() =>
+                                  setSelectedPlan({
+                                    planName: val3,
+                                    planId: i,
+                                  })
+                                }
+                              >
+                                {val3}
+                              </li>
+                            );
+                          }
+                        )}
+                      </div>
+                    ) : (
+                      ""
                     )}
                   </div>
                 ) : (
-                  ""
+                  <div className={styles.shopBtn}>No Plans</div>
                 )}
-              </div>
-            ) : (
-              <div className={styles.shopBtn}>No Plans</div>
-            )}
-            {val == Object.keys(plansToShow)[i]
-              ? Object.keys(Object.values(plansToShow)[i]).map((val2, j) => {
-                  return (
-                    <>
-                      {selectedPlan.planName == val2 &&
-                      selectedPlan.planId == i ? (
-                        <Row className={styles.secondRow} key={j}>
-                          <Col className={styles.firstOuterColumn}>
-                            <Col className={styles.leftArrow2}>
-                              <Col className={styles.colPlans}>
-                                <Col className={styles.colButton}></Col>
-                              </Col>
-                              <Col className={styles.colBot}>
-                                <span
-                                  style={{
-                                    color: "#9acc54",
-                                    padding: "2px 12px",
-                                    borderRadius: "8px",
-                                    border: "1px solid #9acc54",
-                                  }}
-                                >
-                                  {val2}
-                                </span>
-                              </Col>
-                            </Col>
-                          </Col>
-                          <Col className={styles.secondOuterColumn}>
-                            {Object.values(Object.values(plansToShow)[i])[
-                              j
-                            ].map((val3, k) => {
-                              return (
-                                <Col className={styles.column2} key={k}>
-                                  <span>{parseInt(val3.amount) !== 0? `₹${parseInt(val3.amount)}`: 'No Plan'}</span>
+                {val == Object.keys(plansToShow)[i]
+                  ? Object.keys(Object.values(plansToShow)[i]).map((val2, j) => {
+                    return (
+                      <>
+                        {selectedPlan.planName == val2 &&
+                          selectedPlan.planId == i ? (
+                          <Row className={styles.secondRow} key={j}>
+                            <Col className={styles.firstOuterColumn}>
+                              <Col className={styles.leftArrow2}>
+                                <Col className={styles.colPlans}>
+                                  <Col className={styles.colButton}></Col>
                                 </Col>
-                              );
-                            })}
-                            <Col className={styles.rightArrow}>
-                              <MdArrowRight style={{ color: "none" }} />
+                                <Col className={styles.colBot}>
+                                  <span
+                                    style={{
+                                      color: "#9acc54",
+                                      padding: "2px 12px",
+                                      borderRadius: "8px",
+                                      border: "1px solid #9acc54",
+                                    }}
+                                  >
+                                    {val2}
+                                  </span>
+                                </Col>
+                              </Col>
                             </Col>
-                          </Col>
-                        </Row>
-                      ) : (
-                        ""
-                      )}
-                    </>
-                  );
-                })
-              : ""}
-            <hr />
-          </>
-        );
-      })}
-    </div>
-  </div>}
+                            <Col className={styles.secondOuterColumn}>
+                              {Object.values(Object.values(plansToShow)[i])[
+                                j
+                              ].map((val3, k) => {
+                                return (
+                                  <Col className={styles.column2} key={k}>
+                                    <span>{parseInt(val3.amount) !== 0 ? `₹${parseInt(val3.amount)}` : 'No Plan'}</span>
+                                  </Col>
+                                );
+                              })}
+                              <Col className={styles.rightArrow}>
+                                <MdArrowRight style={{ color: "none" }} />
+                              </Col>
+                            </Col>
+                          </Row>
+                        ) : (
+                          ""
+                        )}
+                      </>
+                    );
+                  })
+                  : ""}
+                <hr />
+              </>
+            );
+          })}
+        </div>
+      </div>}
     </>
   );
 };
@@ -1264,33 +1291,10 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const { propertyId } = context.params;
-    // console.log(context)
-    // let dummydate = new Date("2022-07-20");
-    // console.log(dummydate)
-  let currentDate1 = new Date();
-  let lastDate1 =  new Date();
-  lastDate1 = new Date(lastDate1.setDate(currentDate1.getDate() + 11));
-  let currentFilteredDate1 = currentDate1
-    .toLocaleDateString()
-    .split("/")
-    .reverse();
-  let lastFilteredDate1 = lastDate1.toLocaleDateString().split("/").reverse();
-  for (let index = 0; index < currentFilteredDate1.length; index++) {
-    if (currentFilteredDate1[index] < 10) {
-      currentFilteredDate1[index] = "0" + currentFilteredDate1[index];
-    }
-    // console.log(currentFilteredDate[index])
-  }
-  for (let index = 0; index < lastFilteredDate1.length; index++) {
-    if (lastFilteredDate1[index] < 10) {
-      lastFilteredDate1[index] = "0" + lastFilteredDate1[index];
-    }
-    // console.log(currentFilteredDate[index])
-  }
-  let currentDateToShow1 = currentFilteredDate1.join("-");
-  let lastDateToShow1 = lastFilteredDate1.join("-");
-  console.log(lastDateToShow1)
-  console.log(currentDateToShow1)
+  // console.log(context)
+  // let dummydate = new Date("2022-07-20");
+  // console.log(dummydate)
+
   // const propertyId = context.query.params;
   // const propertyId = context.query.propertyId;
   const propertiesResponse = await fetch(
@@ -1343,8 +1347,8 @@ export async function getStaticProps(context) {
           // fromDate: "2022-07-22",
           propertyId: propertyId,
           roomId: oldProperties[index].id,
-        // toDate: "2022-08-01",
-        toDate: lastDateToShow1,
+          // toDate: "2022-08-01",
+          toDate: lastDateToShow1,
         }),
         headers: {
           Accept: "application/json",
@@ -1386,7 +1390,7 @@ export async function getStaticProps(context) {
   //   const rooms = await roomsResponse.json();
   //   roomsArray.push(rooms);
   // }
-  return { props: {oldProperties, oldRoomsArray, oldProperty, propertyId}};
+  return { props: { oldProperties, oldRoomsArray, oldProperty, propertyId } };
 
 }
 
