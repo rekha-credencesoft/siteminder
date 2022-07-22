@@ -746,9 +746,10 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
   };
   const tenDayDecrement = () => {
     if (increment !== 0) {
-      setCount(count - 10)
-      setIncrement(increment - 10);
-      setIncrementDate(incrementDate - 10);
+    window.location.reload();
+    //   setCount(count - 10)
+    //   setIncrement(increment - 10);
+    //   setIncrementDate(incrementDate - 10);
     }
   };
   // console.log(property)
