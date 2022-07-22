@@ -1289,8 +1289,8 @@ export async function getStaticProps(context) {
   }
   let currentDateToShow1 = currentFilteredDate1.join("-");
   let lastDateToShow1 = lastFilteredDate1.join("-");
-  // console.log(lastDateToShow)
-  // console.log(currentDateToShow)
+  console.log(lastDateToShow1)
+  console.log(currentDateToShow1)
   // const propertyId = context.query.params;
   // const propertyId = context.query.propertyId;
   const propertiesResponse = await fetch(
