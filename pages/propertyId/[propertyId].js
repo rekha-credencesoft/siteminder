@@ -1295,8 +1295,8 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const { propertyId } = context.params;
 
-  console.log(lastDateToShow1)
-  console.log(currentDateToShow1)
+  console.log(typeof lastDateToShow1)
+  console.log(typeof currentDateToShow1)
 
 //   let currentDate1 = new Date();
 // let lastDate1 = new Date();
@@ -1352,11 +1352,11 @@ export async function getStaticProps(context) {
     {
       method: "POST",
       body: JSON.stringify({
-        fromDate: currentDateToShow1,
-        // fromDate: "2022-07-22",
+        // fromDate: currentDateToShow1,
+        fromDate: "2022-07-22",
         propertyId: propertyId,
-        toDate: lastDateToShow1
-        // toDate: "2022-08-01"
+        // toDate: lastDateToShow1
+        toDate: "2022-08-01"
       }),
       headers: {
         Accept: "application/json",
@@ -1376,12 +1376,12 @@ export async function getStaticProps(context) {
       {
         method: "POST",
         body: JSON.stringify({
-          fromDate: currentDateToShow1,
-          // fromDate: "2022-07-22",
+          // fromDate: currentDateToShow1,
+          fromDate: "2022-07-22",
           propertyId: propertyId,
           roomId: oldProperties[index].id,
-          // toDate: "2022-08-01",
-          toDate: lastDateToShow1,
+          toDate: "2022-08-01",
+          // toDate: lastDateToShow1,
         }),
         headers: {
           Accept: "application/json",
