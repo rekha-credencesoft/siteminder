@@ -1267,28 +1267,28 @@ export async function getStaticProps(context) {
     // console.log(context)
     // let dummydate = new Date("2022-07-20");
     // console.log(dummydate)
-  let currentDate = new Date();
-  let lastDate =  new Date();
-  lastDate = new Date(lastDate.setDate(currentDate.getDate() + 11));
-  let currentFilteredDate = currentDate
+  let currentDate1 = new Date();
+  let lastDate1 =  new Date();
+  lastDate1 = new Date(lastDate1.setDate(currentDate1.getDate() + 11));
+  let currentFilteredDate1 = currentDate1
     .toLocaleDateString()
     .split("/")
     .reverse();
-  let lastFilteredDate = lastDate.toLocaleDateString().split("/").reverse();
-  for (let index = 0; index < currentFilteredDate.length; index++) {
-    if (currentFilteredDate[index] < 10) {
-      currentFilteredDate[index] = "0" + currentFilteredDate[index];
+  let lastFilteredDate1 = lastDate1.toLocaleDateString().split("/").reverse();
+  for (let index = 0; index < currentFilteredDate1.length; index++) {
+    if (currentFilteredDate1[index] < 10) {
+      currentFilteredDate1[index] = "0" + currentFilteredDate1[index];
     }
     // console.log(currentFilteredDate[index])
   }
-  for (let index = 0; index < lastFilteredDate.length; index++) {
-    if (lastFilteredDate[index] < 10) {
-      lastFilteredDate[index] = "0" + lastFilteredDate[index];
+  for (let index = 0; index < lastFilteredDate1.length; index++) {
+    if (lastFilteredDate1[index] < 10) {
+      lastFilteredDate1[index] = "0" + lastFilteredDate1[index];
     }
     // console.log(currentFilteredDate[index])
   }
-  let currentDateToShow = currentFilteredDate.join("-");
-  let lastDateToShow = lastFilteredDate.join("-");
+  let currentDateToShow1 = currentFilteredDate1.join("-");
+  let lastDateToShow1 = lastFilteredDate1.join("-");
   // console.log(lastDateToShow)
   // console.log(currentDateToShow)
   // const propertyId = context.query.params;
@@ -1315,11 +1315,11 @@ export async function getStaticProps(context) {
     {
       method: "POST",
       body: JSON.stringify({
-        // fromDate: currentDateToShow,
-        fromDate: "2022-07-22",
+        fromDate: currentDateToShow1,
+        // fromDate: "2022-07-22",
         propertyId: propertyId,
-        // toDate: lastDateToShow
-        toDate: "2022-08-01"
+        toDate: lastDateToShow1
+        // toDate: "2022-08-01"
       }),
       headers: {
         Accept: "application/json",
@@ -1339,12 +1339,12 @@ export async function getStaticProps(context) {
       {
         method: "POST",
         body: JSON.stringify({
-          fromDate: currentDateToShow,
-          fromDate: "2022-07-22",
+          fromDate: currentDateToShow1,
+          // fromDate: "2022-07-22",
           propertyId: propertyId,
           roomId: oldProperties[index].id,
-        toDate: "2022-08-01",
-        // toDate: lastDateToShow,
+        // toDate: "2022-08-01",
+        toDate: lastDateToShow1,
         }),
         headers: {
           Accept: "application/json",
