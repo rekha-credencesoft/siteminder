@@ -1296,14 +1296,14 @@ export async function getStaticProps(context) {
   console.log(context)
 
   const { propertyId } = context.params;
-  const currentDateToShow2Resp = await fetch('https://siteminder-omega.vercel.app/api/getCurrentDate');
+  const currentDateToShow2Resp = await fetch('https://api-for-dates.herokuapp.com/getCurrentDate');
   const currentDateToShow2 = await currentDateToShow2Resp.json();
-  const LastDateToShow2Resp = await fetch('https://siteminder-omega.vercel.app/api/getLastDate');
+  const LastDateToShow2Resp = await fetch('https://api-for-dates.herokuapp.com/getLastDate');
   const lastDateToShow2 = await LastDateToShow2Resp.json();
 // const lastDateToShow2 = await lastDateToShow1
 // const currentDateToShow2 = await currentDateToShow1
-  console.log(lastDateToShow2.date)
-  console.log(currentDateToShow2.date)
+  // console.log(lastDateToShow2.date)
+  // console.log(currentDateToShow2.date)
 
 //   let currentDate1 = new Date();
 // let lastDate1 = new Date();
