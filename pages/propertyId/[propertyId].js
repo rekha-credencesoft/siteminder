@@ -11,7 +11,6 @@ import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
 import { AiFillCopyrightCircle, AiFillCaretDown } from "react-icons/ai";
 import {Router, useRouter} from "next/router";
-// import {currentDateToShow,lastDateToShow} from '../date'
 const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
   const [increment, setIncrement] = useState(0);
   const [properties, setProperties] = useState(oldProperties);
@@ -66,6 +65,7 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
   // console.log(roomTypes)
 
   let currentDate = new Date();
+  currentDate = new Date();
   let lastDate = new Date();
   lastDate = new Date(lastDate.setDate(currentDate.getDate() + incrementDate));
   let currentFilteredDate = currentDate
@@ -228,31 +228,31 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
 
 
   
-  let roomsPlansToShowNew = {};
-  // console.log(Object.keys(roomsPlansNames))
-  for (let index = 0; index < Object.values(roomsPlansNames).length; index++) {
-    // console.log(Object.keys(roomsPlansNames)[index])
-    if (!roomsPlansToShowNew[Object.keys(roomsPlansNames)[index]]) {
-      roomsPlansToShowNew[Object.keys(roomsPlansNames)[index]] = []
-      for (let jindex = 0; jindex < Object.values(roomsPlansNames)[index].length; jindex++) {
-        // console.log(Object.values(roomsPlansNames)[index][jindex])
-        // console.log(Object.values(roomsPlansNames)[index][jindex])
-        if(Object.values(roomsPlansNames)[index][jindex].length == 0){
-          // console.log(Object.values(roomsPlansNames)[index][jindex].name)
-          roomsPlansToShowNew[Object.keys(roomsPlansNames)[index]].push({name: 'No Plan'})
-        }
-        else{
-          for (let zindex = 0; zindex < Object.values(roomsPlansNames)[index][jindex].length; zindex++) {
-            // console.log(Object.values(roomsPlansNames)[index][jindex][zindex])
-            roomsPlansToShowNew[Object.keys(roomsPlansNames)[index]].push(Object.values(roomsPlansNames)[index][jindex][zindex])
+  // let roomsPlansToShowNew = {};
+  // // console.log(Object.keys(roomsPlansNames))
+  // for (let index = 0; index < Object.values(roomsPlansNames).length; index++) {
+  //   // console.log(Object.keys(roomsPlansNames)[index])
+  //   if (!roomsPlansToShowNew[Object.keys(roomsPlansNames)[index]]) {
+  //     roomsPlansToShowNew[Object.keys(roomsPlansNames)[index]] = []
+  //     for (let jindex = 0; jindex < Object.values(roomsPlansNames)[index].length; jindex++) {
+  //       // console.log(Object.values(roomsPlansNames)[index][jindex])
+  //       // console.log(Object.values(roomsPlansNames)[index][jindex])
+  //       if(Object.values(roomsPlansNames)[index][jindex].length == 0){
+  //         // console.log(Object.values(roomsPlansNames)[index][jindex].name)
+  //         roomsPlansToShowNew[Object.keys(roomsPlansNames)[index]].push({name: 'No Plan'})
+  //       }
+  //       else{
+  //         for (let zindex = 0; zindex < Object.values(roomsPlansNames)[index][jindex].length; zindex++) {
+  //           // console.log(Object.values(roomsPlansNames)[index][jindex][zindex])
+  //           roomsPlansToShowNew[Object.keys(roomsPlansNames)[index]].push(Object.values(roomsPlansNames)[index][jindex][zindex])
             
-          }
-        }
+  //         }
+  //       }
         
-      }
-    }
+  //     }
+  //   }
     
-  }
+  // }
 
   // console.log(roomsPlansToShowNew)
 
@@ -295,7 +295,6 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
   }
   // console.log(roomsPlansToShow)
 
-  let newRoom = [];
   for (let index = 0; index < Object.keys(roomsPlansToShow).length; index++) {
     // console.log(Object.values(roomsPlansToShow)[index][0])
     // console.log(Object.keys(roomsPlansToShow)[index])
@@ -322,7 +321,7 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
     
   }
 
-  console.log(newRoom)
+  // console.log(newRoom)
   // console.log(roomsPlansToShow)
 
   let roomPlansToShowTrial = [];
@@ -1164,7 +1163,7 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
                             ].map((val3, k) => {
                               return (
                                 <Col className={styles.column2} key={k}>
-                                  <span>₹{parseInt(val3.amount)}</span>
+                                  <span>{parseInt(val3.amount) !== 0? `₹${parseInt(val3.amount)}`: 'No Plan'}</span>
                                 </Col>
                               );
                             })}
