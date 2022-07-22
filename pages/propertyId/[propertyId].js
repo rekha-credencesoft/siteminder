@@ -1353,11 +1353,11 @@ const currentDateToShow2 = await currentDateToShow1
     {
       method: "POST",
       body: JSON.stringify({
-        fromDate: currentDateToShow2,
-        // fromDate: "2022-07-22",
+        // fromDate: currentDateToShow2,
+        fromDate: "2022-07-22",
         propertyId: propertyId,
-        toDate: lastDateToShow2
-        // toDate: "2022-08-01"
+        // toDate: lastDateToShow2
+        toDate: "2022-08-01"
       }),
       headers: {
         Accept: "application/json",
@@ -1377,12 +1377,12 @@ const currentDateToShow2 = await currentDateToShow1
       {
         method: "POST",
         body: JSON.stringify({
-          fromDate: currentDateToShow2,
-          // fromDate: "2022-07-22",
+          // fromDate: currentDateToShow2,
+          fromDate: "2022-07-22",
           propertyId: propertyId,
           roomId: oldProperties[index].id,
-          // toDate: "2022-08-01",
-          toDate: lastDateToShow2,
+          toDate: "2022-08-01",
+          // toDate: lastDateToShow2,
         }),
         headers: {
           Accept: "application/json",
