@@ -1269,11 +1269,17 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
+  console.log(context)
+
   const { propertyId } = context.params;
-const lastDateToShow2 = await lastDateToShow1
-const currentDateToShow2 = await currentDateToShow1
-  console.log(lastDateToShow2)
-  console.log(currentDateToShow2)
+  const currentDateToShow2Resp = await fetch('https://siteminder-omega.vercel.app/api/getCurrentDate');
+  const currentDateToShow2 = await currentDateToShow2Resp.json();
+  const LastDateToShow2Resp = await fetch('https://siteminder-omega.vercel.app/api/getLastDate');
+  const lastDateToShow2 = await LastDateToShow2Resp.json();
+// const lastDateToShow2 = await lastDateToShow1
+// const currentDateToShow2 = await currentDateToShow1
+  console.log(lastDateToShow2.date)
+  console.log(currentDateToShow2.date)
 
 
 
@@ -1303,10 +1309,12 @@ const currentDateToShow2 = await currentDateToShow1
     {
       method: "POST",
       body: JSON.stringify({
-        fromDate: currentDateToShow2,
+        fromDate: currentDateToShow2.date
+        ,
         // fromDate: "2022-07-22",
         propertyId: propertyId,
-        toDate: lastDateToShow2
+        toDate: lastDateToShow2.date
+
         // toDate: "2022-08-01"
       }),
       headers: {
@@ -1327,12 +1335,14 @@ const currentDateToShow2 = await currentDateToShow1
       {
         method: "POST",
         body: JSON.stringify({
-          fromDate: currentDateToShow2,
+          fromDate: currentDateToShow2.date
+          ,
           // fromDate: "2022-07-22",
           propertyId: propertyId,
           roomId: oldProperties[index].id,
           // toDate: "2022-08-01",
-          toDate: lastDateToShow2,
+          toDate: lastDateToShow2.date
+          ,
         }),
         headers: {
           Accept: "application/json",
