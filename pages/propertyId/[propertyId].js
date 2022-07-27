@@ -1294,7 +1294,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  console.log(context)
+  // console.log(context)
 
   const { propertyId } = context.params;
   const currentDateToShow2Resp = await fetch('https://api-for-dates.herokuapp.com/getCurrentDate');
