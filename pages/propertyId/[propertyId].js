@@ -159,7 +159,7 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
         headers: {
           Accept: "application/json",
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rb25ldGVzdGJ1c2luZXNzQGdtYWlsLmNvbSIsInNjb3BlcyI6IlJPTEVfUFJPUF9BRE1JTiIsImlhdCI6MTY1OTQxMjMwNCwiZXhwIjoxNjU5ODQ0MzA0fQ.zUnDxuPJ-USs2jE4wM8nUtBj2Ny1WYOi5rPaXqDTuuk",
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rb25ldGVzdGJ1c2luZXNzQGdtYWlsLmNvbSIsInNjb3BlcyI6IlJPTEVfUFJPUF9BRE1JTiIsImlhdCI6MTY2MDI4MjIxOSwiZXhwIjoxNjYwNzE0MjE5fQ.ZW0p4HEZisMRznoRPVgXLFD9xgspKxIRW3VBIQrRtlg",
           "Content-Type": "application/json",
           APP_ID: "BOOKONE_WEB_APP",
         },
@@ -183,7 +183,7 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
           headers: {
             Accept: "application/json",
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rb25ldGVzdGJ1c2luZXNzQGdtYWlsLmNvbSIsInNjb3BlcyI6IlJPTEVfUFJPUF9BRE1JTiIsImlhdCI6MTY1OTQxMjMwNCwiZXhwIjoxNjU5ODQ0MzA0fQ.zUnDxuPJ-USs2jE4wM8nUtBj2Ny1WYOi5rPaXqDTuuk",
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rb25ldGVzdGJ1c2luZXNzQGdtYWlsLmNvbSIsInNjb3BlcyI6IlJPTEVfUFJPUF9BRE1JTiIsImlhdCI6MTY2MDI4MjIxOSwiZXhwIjoxNjYwNzE0MjE5fQ.ZW0p4HEZisMRznoRPVgXLFD9xgspKxIRW3VBIQrRtlg",
             "Content-Type": "application/json",
             APP_ID: "BOOKONE_WEB_APP",
           },
@@ -1347,7 +1347,7 @@ export async function getStaticProps(context) {
       headers: {
         Accept: "application/json",
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rb25ldGVzdGJ1c2luZXNzQGdtYWlsLmNvbSIsInNjb3BlcyI6IlJPTEVfUFJPUF9BRE1JTiIsImlhdCI6MTY1OTQxMjMwNCwiZXhwIjoxNjU5ODQ0MzA0fQ.zUnDxuPJ-USs2jE4wM8nUtBj2Ny1WYOi5rPaXqDTuuk",
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rb25ldGVzdGJ1c2luZXNzQGdtYWlsLmNvbSIsInNjb3BlcyI6IlJPTEVfUFJPUF9BRE1JTiIsImlhdCI6MTY2MDI4MjIxOSwiZXhwIjoxNjYwNzE0MjE5fQ.ZW0p4HEZisMRznoRPVgXLFD9xgspKxIRW3VBIQrRtlg",
         "Content-Type": "application/x-www-form-urlencoded",
         APP_ID: "BOOKONE_WEB_APP",
       },
@@ -1369,7 +1369,7 @@ export async function getStaticProps(context) {
       headers: {
         Accept: "application/json",
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rb25ldGVzdGJ1c2luZXNzQGdtYWlsLmNvbSIsInNjb3BlcyI6IlJPTEVfUFJPUF9BRE1JTiIsImlhdCI6MTY1OTQxMjMwNCwiZXhwIjoxNjU5ODQ0MzA0fQ.zUnDxuPJ-USs2jE4wM8nUtBj2Ny1WYOi5rPaXqDTuuk",
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rb25ldGVzdGJ1c2luZXNzQGdtYWlsLmNvbSIsInNjb3BlcyI6IlJPTEVfUFJPUF9BRE1JTiIsImlhdCI6MTY2MDI4MjIxOSwiZXhwIjoxNjYwNzE0MjE5fQ.ZW0p4HEZisMRznoRPVgXLFD9xgspKxIRW3VBIQrRtlg",
         "Content-Type": "application/json",
         APP_ID: "BOOKONE_WEB_APP",
       },
@@ -1394,7 +1394,7 @@ export async function getStaticProps(context) {
         headers: {
           Accept: "application/json",
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rb25ldGVzdGJ1c2luZXNzQGdtYWlsLmNvbSIsInNjb3BlcyI6IlJPTEVfUFJPUF9BRE1JTiIsImlhdCI6MTY1OTQxMjMwNCwiZXhwIjoxNjU5ODQ0MzA0fQ.zUnDxuPJ-USs2jE4wM8nUtBj2Ny1WYOi5rPaXqDTuuk",
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rb25ldGVzdGJ1c2luZXNzQGdtYWlsLmNvbSIsInNjb3BlcyI6IlJPTEVfUFJPUF9BRE1JTiIsImlhdCI6MTY2MDI4MjIxOSwiZXhwIjoxNjYwNzE0MjE5fQ.ZW0p4HEZisMRznoRPVgXLFD9xgspKxIRW3VBIQrRtlg",
           "Content-Type": "application/json",
           APP_ID: "BOOKONE_WEB_APP",
         },
