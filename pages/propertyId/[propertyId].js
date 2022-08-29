@@ -1285,7 +1285,7 @@ export async function getStaticPaths() {
       headers: {
         Accept: "application/json",
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBib29rb25lbG9jYWwuaW4iLCJzY29wZXMiOiJST0xFX09SR19BRE1JTiIsImlhdCI6MTY2MDMwMjI4OSwiZXhwIjoxNjYwNzM0Mjg5fQ.gogT1dglSRGFau-x0TmI6ciI5rFG3jMXbMr_8YG8QD4",
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBib29rb25lbG9jYWwuaW4iLCJzY29wZXMiOiJST0xFX09SR19BRE1JTiIsImlhdCI6MTY2MTc3NTAzNCwiZXhwIjoxNjYyMjA3MDM0fQ.Hagno4ioyrtu9Ggt2v7gif4h0aAWUSKDMH7PkUxoodg",
         "Content-Type": "application/json",
         APP_ID: "BOOKONE_WEB_APP",
         User_Id:"2",
@@ -1294,7 +1294,6 @@ export async function getStaticPaths() {
     }
   );
   const data = await res.json()
-  console.log(data[12].id)
   const paths = data.map((a)=>{
     return {
       params : {propertyId: a.id.toString()}
