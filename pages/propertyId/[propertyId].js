@@ -1,4 +1,5 @@
 import React from "react";
+// import { useState } from "react";
 import styles from "../../styles/Home.module.css";
 import { BsBasket3, BsInfoCircle } from "react-icons/bs";
 import { Row, Col, NavDropdown } from "react-bootstrap";
@@ -12,6 +13,9 @@ import Carousel from "react-bootstrap/Carousel";
 import { AiFillCopyrightCircle, AiFillCaretDown } from "react-icons/ai";
 import { Router, useRouter } from "next/router";
 import { currentDateToShow1, lastDateToShow1 } from "../../public/dates";
+import { useEffect } from "react";
+// import {useRouter} from 'next/router'
+
 
 //   let currentDate1 = new Date();
 // let lastDate1 = new Date();
@@ -49,6 +53,42 @@ const Home = ({ oldProperties, oldRoomsArray, oldProperty, propertyId }) => {
   const [roomsArray, setRoomsArray] = useState(oldRoomsArray);
   const [incrementDate, setIncrementDate] = useState(20);
 
+  const [dataOne, setDataOne] = useState({})
+  
+  const router = useRouter()
+  const [routerId, setRouterId] = useState(router.query.propertyId)
+  // console.log(router.query.propertyId)
+  // const newId = router.query.propertyId
+  // console.log(newId)
+
+  // console.log(dataOne)
+
+  // useEffect(() => {
+  //   fetch(
+  //     `https://api.bookonelocal.in/api-bookone/api/property/${routerId}/rooms`,
+  //     {
+  //       // const propertiesResponse = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForProperty?PropertyId=495', {
+  //       // const response = await fetch('https://api.bookonelocal.in/api-bookone/api/availability/getNext7daysRatesAndAvailabilityForRoom?PropertyId=495&RoomId=1539', {
+  //       method: "GET",
+  //       headers: {
+  //         Accept: "application/json",
+  //         Authorization:
+  //           "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rb25ldGVzdGJ1c2luZXNzQGdtYWlsLmNvbSIsInNjb3BlcyI6IlJPTEVfUFJPUF9BRE1JTiIsImlhdCI6MTY2MTc3MDQ0NCwiZXhwIjoxNjYyMjAyNDQ0fQ.NRXtZudUnLIGr6obtDwywLK4mwvvFwPFb0VN6mydcWk",
+  //         "Content-Type": "application/x-www-form-urlencoded",
+  //         APP_ID: "BOOKONE_WEB_APP",
+  //         User_Id:"1",
+  //       },
+        
+  //     }
+  //   ).then(response => response.json())
+  //   .then(d => setDataOne(d))
+    
+  //   // console.log(response.json())
+  //   // const oldProperties =  propertiesResponse.json();
+  //   // console.log(oldProperties)
+
+  // },[])
+  // console.log(dataOne)
 
 
   if (oldRoomsArray?.length) {
@@ -1279,7 +1319,7 @@ function MyVerticallyCenteredModal(props) {
 
 export async function getStaticPaths() {
   const res = await fetch(
-   "https://testapi.bookonelocal.co.nz/api-bookone/api/organisation/1/properties",
+   "https://api.bookonelocal.in/api-bookone/api/organisation/1/properties",
     {
       method: "GET",
       headers: {
@@ -1288,12 +1328,26 @@ export async function getStaticPaths() {
         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBib29rb25lbG9jYWwuaW4iLCJzY29wZXMiOiJST0xFX09SR19BRE1JTiIsImlhdCI6MTY2MTc3NTAzNCwiZXhwIjoxNjYyMjA3MDM0fQ.Hagno4ioyrtu9Ggt2v7gif4h0aAWUSKDMH7PkUxoodg",
         "Content-Type": "application/json",
         APP_ID: "BOOKONE_WEB_APP",
-        User_Id:"2",
+        User_Id:"1",
         
       },
     }
   );
   const data = await res.json()
+  // console.log(data[0].id)
+  // const mapping = data.map((val, i) => {
+    
+  //     if(val.id > "600"){
+  //       console.log(true)
+  //     }
+  //     else{
+  //       console.log(false)
+  //     }
+    
+  // })
+  // console.log(mapping)
+  
+  // setDataOne(data)
   const paths = data.map((a)=>{
     return {
       params : {propertyId: a.id.toString()}
@@ -1362,10 +1416,12 @@ export async function getStaticProps(context) {
           "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib29rb25ldGVzdGJ1c2luZXNzQGdtYWlsLmNvbSIsInNjb3BlcyI6IlJPTEVfUFJPUF9BRE1JTiIsImlhdCI6MTY2MTc3MDQ0NCwiZXhwIjoxNjYyMjAyNDQ0fQ.NRXtZudUnLIGr6obtDwywLK4mwvvFwPFb0VN6mydcWk",
         "Content-Type": "application/x-www-form-urlencoded",
         APP_ID: "BOOKONE_WEB_APP",
+        User_Id:"1",
       },
     }
   );
   const oldProperties = await propertiesResponse.json();
+  // console.log(oldProperties)
   //This is for fetching property data by dates
   const propertyResponse = await fetch(
     "https://api.bookonelocal.in/api-bookone/api/availability/getRatesAndAvailabilityForPropertyByDate",
