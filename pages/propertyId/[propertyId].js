@@ -1325,7 +1325,7 @@ export async function getStaticPaths() {
       headers: {
         Accept: "application/json",
         Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBib29rb25lbG9jYWwuaW4iLCJzY29wZXMiOiJST0xFX09SR19BRE1JTiIsImlhdCI6MTY2MTc3NTAzNCwiZXhwIjoxNjYyMjA3MDM0fQ.Hagno4ioyrtu9Ggt2v7gif4h0aAWUSKDMH7PkUxoodg",
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBib29rb25lbG9jYWwuaW4iLCJzY29wZXMiOiJST0xFX09SR19BRE1JTiIsImlhdCI6MTY5NjU4NzQzNywiZXhwIjoxNjk3MDE5NDM3fQ.coUWBVGZp9qJwM6X559rfCvi4nCaC6hcYMdmLZ2QRH8",
         "Content-Type": "application/json",
         APP_ID: "BOOKONE_WEB_APP",
         User_Id:"1",
